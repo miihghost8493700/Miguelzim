@@ -2,90 +2,93 @@
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<title>Mochila Digital - Completo</title>
+<title>Mochila Digital PRO</title>
 
 <style>
+
+/* RESET */
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
+
+/* LAYOUT */
 body{
-font-family:Arial;
-margin:0;
-background:linear-gradient(135deg,#cfe9ff,#a6d4fa);
+display:flex;
+background:#eef5ff;
 color:#1e2a38;
 }
 
-header{
-background:#8ec5f5;
-padding:15px;
-text-align:center;
-font-size:22px;
-}
-
-#login{
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-height:100vh;
-}
-
-input,textarea{
-padding:8px;
-border-radius:6px;
-border:none;
-margin:4px;
-}
-
-button{
-padding:6px 10px;
-border:none;
-border-radius:6px;
+/* SIDEBAR */
+.sidebar{
+width:220px;
 background:#5aa9e6;
+height:100vh;
+padding:20px;
+color:white;
+position:fixed;
+}
+
+.sidebar h2{
+margin-bottom:20px;
+}
+
+.sidebar button{
+display:block;
+width:100%;
+margin:8px 0;
+padding:10px;
+border:none;
+border-radius:8px;
+background:#ffffff22;
 color:white;
 cursor:pointer;
 }
 
-button:hover{background:#3d8ed1;}
+.sidebar button:hover{
+background:#ffffff44;
+}
 
-#app{display:none;}
+/* CONTEÚDO */
+.main{
+margin-left:220px;
+padding:20px;
+width:100%;
+}
 
-nav{text-align:center;margin:10px;}
-nav button{margin:4px;}
+/* SEÇÕES */
+.section{display:none}
 
+/* CARDS */
+.card{
+background:white;
+padding:15px;
+border-radius:12px;
+box-shadow:0 4px 10px rgba(0,0,0,0.1);
+margin-bottom:15px;
+}
+
+/* GRID */
 .grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
 gap:15px;
-padding:20px;
 }
 
-.materia{
-background:#e3f2fd;
-border-radius:10px;
-padding:12px;
-}
-
-.conteudo{
-background:#d4ecff;
-padding:6px;
-margin-top:6px;
-display:flex;
-justify-content:space-between;
-}
-
-.section{display:none;padding:20px;text-align:center;}
-
-/* HORÁRIO */
-.tabela{
-display:grid;
-grid-template-columns:repeat(5,1fr);
-gap:6px;
-margin-bottom:20px;
-}
-
-.celula{
-background:#d4ecff;
-padding:10px;
+/* BOTÕES */
+button{
+background:#5aa9e6;
+color:white;
+border:none;
+padding:8px 12px;
 border-radius:6px;
-min-height:40px;
+cursor:pointer;
+}
+
+button:hover{background:#3d8ed1}
+
+input,textarea{
+padding:8px;
+border-radius:6px;
+border:1px solid #ccc;
+margin:5px;
 }
 
 /* MODAL */
@@ -98,17 +101,52 @@ background:rgba(0,0,0,0.5);
 }
 
 .modal-content{
-background:#e3f2fd;
-margin:10% auto;
+background:white;
 padding:20px;
+border-radius:10px;
 width:90%;
 max-width:500px;
-border-radius:10px;
+margin:10% auto;
 }
 
+.modal textarea{
+width:100%;
+height:150px;
+}
+
+/* HORÁRIO */
+.tabela{
+display:grid;
+grid-template-columns:repeat(6,1fr);
+gap:5px;
+}
+
+.celula{
+background:white;
+padding:10px;
+border-radius:6px;
+min-height:50px;
+text-align:center;
+}
+
+/* JOGOS */
+.jogo{
+background:white;
+padding:20px;
+border-radius:10px;
+text-align:center;
+transition:0.2s;
+}
+
+.jogo:hover{
+transform:scale(1.05);
+}
+
+/* CANVAS */
 canvas{
 background:white;
 border-radius:10px;
+margin-top:10px;
 }
 
 </style>
@@ -116,72 +154,80 @@ border-radius:10px;
 
 <body>
 
-<div id="login">
-<h2>🔒 Mochila Digital</h2>
-<input type="password" id="senha">
-<button onclick="entrar()">Entrar</button>
-<p id="erro"></p>
-</div>
-
-<div id="app">
-
-<header>🎒 Mochila Escolar</header>
-
-<nav>
+<!-- SIDEBAR -->
+<div class="sidebar">
+<h2>🎒 Mochila</h2>
 <button onclick="mostrar('mochila')">📚 Mochila</button>
 <button onclick="mostrar('horario')">📅 Horário</button>
-<button onclick="mostrar('provas')">📅 Provas</button>
 <button onclick="mostrar('notas')">📊 Notas</button>
-<button onclick="mostrar('arquivos')">📂 Arquivos</button>
+<button onclick="mostrar('provas')">📅 Provas</button>
 <button onclick="mostrar('jogos')">🎮 Jogos</button>
-</nav>
+<button onclick="mostrar('arquivos')">📂 Arquivos</button>
+</div>
+
+<!-- CONTEÚDO -->
+<div class="main">
 
 <!-- MOCHILA -->
 <div id="mochila" class="section">
-<input id="pesquisa" placeholder="Pesquisar matéria..." onkeyup="buscar()">
-<br><br>
-<input id="novaMateria" placeholder="Nome da nova matéria">
+<div class="card">
+<input id="novaMateria" placeholder="Nova matéria">
 <button onclick="criarMateria()">Adicionar</button>
+</div>
 <div class="grid" id="grid"></div>
 </div>
 
 <!-- HORÁRIO -->
 <div id="horario" class="section">
-<h2>📅 Horário Escolar</h2>
 
-<h3>🌅 Manhã (5 aulas)</h3>
+<div class="card">
+<h3>🌅 Manhã</h3>
 <div id="manha" class="tabela"></div>
+</div>
 
-<h3>🌇 Tarde (4 aulas)</h3>
+<div class="card">
+<h3>🌇 Tarde</h3>
 <div id="tarde" class="tabela"></div>
 </div>
 
-<!-- PROVAS -->
-<div id="provas" class="section">
-<input type="date" id="dataProva">
-<input id="materiaProva" placeholder="Matéria">
-<button onclick="addProva()">Adicionar</button>
-<ul id="listaProvas"></ul>
 </div>
 
 <!-- NOTAS -->
 <div id="notas" class="section">
-<input id="nota" placeholder="Digite nota">
+<div class="card">
+<input id="nota">
 <button onclick="addNota()">Adicionar</button>
-<canvas id="grafico" width="400" height="200"></canvas>
+<canvas id="grafico" width="500" height="250"></canvas>
+</div>
+</div>
+
+<!-- PROVAS -->
+<div id="provas" class="section">
+<div class="card">
+<input type="date" id="dataProva">
+<input id="materiaProva">
+<button onclick="addProva()">Adicionar</button>
+<ul id="listaProvas"></ul>
+</div>
 </div>
 
 <!-- JOGOS -->
 <div id="jogos" class="section">
-<div><a href="https://www.friv.com" target="_blank">FRIV</a></div>
-<div><a href="https://poki.com" target="_blank">Poki</a></div>
-<div><a href="https://crazygames.com" target="_blank">Crazy Games</a></div>
+<div class="grid">
+<div class="jogo"><a href="https://www.friv.com" target="_blank">FRIV</a></div>
+<div class="jogo"><a href="https://poki.com" target="_blank">Poki</a></div>
+<div class="jogo"><a href="https://crazygames.com" target="_blank">Crazy Games</a></div>
+</div>
 </div>
 
 <!-- ARQUIVOS -->
 <div id="arquivos" class="section">
+<div class="card">
 <input type="file" id="fileInput">
 <ul id="listaArquivos"></ul>
+</div>
+</div>
+
 </div>
 
 <!-- MODAL -->
@@ -193,38 +239,85 @@ border-radius:10px;
 </div>
 </div>
 
-</div>
-
 <script>
-
-/* LOGIN */
-let senhaCorreta="244m"
-function entrar(){
-if(senha.value===senhaCorreta){
-login.style.display="none"
-app.style.display="block"
-mostrar("mochila")
-}else{
-erro.innerText="Senha incorreta"
-}
-}
 
 /* NAV */
 function mostrar(s){
 document.querySelectorAll(".section").forEach(e=>e.style.display="none")
 document.getElementById(s).style.display="block"
 }
+mostrar("mochila")
+
+/* MOCHILA */
+let grid=document.getElementById("grid")
+let total=parseInt(localStorage.getItem("total")||5)
+
+for(let i=1;i<=total;i++) criar(i)
+
+function criar(i){
+let nome=localStorage.getItem("nome"+i)||"Matéria"
+let div=document.createElement("div")
+div.className="card"
+
+div.innerHTML=`
+<h3 contenteditable oninput="localStorage.setItem('nome${i}',this.innerText)">${nome}</h3>
+<button onclick="add(${i})">+ Conteúdo</button>
+<div id="c${i}"></div>
+`
+
+grid.appendChild(div)
+render(i)
+}
+
+function render(i){
+let lista=JSON.parse(localStorage.getItem("c"+i)||"[]")
+let c=document.getElementById("c"+i)
+c.innerHTML=""
+lista.forEach((t,idx)=>{
+c.innerHTML+=`<div onclick="abrir(${i},${idx})">${t.substring(0,20)}</div>`
+})
+}
+
+function add(i){
+let l=JSON.parse(localStorage.getItem("c"+i)||"[]")
+l.push("")
+localStorage.setItem("c"+i,JSON.stringify(l))
+render(i)
+}
+
+/* MODAL */
+let mat,idx
+function abrir(i,j){
+mat=i;idx=j
+modalText.value=JSON.parse(localStorage.getItem("c"+i))[j]
+modal.style.display="block"
+}
+
+function salvarModal(){
+let l=JSON.parse(localStorage.getItem("c"+mat))
+l[idx]=modalText.value
+localStorage.setItem("c"+mat,JSON.stringify(l))
+modal.style.display="none"
+render(mat)
+}
+
+function excluirModal(){
+let l=JSON.parse(localStorage.getItem("c"+mat))
+l.splice(idx,1)
+localStorage.setItem("c"+mat,JSON.stringify(l))
+modal.style.display="none"
+render(mat)
+}
 
 /* HORÁRIO */
 let dias=["Seg","Ter","Qua","Qui","Sex"]
 
-function criarTabela(id,linhas){
+function tabela(id,linhas){
 let div=document.getElementById(id)
-div.innerHTML=""
-
-dias.forEach(d=>div.innerHTML+=`<div class="celula"><b>${d}</b></div>`)
+div.innerHTML="<div></div>"+dias.map(d=>`<div>${d}</div>`).join("")
 
 for(let i=1;i<=linhas;i++){
+div.innerHTML+=`<div>Aula ${i}</div>`
 dias.forEach((d,j)=>{
 let key=id+i+j
 let val=localStorage.getItem(key)||""
@@ -234,10 +327,10 @@ oninput="localStorage.setItem('${key}',this.innerText)">${val}</div>`
 }
 }
 
-criarTabela("manha",5)
-criarTabela("tarde",4)
+tabela("manha",5)
+tabela("tarde",4)
 
-/* NOTAS PROFISSIONAL */
+/* NOTAS */
 let notas=[]
 let ctx=grafico.getContext("2d")
 
@@ -245,132 +338,40 @@ function addNota(){
 let n=parseFloat(nota.value)
 if(isNaN(n))return
 notas.push(n)
-desenhar()
+draw()
 }
 
-function desenhar(){
-ctx.clearRect(0,0,400,200)
+function draw(){
+ctx.clearRect(0,0,500,250)
 
-/* linhas */
+/* grid */
 for(let i=0;i<=10;i++){
-let y=200-i*20
+let y=250-i*20
 ctx.fillStyle="#ccc"
-ctx.fillRect(0,y,400,1)
+ctx.fillRect(0,y,500,1)
 ctx.fillStyle="#000"
 ctx.fillText(i,5,y-2)
 }
 
 /* barras */
 notas.forEach((n,i)=>{
-let x=i*40+30
-let h=n*15
+let x=i*40+40
+let h=n*20
 ctx.fillStyle="#5aa9e6"
-ctx.fillRect(x,200-h,30,h)
+ctx.fillRect(x,250-h,30,h)
 ctx.fillStyle="#000"
-ctx.fillText(n,x,200-h-5)
+ctx.fillText(n,x,250-h-5)
 })
 }
 
-/* RESTANTE DO SEU CÓDIGO (mantido) */
-
-let grid=document.getElementById("grid")
-let totalMaterias=parseInt(localStorage.getItem("totalMaterias")||21)
-
-for(let i=1;i<=totalMaterias;i++) criarMateriaHTML(i)
-
-function criarMateriaHTML(i){
-let nome=localStorage.getItem("nome"+i)||("Matéria "+i)
-let div=document.createElement("div")
-div.className="materia"
-div.innerHTML=`
-<h3 contenteditable oninput="salvarNome(${i},this)">${nome}</h3>
-<button onclick="addConteudo(${i})">➕</button>
-<div id="conteudos${i}"></div>`
-grid.appendChild(div)
-renderConteudos(i)
-}
-
-let modal=document.getElementById("modal")
-let modalText=document.getElementById("modalText")
-let modalMateria=0
-let modalIndex=0
-
-function renderConteudos(i){
-let c=document.getElementById("conteudos"+i)
-c.innerHTML=""
-let lista=JSON.parse(localStorage.getItem("conteudos"+i)||"[]")
-lista.forEach((t,idx)=>{
-let d=document.createElement("div")
-d.className="conteudo"
-d.innerHTML=`<span onclick="abrirModal(${i},${idx})">${t.substring(0,20)}</span>
-<button onclick="removerConteudo(${i},${idx})">x</button>`
-c.appendChild(d)
-})
-}
-
-function addConteudo(i){
-let l=JSON.parse(localStorage.getItem("conteudos"+i)||"[]")
-l.push("")
-localStorage.setItem("conteudos"+i,JSON.stringify(l))
-renderConteudos(i)
-}
-
-function abrirModal(i,j){
-modalMateria=i
-modalIndex=j
-let l=JSON.parse(localStorage.getItem("conteudos"+i)||"[]")
-modalText.value=l[j]
-modal.style.display="block"
-}
-
-function salvarModal(){
-let l=JSON.parse(localStorage.getItem("conteudos"+modalMateria)||"[]")
-l[modalIndex]=modalText.value
-localStorage.setItem("conteudos"+modalMateria,JSON.stringify(l))
-modal.style.display="none"
-renderConteudos(modalMateria)
-}
-
-function excluirModal(){
-removerConteudo(modalMateria,modalIndex)
-modal.style.display="none"
-}
-
-function removerConteudo(i,j){
-let l=JSON.parse(localStorage.getItem("conteudos"+i)||"[]")
-l.splice(j,1)
-localStorage.setItem("conteudos"+i,JSON.stringify(l))
-renderConteudos(i)
-}
-
-function salvarNome(i,e){
-localStorage.setItem("nome"+i,e.innerText)
-}
-
-function criarMateria(){
-let nome=novaMateria.value.trim()
-if(nome==="")return
-totalMaterias++
-localStorage.setItem("totalMaterias",totalMaterias)
-localStorage.setItem("nome"+totalMaterias,nome)
-criarMateriaHTML(totalMaterias)
-novaMateria.value=""
-}
-
-function buscar(){
-let t=pesquisa.value.toLowerCase()
-document.querySelectorAll(".materia").forEach(m=>{
-let n=m.querySelector("h3").innerText.toLowerCase()
-m.style.display=n.includes(t)?"block":"none"
-})
-}
-
+/* PROVAS */
 function addProva(){
 let li=document.createElement("li")
 li.innerText=dataProva.value+" - "+materiaProva.value
 listaProvas.appendChild(li)
 }
 
+/* ARQUIVOS */
 fileInput.onchange=()=>{
 let li=document.createElement("li")
 li.innerText=fileInput.files[0].name
