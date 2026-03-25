@@ -5,11 +5,8 @@
 <title>Mochila Digital PRO</title>
 
 <style>
-
-/* RESET */
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
 
-/* LAYOUT */
 body{
 display:flex;
 background:#eef5ff;
@@ -26,9 +23,7 @@ color:white;
 position:fixed;
 }
 
-.sidebar h2{
-margin-bottom:20px;
-}
+.sidebar h2{margin-bottom:20px;}
 
 .sidebar button{
 display:block;
@@ -42,11 +37,9 @@ color:white;
 cursor:pointer;
 }
 
-.sidebar button:hover{
-background:#ffffff44;
-}
+.sidebar button:hover{background:#ffffff44}
 
-/* CONTEÚDO */
+/* MAIN */
 .main{
 margin-left:220px;
 padding:20px;
@@ -114,19 +107,32 @@ width:100%;
 height:150px;
 }
 
-/* HORÁRIO */
+/* HORÁRIO PROFISSIONAL */
 .tabela{
 display:grid;
-grid-template-columns:repeat(6,1fr);
-gap:5px;
+grid-template-columns:80px repeat(5,1fr);
+gap:6px;
+justify-content:center;
+margin:20px auto;
+max-width:700px;
 }
 
 .celula{
 background:white;
 padding:10px;
-border-radius:6px;
+border-radius:8px;
 min-height:50px;
+display:flex;
+align-items:center;
+justify-content:center;
 text-align:center;
+border:1px solid #ddd;
+}
+
+.header{
+font-weight:bold;
+background:#5aa9e6;
+color:white;
 }
 
 /* JOGOS */
@@ -138,17 +144,13 @@ text-align:center;
 transition:0.2s;
 }
 
-.jogo:hover{
-transform:scale(1.05);
-}
+.jogo:hover{transform:scale(1.05)}
 
-/* CANVAS */
 canvas{
 background:white;
 border-radius:10px;
 margin-top:10px;
 }
-
 </style>
 </head>
 
@@ -165,7 +167,7 @@ margin-top:10px;
 <button onclick="mostrar('arquivos')">📂 Arquivos</button>
 </div>
 
-<!-- CONTEÚDO -->
+<!-- MAIN -->
 <div class="main">
 
 <!-- MOCHILA -->
@@ -309,22 +311,39 @@ modal.style.display="none"
 render(mat)
 }
 
-/* HORÁRIO */
+/* HORÁRIO PROFISSIONAL */
 let dias=["Seg","Ter","Qua","Qui","Sex"]
 
 function tabela(id,linhas){
-let div=document.getElementById(id)
-div.innerHTML="<div></div>"+dias.map(d=>`<div>${d}</div>`).join("")
 
+let div=document.getElementById(id)
+div.innerHTML=""
+
+/* cabeçalho */
+div.innerHTML+=`<div class="celula header"></div>`
+dias.forEach(d=>{
+div.innerHTML+=`<div class="celula header">${d}</div>`
+})
+
+/* aulas */
 for(let i=1;i<=linhas;i++){
-div.innerHTML+=`<div>Aula ${i}</div>`
+
+div.innerHTML+=`<div class="celula header">Aula ${i}</div>`
+
 dias.forEach((d,j)=>{
 let key=id+i+j
 let val=localStorage.getItem(key)||""
-div.innerHTML+=`<div contenteditable class="celula"
-oninput="localStorage.setItem('${key}',this.innerText)">${val}</div>`
+
+div.innerHTML+=`
+<div contenteditable class="celula"
+oninput="localStorage.setItem('${key}',this.innerText)">
+${val}
+</div>
+`
 })
+
 }
+
 }
 
 tabela("manha",5)
@@ -344,7 +363,6 @@ draw()
 function draw(){
 ctx.clearRect(0,0,500,250)
 
-/* grid */
 for(let i=0;i<=10;i++){
 let y=250-i*20
 ctx.fillStyle="#ccc"
@@ -353,7 +371,6 @@ ctx.fillStyle="#000"
 ctx.fillText(i,5,y-2)
 }
 
-/* barras */
 notas.forEach((n,i)=>{
 let x=i*40+40
 let h=n*20
@@ -364,10 +381,30 @@ ctx.fillText(n,x,250-h-5)
 })
 }
 
-/* PROVAS */
+/* PROVAS COM BOTÃO DIREITO */
 function addProva(){
+
+if(!dataProva.value || !materiaProva.value) return
+
 let li=document.createElement("li")
 li.innerText=dataProva.value+" - "+materiaProva.value
+
+li.oncontextmenu=function(e){
+e.preventDefault()
+
+let opcao=prompt("1 - Editar\n2 - Excluir")
+
+if(opcao=="1"){
+let novo=prompt("Editar:",li.innerText)
+if(novo) li.innerText=novo
+}
+
+if(opcao=="2"){
+li.remove()
+}
+
+}
+
 listaProvas.appendChild(li)
 }
 
