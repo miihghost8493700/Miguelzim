@@ -33,6 +33,36 @@
             gap: 20px;
             align-items: center;
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+
+            /* ANIMAÇÃO */
+            opacity: 0;
+            transform: translateY(30px);
+            animation: aparecer 0.8s ease forwards;
+        }
+
+        /* EFEITO HOVER */
+        .card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        /* CASCATA */
+        .card:nth-child(1) { animation-delay: 0.2s; }
+        .card:nth-child(2) { animation-delay: 0.4s; }
+        .card:nth-child(3) { animation-delay: 0.6s; }
+        .card:nth-child(4) { animation-delay: 0.8s; }
+        .card:nth-child(5) { animation-delay: 1s; }
+        .card:nth-child(6) { animation-delay: 1.2s; }
+        .card:nth-child(7) { animation-delay: 1.4s; }
+        .card:nth-child(8) { animation-delay: 1.6s; }
+        .card:nth-child(9) { animation-delay: 1.8s; }
+        .card:nth-child(10) { animation-delay: 2s; }
+
+        @keyframes aparecer {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .card img {
@@ -98,97 +128,86 @@
 
 <main>
 
-    <!-- 1 -->
     <div class="card">
         <img src="https://cdn.pixabay.com/photo/2016/11/29/04/17/computer-1867758_1280.jpg">
         <div>
             <h3>1. Socket</h3>
-            <p>Local onde o processador é encaixado. Ele conecta a CPU à placa-mãe e permite a comunicação com os outros componentes.</p>
+            <p>Local onde o processador é encaixado. Ele conecta a CPU à placa-mãe.</p>
         </div>
     </div>
 
-    <!-- 2 -->
     <div class="card">
         <img src="https://cdn.pixabay.com/photo/2014/05/02/21/50/ram-336704_1280.jpg">
         <div>
             <h3>2. Memória RAM</h3>
-            <p>Responsável por armazenar dados temporários enquanto o computador está em uso, garantindo velocidade no funcionamento.</p>
+            <p>Armazena dados temporários e ajuda na velocidade do sistema.</p>
         </div>
     </div>
 
-    <!-- 3 -->
     <div class="card">
         <img src="https://cdn.pixabay.com/photo/2015/01/08/18/24/motherboard-593296_1280.jpg">
         <div>
             <h3>3. Chipset</h3>
-            <p>Controla a comunicação entre o processador, memória e outros dispositivos da placa-mãe.</p>
+            <p>Controla a comunicação entre os componentes da placa-mãe.</p>
         </div>
     </div>
 
-    <!-- 4 -->
     <div class="card">
         <img src="https://cdn.pixabay.com/photo/2016/03/26/22/13/bios-1282302_1280.jpg">
         <div>
             <h3>4. BIOS/UEFI</h3>
-            <p>Software que inicia o computador e faz a verificação dos componentes antes do sistema operacional carregar.</p>
+            <p>Inicia o sistema e verifica os componentes do computador.</p>
         </div>
     </div>
 
-    <!-- 5 -->
     <div class="card">
         <img src="https://cdn.pixabay.com/photo/2013/07/13/10/07/power-supply-156256_1280.png">
         <div>
             <h3>5. Conector ATX</h3>
-            <p>Responsável por fornecer energia para toda a placa-mãe através da fonte de alimentação.</p>
+            <p>Fornece energia para toda a placa-mãe.</p>
         </div>
     </div>
 
-    <!-- 6 -->
     <div class="card">
         <img src="https://cdn.pixabay.com/photo/2017/01/06/19/15/processor-1955629_1280.jpg">
         <div>
             <h3>6. Conector CPU</h3>
-            <p>Fornece energia exclusiva para o processador, garantindo seu funcionamento correto.</p>
+            <p>Responsável pela energia exclusiva do processador.</p>
         </div>
     </div>
 
-    <!-- 7 -->
     <div class="card">
         <img src="https://cdn.pixabay.com/photo/2016/11/21/15/47/computer-1846033_1280.jpg">
         <div>
             <h3>7. PCI Express</h3>
-            <p>Slot utilizado para conectar placas de expansão, como placa de vídeo, som e rede.</p>
+            <p>Usado para placas de vídeo e outras expansões.</p>
         </div>
     </div>
 
-    <!-- 8 -->
     <div class="card">
         <img src="https://cdn.pixabay.com/photo/2014/04/05/11/40/hard-drive-316942_1280.jpg">
         <div>
             <h3>8. SATA</h3>
-            <p>Conector usado para ligar dispositivos de armazenamento como HDs e SSDs.</p>
+            <p>Conecta HDs e SSDs à placa-mãe.</p>
         </div>
     </div>
 
-    <!-- 9 -->
     <div class="card">
         <img src="https://cdn.pixabay.com/photo/2017/01/06/19/15/motherboard-1955627_1280.jpg">
         <div>
             <h3>9. Bateria CMOS</h3>
-            <p>Mantém as configurações da BIOS mesmo quando o computador está desligado.</p>
+            <p>Mantém as configurações do sistema mesmo desligado.</p>
         </div>
     </div>
 
-    <!-- 10 -->
     <div class="card">
         <img src="https://cdn.pixabay.com/photo/2015/01/21/14/14/computer-606110_1280.jpg">
         <div>
             <h3>10. Portas Traseiras</h3>
-            <p>Permitem a conexão com dispositivos externos, como USB, monitor, rede e áudio.</p>
+            <p>Permitem conectar dispositivos externos.</p>
         </div>
     </div>
 
-    <!-- BOTÃO -->
     <div class="voltar">
         <button onclick="history.back()">⬅ Voltar</button>
     </div>
