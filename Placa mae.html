@@ -28,7 +28,7 @@
             background: white;
             margin-bottom: 20px;
             padding: 20px;
-            border-radius: 10px;
+            border-radius: 12px;
             display: flex;
             gap: 20px;
             align-items: center;
@@ -40,10 +40,11 @@
         }
 
         .card:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            transform: translateY(-6px);
+            box-shadow: 0 10px 22px rgba(0,0,0,0.15);
         }
 
+        /* CASCATA */
         .card:nth-child(1) { animation-delay: 0.2s; }
         .card:nth-child(2) { animation-delay: 0.4s; }
         .card:nth-child(3) { animation-delay: 0.6s; }
@@ -62,47 +63,27 @@
             }
         }
 
-        .card img.main-img {
-            width: 150px;
-            border-radius: 8px;
-            animation: flutuar 3s ease-in-out infinite;
-            transition: transform 0.4s ease;
-        }
-
-        .card img.main-img:hover {
-            transform: scale(1.1) rotate(2deg);
-        }
-
-        @keyframes flutuar {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
-        /* ÍCONE PEQUENO */
-        .titulo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
+        /* ÍCONE LATERAL */
         .icone {
-            width: 28px;
-            height: 28px;
-            animation: girar 6s linear infinite;
+            width: 50px;
+            height: 50px;
         }
 
-        @keyframes girar {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+        .conteudo {
+            flex: 1;
         }
 
-        .card h3 {
+        .card img.main-img {
+            width: 130px;
+            border-radius: 8px;
+        }
+
+        h3 {
             margin: 0;
             color: #2a5298;
         }
 
-        .card p {
+        p {
             margin-top: 5px;
         }
 
@@ -150,50 +131,104 @@
 
 <main>
 
+    <!-- 1 -->
     <div class="card">
+        <img class="icone" src="https://cdn-icons-png.flaticon.com/512/2721/2721293.png">
+        <div class="conteudo">
+            <h3>1. Socket</h3>
+            <p>Onde o processador é encaixado na placa-mãe.</p>
+        </div>
         <img class="main-img" src="https://cdn.pixabay.com/photo/2016/11/29/04/17/computer-1867758_1280.jpg">
-        <div>
-            <div class="titulo">
-                <img class="icone" src="https://cdn-icons-png.flaticon.com/512/2721/2721293.png">
-                <h3>1. Socket</h3>
-            </div>
-            <p>Local onde o processador é encaixado.</p>
-        </div>
     </div>
 
+    <!-- 2 -->
     <div class="card">
+        <img class="icone" src="https://cdn-icons-png.flaticon.com/512/3659/3659899.png">
+        <div class="conteudo">
+            <h3>2. RAM</h3>
+            <p>Memória temporária usada durante o funcionamento.</p>
+        </div>
         <img class="main-img" src="https://cdn.pixabay.com/photo/2014/05/02/21/50/ram-336704_1280.jpg">
-        <div>
-            <div class="titulo">
-                <img class="icone" src="https://cdn-icons-png.flaticon.com/512/3659/3659899.png">
-                <h3>2. Memória RAM</h3>
-            </div>
-            <p>Armazena dados temporários.</p>
-        </div>
     </div>
 
+    <!-- 3 -->
     <div class="card">
+        <img class="icone" src="https://cdn-icons-png.flaticon.com/512/2920/2920277.png">
+        <div class="conteudo">
+            <h3>3. Chipset</h3>
+            <p>Controla a comunicação entre os componentes.</p>
+        </div>
         <img class="main-img" src="https://cdn.pixabay.com/photo/2015/01/08/18/24/motherboard-593296_1280.jpg">
-        <div>
-            <div class="titulo">
-                <img class="icone" src="https://cdn-icons-png.flaticon.com/512/2920/2920277.png">
-                <h3>3. Chipset</h3>
-            </div>
-            <p>Controla os componentes da placa.</p>
-        </div>
     </div>
 
-    <!-- continua padrão pros outros -->
-    
+    <!-- 4 -->
     <div class="card">
-        <img class="main-img" src="https://cdn.pixabay.com/photo/2015/01/21/14/14/computer-606110_1280.jpg">
-        <div>
-            <div class="titulo">
-                <img class="icone" src="https://cdn-icons-png.flaticon.com/512/483/483947.png">
-                <h3>10. Portas Traseiras</h3>
-            </div>
-            <p>Conexão com dispositivos externos.</p>
+        <img class="icone" src="https://cdn-icons-png.flaticon.com/512/1048/1048953.png">
+        <div class="conteudo">
+            <h3>4. BIOS/UEFI</h3>
+            <p>Primeiro software executado ao ligar o computador.</p>
         </div>
+        <img class="main-img" src="https://cdn.pixabay.com/photo/2016/03/26/22/13/bios-1282302_1280.jpg">
+    </div>
+
+    <!-- 5 -->
+    <div class="card">
+        <img class="icone" src="https://cdn-icons-png.flaticon.com/512/1046/1046857.png">
+        <div class="conteudo">
+            <h3>5. Conector ATX</h3>
+            <p>Responsável pela energia da placa-mãe.</p>
+        </div>
+        <img class="main-img" src="https://cdn.pixabay.com/photo/2013/07/13/10/07/power-supply-156256_1280.png">
+    </div>
+
+    <!-- 6 -->
+    <div class="card">
+        <img class="icone" src="https://cdn-icons-png.flaticon.com/512/3523/3523887.png">
+        <div class="conteudo">
+            <h3>6. Conector CPU</h3>
+            <p>Energia exclusiva para o processador.</p>
+        </div>
+        <img class="main-img" src="https://cdn.pixabay.com/photo/2017/01/06/19/15/processor-1955629_1280.jpg">
+    </div>
+
+    <!-- 7 -->
+    <div class="card">
+        <img class="icone" src="https://cdn-icons-png.flaticon.com/512/1055/1055687.png">
+        <div class="conteudo">
+            <h3>7. PCI Express</h3>
+            <p>Usado para placas de vídeo e expansões.</p>
+        </div>
+        <img class="main-img" src="https://cdn.pixabay.com/photo/2016/11/21/15/47/computer-1846033_1280.jpg">
+    </div>
+
+    <!-- 8 -->
+    <div class="card">
+        <img class="icone" src="https://cdn-icons-png.flaticon.com/512/1048/1048972.png">
+        <div class="conteudo">
+            <h3>8. SATA</h3>
+            <p>Conecta HDs e SSDs.</p>
+        </div>
+        <img class="main-img" src="https://cdn.pixabay.com/photo/2014/04/05/11/40/hard-drive-316942_1280.jpg">
+    </div>
+
+    <!-- 9 -->
+    <div class="card">
+        <img class="icone" src="https://cdn-icons-png.flaticon.com/512/833/833472.png">
+        <div class="conteudo">
+            <h3>9. Bateria CMOS</h3>
+            <p>Mantém configurações do sistema.</p>
+        </div>
+        <img class="main-img" src="https://cdn.pixabay.com/photo/2017/01/06/19/15/motherboard-1955627_1280.jpg">
+    </div>
+
+    <!-- 10 -->
+    <div class="card">
+        <img class="icone" src="https://cdn-icons-png.flaticon.com/512/483/483947.png">
+        <div class="conteudo">
+            <h3>10. Portas Traseiras</h3>
+            <p>USB, rede, vídeo e outros conectores.</p>
+        </div>
+        <img class="main-img" src="https://cdn.pixabay.com/photo/2015/01/21/14/14/computer-606110_1280.jpg">
     </div>
 
     <div class="voltar">
