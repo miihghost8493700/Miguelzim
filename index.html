@@ -43,7 +43,6 @@ width:100%;
 
 .section{display:none}
 
-/* CARD */
 .card{
 background:white;
 padding:12px;
@@ -58,7 +57,6 @@ grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
 gap:15px;
 }
 
-/* BOTÕES */
 button{
 background:#5aa9e6;
 color:white;
@@ -118,6 +116,19 @@ canvas{
 background:white;
 border-radius:10px;
 }
+
+/* JOGOS */
+.jogo{
+background:white;
+padding:20px;
+border-radius:10px;
+text-align:center;
+transition:0.2s;
+}
+
+.jogo:hover{
+transform:scale(1.05);
+}
 </style>
 </head>
 
@@ -128,6 +139,7 @@ border-radius:10px;
 <button onclick="mostrar('horario')">📅 Horário</button>
 <button onclick="mostrar('notas')">📊 Notas</button>
 <button onclick="mostrar('provas')">📅 Provas</button>
+<button onclick="mostrar('jogos')">🎮 Jogos</button>
 </div>
 
 <div class="main">
@@ -156,7 +168,7 @@ border-radius:10px;
 <!-- NOTAS -->
 <div id="notas" class="section">
 <div class="card">
-<input id="nota">
+<input id="nota" placeholder="Ex: 8P">
 <button onclick="addNota()">Adicionar</button>
 <canvas id="grafico" width="500" height="250"></canvas>
 </div>
@@ -172,15 +184,15 @@ border-radius:10px;
 </div>
 </div>
 
+<!-- JOGOS -->
+<div id="jogos" class="section">
+<div class="grid">
+<div class="jogo"><a href="https://www.friv.com" target="_blank">FRIV</a></div>
+<div class="jogo"><a href="https://poki.com" target="_blank">Poki</a></div>
+<div class="jogo"><a href="https://crazygames.com" target="_blank">CrazyGames</a></div>
+</div>
 </div>
 
-<!-- MODAL -->
-<div id="modal" class="modal">
-<div class="modal-content">
-<textarea id="modalText"></textarea><br>
-<button onclick="salvarModal()">Salvar</button>
-<button onclick="excluirModal()">Excluir</button>
-</div>
 </div>
 
 <script>
@@ -192,108 +204,7 @@ document.getElementById(s).style.display="block"
 }
 mostrar("mochila")
 
-/* ================= MOCHILA (SEU CÓDIGO) ================= */
-
-let grid = document.getElementById("grid")
-let total = parseInt(localStorage.getItem("total") || 0)
-
-for(let i = 1; i <= total; i++){
-  criarMateriaHTML(i)
-}
-
-function criarMateria(){
-let nome = document.getElementById("novaMateria").value.trim()
-if(nome === "") return
-
-total++
-localStorage.setItem("total", total)
-localStorage.setItem("nome"+total, nome)
-
-criarMateriaHTML(total)
-document.getElementById("novaMateria").value = ""
-}
-
-function criarMateriaHTML(i){
-let nome = localStorage.getItem("nome"+i) || "Matéria"
-
-let div = document.createElement("div")
-div.className = "card"
-
-div.innerHTML = `
-<h3 contenteditable oninput="salvarNome(${i}, this)">${nome}</h3>
-<button onclick="addConteudo(${i})">➕ Conteúdo</button>
-<div id="c${i}"></div>
-`
-
-grid.appendChild(div)
-renderConteudos(i)
-}
-
-function salvarNome(i, el){
-localStorage.setItem("nome"+i, el.innerText)
-}
-
-function renderConteudos(i){
-let lista = JSON.parse(localStorage.getItem("conteudos"+i) || "[]")
-let container = document.getElementById("c"+i)
-container.innerHTML = ""
-
-lista.forEach((texto, index)=>{
-let preview = texto.length > 25 ? texto.substring(0,25)+"..." : (texto || "Novo conteúdo")
-
-let div = document.createElement("div")
-div.className = "card"
-div.style.marginTop = "6px"
-div.style.padding = "6px"
-div.style.cursor = "pointer"
-
-div.innerText = preview
-div.onclick = () => abrirModal(i, index)
-
-container.appendChild(div)
-})
-}
-
-function addConteudo(i){
-let lista = JSON.parse(localStorage.getItem("conteudos"+i) || "[]")
-lista.push("")
-localStorage.setItem("conteudos"+i, JSON.stringify(lista))
-renderConteudos(i)
-}
-
-/* MODAL */
-let modal = document.getElementById("modal")
-let modalText = document.getElementById("modalText")
-
-let materiaAtual = 0
-let indexAtual = 0
-
-function abrirModal(i, index){
-materiaAtual = i
-indexAtual = index
-let lista = JSON.parse(localStorage.getItem("conteudos"+i) || "[]")
-modalText.value = lista[index]
-modal.style.display = "block"
-}
-
-function salvarModal(){
-let lista = JSON.parse(localStorage.getItem("conteudos"+materiaAtual) || "[]")
-lista[indexAtual] = modalText.value
-localStorage.setItem("conteudos"+materiaAtual, JSON.stringify(lista))
-modal.style.display = "none"
-renderConteudos(materiaAtual)
-}
-
-function excluirModal(){
-let lista = JSON.parse(localStorage.getItem("conteudos"+materiaAtual) || "[]")
-lista.splice(indexAtual, 1)
-localStorage.setItem("conteudos"+materiaAtual, JSON.stringify(lista))
-modal.style.display = "none"
-renderConteudos(materiaAtual)
-}
-
-/* ================= HORÁRIO ================= */
-
+/* HORÁRIO */
 let dias=["Seg","Ter","Qua","Qui","Sex"]
 
 function tabela(id,linhas){
@@ -320,21 +231,30 @@ ${val}
 tabela("manha",5)
 tabela("tarde",4)
 
-/* ================= NOTAS ================= */
-
+/* NOTAS COM SIGLA */
 let notas=[]
+let labels=[]
 let ctx=grafico.getContext("2d")
 
 function addNota(){
-let n=parseFloat(nota.value)
-if(isNaN(n)) return
-notas.push(n)
+
+let input = nota.value.trim()
+
+let numero = parseFloat(input)
+let sigla = input.replace(/[0-9.]/g,'')
+
+if(isNaN(numero)) return
+
+notas.push(numero)
+labels.push(sigla)
+
 draw()
 }
 
 function draw(){
 ctx.clearRect(0,0,500,250)
 
+/* linhas */
 for(let i=0;i<=10;i++){
 let y=250-i*20
 ctx.fillStyle="#ccc"
@@ -343,18 +263,25 @@ ctx.fillStyle="#000"
 ctx.fillText(i,5,y-2)
 }
 
+/* barras */
 notas.forEach((n,i)=>{
 let x=i*40+40
 let h=n*20
+
 ctx.fillStyle="#5aa9e6"
 ctx.fillRect(x,250-h,30,h)
+
+/* número */
 ctx.fillStyle="#000"
 ctx.fillText(n,x,250-h-5)
+
+/* sigla */
+ctx.fillText(labels[i],x,245)
 })
+
 }
 
-/* ================= PROVAS ================= */
-
+/* PROVAS */
 function addProva(){
 if(!dataProva.value || !materiaProva.value) return
 
@@ -380,5 +307,6 @@ listaProvas.appendChild(li)
 }
 
 </script>
+
 </body>
 </html>
