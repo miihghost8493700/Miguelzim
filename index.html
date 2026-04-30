@@ -10,7 +10,6 @@
 body{
 display:flex;
 background:#eef5ff;
-color:#1e2a38;
 }
 
 /* SIDEBAR */
@@ -22,8 +21,6 @@ padding:20px;
 color:white;
 position:fixed;
 }
-
-.sidebar h2{margin-bottom:20px;}
 
 .sidebar button{
 display:block;
@@ -37,8 +34,6 @@ color:white;
 cursor:pointer;
 }
 
-.sidebar button:hover{background:#ffffff44}
-
 /* MAIN */
 .main{
 margin-left:220px;
@@ -46,19 +41,17 @@ padding:20px;
 width:100%;
 }
 
-/* SEÇÕES */
 .section{display:none}
 
-/* CARDS */
+/* CARD */
 .card{
 background:white;
-padding:15px;
-border-radius:12px;
-box-shadow:0 4px 10px rgba(0,0,0,0.1);
-margin-bottom:15px;
+padding:12px;
+border-radius:10px;
+box-shadow:0 3px 8px rgba(0,0,0,0.1);
+margin-bottom:10px;
 }
 
-/* GRID */
 .grid{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
@@ -70,18 +63,32 @@ button{
 background:#5aa9e6;
 color:white;
 border:none;
-padding:8px 12px;
+padding:6px 10px;
 border-radius:6px;
 cursor:pointer;
 }
 
-button:hover{background:#3d8ed1}
+/* HORÁRIO */
+.tabela{
+display:grid;
+grid-template-columns:80px repeat(5,1fr);
+gap:6px;
+max-width:700px;
+margin:auto;
+}
 
-input,textarea{
-padding:8px;
-border-radius:6px;
-border:1px solid #ccc;
-margin:5px;
+.celula{
+background:white;
+padding:10px;
+border-radius:8px;
+text-align:center;
+border:1px solid #ddd;
+}
+
+.header{
+background:#5aa9e6;
+color:white;
+font-weight:bold;
 }
 
 /* MODAL */
@@ -102,72 +109,27 @@ max-width:500px;
 margin:10% auto;
 }
 
-.modal textarea{
+textarea{
 width:100%;
 height:150px;
 }
 
-/* HORÁRIO PROFISSIONAL */
-.tabela{
-display:grid;
-grid-template-columns:80px repeat(5,1fr);
-gap:6px;
-justify-content:center;
-margin:20px auto;
-max-width:700px;
-}
-
-.celula{
-background:white;
-padding:10px;
-border-radius:8px;
-min-height:50px;
-display:flex;
-align-items:center;
-justify-content:center;
-text-align:center;
-border:1px solid #ddd;
-}
-
-.header{
-font-weight:bold;
-background:#5aa9e6;
-color:white;
-}
-
-/* JOGOS */
-.jogo{
-background:white;
-padding:20px;
-border-radius:10px;
-text-align:center;
-transition:0.2s;
-}
-
-.jogo:hover{transform:scale(1.05)}
-
 canvas{
 background:white;
 border-radius:10px;
-margin-top:10px;
 }
 </style>
 </head>
 
 <body>
 
-<!-- SIDEBAR -->
 <div class="sidebar">
-<h2>🎒 Mochila</h2>
 <button onclick="mostrar('mochila')">📚 Mochila</button>
 <button onclick="mostrar('horario')">📅 Horário</button>
 <button onclick="mostrar('notas')">📊 Notas</button>
 <button onclick="mostrar('provas')">📅 Provas</button>
-<button onclick="mostrar('jogos')">🎮 Jogos</button>
-<button onclick="mostrar('arquivos')">📂 Arquivos</button>
 </div>
 
-<!-- MAIN -->
 <div class="main">
 
 <!-- MOCHILA -->
@@ -181,17 +143,14 @@ margin-top:10px;
 
 <!-- HORÁRIO -->
 <div id="horario" class="section">
-
 <div class="card">
-<h3>🌅 Manhã</h3>
+<h3>Manhã</h3>
 <div id="manha" class="tabela"></div>
 </div>
-
 <div class="card">
-<h3>🌇 Tarde</h3>
+<h3>Tarde</h3>
 <div id="tarde" class="tabela"></div>
 </div>
-
 </div>
 
 <!-- NOTAS -->
@@ -210,23 +169,6 @@ margin-top:10px;
 <input id="materiaProva">
 <button onclick="addProva()">Adicionar</button>
 <ul id="listaProvas"></ul>
-</div>
-</div>
-
-<!-- JOGOS -->
-<div id="jogos" class="section">
-<div class="grid">
-<div class="jogo"><a href="https://www.friv.com" target="_blank">FRIV</a></div>
-<div class="jogo"><a href="https://poki.com" target="_blank">Poki</a></div>
-<div class="jogo"><a href="https://crazygames.com" target="_blank">Crazy Games</a></div>
-</div>
-</div>
-
-<!-- ARQUIVOS -->
-<div id="arquivos" class="section">
-<div class="card">
-<input type="file" id="fileInput">
-<ul id="listaArquivos"></ul>
 </div>
 </div>
 
@@ -250,112 +192,142 @@ document.getElementById(s).style.display="block"
 }
 mostrar("mochila")
 
-/* MOCHILA */
-let grid=document.getElementById("grid")
-let total=parseInt(localStorage.getItem("total")||5)
+/* ================= MOCHILA (SEU CÓDIGO) ================= */
 
-for(let i=1;i<=total;i++) criar(i)
+let grid = document.getElementById("grid")
+let total = parseInt(localStorage.getItem("total") || 0)
 
-function criar(i){
-let nome=localStorage.getItem("nome"+i)||"Matéria"
-let div=document.createElement("div")
-div.className="card"
+for(let i = 1; i <= total; i++){
+  criarMateriaHTML(i)
+}
 
-div.innerHTML=`
-<h3 contenteditable oninput="localStorage.setItem('nome${i}',this.innerText)">${nome}</h3>
-<button onclick="add(${i})">+ Conteúdo</button>
+function criarMateria(){
+let nome = document.getElementById("novaMateria").value.trim()
+if(nome === "") return
+
+total++
+localStorage.setItem("total", total)
+localStorage.setItem("nome"+total, nome)
+
+criarMateriaHTML(total)
+document.getElementById("novaMateria").value = ""
+}
+
+function criarMateriaHTML(i){
+let nome = localStorage.getItem("nome"+i) || "Matéria"
+
+let div = document.createElement("div")
+div.className = "card"
+
+div.innerHTML = `
+<h3 contenteditable oninput="salvarNome(${i}, this)">${nome}</h3>
+<button onclick="addConteudo(${i})">➕ Conteúdo</button>
 <div id="c${i}"></div>
 `
 
 grid.appendChild(div)
-render(i)
+renderConteudos(i)
 }
 
-function render(i){
-let lista=JSON.parse(localStorage.getItem("c"+i)||"[]")
-let c=document.getElementById("c"+i)
-c.innerHTML=""
-lista.forEach((t,idx)=>{
-c.innerHTML+=`<div onclick="abrir(${i},${idx})">${t.substring(0,20)}</div>`
+function salvarNome(i, el){
+localStorage.setItem("nome"+i, el.innerText)
+}
+
+function renderConteudos(i){
+let lista = JSON.parse(localStorage.getItem("conteudos"+i) || "[]")
+let container = document.getElementById("c"+i)
+container.innerHTML = ""
+
+lista.forEach((texto, index)=>{
+let preview = texto.length > 25 ? texto.substring(0,25)+"..." : (texto || "Novo conteúdo")
+
+let div = document.createElement("div")
+div.className = "card"
+div.style.marginTop = "6px"
+div.style.padding = "6px"
+div.style.cursor = "pointer"
+
+div.innerText = preview
+div.onclick = () => abrirModal(i, index)
+
+container.appendChild(div)
 })
 }
 
-function add(i){
-let l=JSON.parse(localStorage.getItem("c"+i)||"[]")
-l.push("")
-localStorage.setItem("c"+i,JSON.stringify(l))
-render(i)
+function addConteudo(i){
+let lista = JSON.parse(localStorage.getItem("conteudos"+i) || "[]")
+lista.push("")
+localStorage.setItem("conteudos"+i, JSON.stringify(lista))
+renderConteudos(i)
 }
 
 /* MODAL */
-let mat,idx
-function abrir(i,j){
-mat=i;idx=j
-modalText.value=JSON.parse(localStorage.getItem("c"+i))[j]
-modal.style.display="block"
+let modal = document.getElementById("modal")
+let modalText = document.getElementById("modalText")
+
+let materiaAtual = 0
+let indexAtual = 0
+
+function abrirModal(i, index){
+materiaAtual = i
+indexAtual = index
+let lista = JSON.parse(localStorage.getItem("conteudos"+i) || "[]")
+modalText.value = lista[index]
+modal.style.display = "block"
 }
 
 function salvarModal(){
-let l=JSON.parse(localStorage.getItem("c"+mat))
-l[idx]=modalText.value
-localStorage.setItem("c"+mat,JSON.stringify(l))
-modal.style.display="none"
-render(mat)
+let lista = JSON.parse(localStorage.getItem("conteudos"+materiaAtual) || "[]")
+lista[indexAtual] = modalText.value
+localStorage.setItem("conteudos"+materiaAtual, JSON.stringify(lista))
+modal.style.display = "none"
+renderConteudos(materiaAtual)
 }
 
 function excluirModal(){
-let l=JSON.parse(localStorage.getItem("c"+mat))
-l.splice(idx,1)
-localStorage.setItem("c"+mat,JSON.stringify(l))
-modal.style.display="none"
-render(mat)
+let lista = JSON.parse(localStorage.getItem("conteudos"+materiaAtual) || "[]")
+lista.splice(indexAtual, 1)
+localStorage.setItem("conteudos"+materiaAtual, JSON.stringify(lista))
+modal.style.display = "none"
+renderConteudos(materiaAtual)
 }
 
-/* HORÁRIO PROFISSIONAL */
+/* ================= HORÁRIO ================= */
+
 let dias=["Seg","Ter","Qua","Qui","Sex"]
 
 function tabela(id,linhas){
-
 let div=document.getElementById(id)
 div.innerHTML=""
 
-/* cabeçalho */
 div.innerHTML+=`<div class="celula header"></div>`
-dias.forEach(d=>{
-div.innerHTML+=`<div class="celula header">${d}</div>`
-})
+dias.forEach(d=>div.innerHTML+=`<div class="celula header">${d}</div>`)
 
-/* aulas */
 for(let i=1;i<=linhas;i++){
-
 div.innerHTML+=`<div class="celula header">Aula ${i}</div>`
-
 dias.forEach((d,j)=>{
 let key=id+i+j
 let val=localStorage.getItem(key)||""
-
 div.innerHTML+=`
 <div contenteditable class="celula"
 oninput="localStorage.setItem('${key}',this.innerText)">
 ${val}
-</div>
-`
+</div>`
 })
-
 }
-
 }
 
 tabela("manha",5)
 tabela("tarde",4)
 
-/* NOTAS */
+/* ================= NOTAS ================= */
+
 let notas=[]
 let ctx=grafico.getContext("2d")
 
 function addNota(){
 let n=parseFloat(nota.value)
-if(isNaN(n))return
+if(isNaN(n)) return
 notas.push(n)
 draw()
 }
@@ -381,9 +353,9 @@ ctx.fillText(n,x,250-h-5)
 })
 }
 
-/* PROVAS COM BOTÃO DIREITO */
-function addProva(){
+/* ================= PROVAS ================= */
 
+function addProva(){
 if(!dataProva.value || !materiaProva.value) return
 
 let li=document.createElement("li")
@@ -392,52 +364,21 @@ li.innerText=dataProva.value+" - "+materiaProva.value
 li.oncontextmenu=function(e){
 e.preventDefault()
 
-let opcao=prompt("1 - Editar\n2 - Excluir")
+let op=prompt("1 editar | 2 excluir")
 
-if(opcao=="1"){
+if(op=="1"){
 let novo=prompt("Editar:",li.innerText)
 if(novo) li.innerText=novo
 }
 
-if(opcao=="2"){
+if(op=="2"){
 li.remove()
 }
-
 }
 
 listaProvas.appendChild(li)
 }
 
-/* ARQUIVOS */
-fileInput.onchange=()=>{
-let li=document.createElement("li")
-li.innerText=fileInput.files[0].name
-listaArquivos.appendChild(li)
-}
-
 </script>
-
 </body>
-<a href="aula.html">
-  <button class="btn"> S.O.MIGUEL <button/> 
-  </a>
-
-<a href="Cão de pelagem preta na trilha.png"> 
-  <button class="btn"> M.CACHORRO <button/> 
-  </a>
-
-<a href="Aula fantástica e cheia de magia.png">
-  <button class="btn"> C.BRANCO <button/> 
-  </a>
-    
-<a href="braille.html">
-  <button class="btn"> C.BRAILLE <button/> 
-  </a>
-    
-<a href="D.Humanos.html">
-  <button class="btn"> D.H.ESCOLA <button/> 
-  </a>
-    
-    <a href="Placa mae.html">
-  <button class="btn"> P.MÃE <button/> 
-  </a>
+</html>
