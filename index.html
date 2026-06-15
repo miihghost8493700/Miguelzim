@@ -1,54 +1,138 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
+
 <head>
 <meta charset="UTF-8">
-<title>Mochila Digital PRO</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>🎒 Mochila do Miguel</title>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
 
 body{
 display:flex;
 background:#eef5ff;
+min-height:100vh;
+transition:.3s;
+}
+
+/* MODO ESCURO */
+
+.dark{
+background:#181818;
+color:white;
+}
+
+.dark .card,
+.dark .jogo,
+.dark .celula{
+background:#242424;
+color:white;
+border-color:#333;
 }
 
 /* SIDEBAR */
+
 .sidebar{
-width:220px;
-background:#5aa9e6;
+width:240px;
+background:linear-gradient(180deg,#5aa9e6,#3d84d8);
 height:100vh;
 padding:20px;
 color:white;
 position:fixed;
+box-shadow:3px 0 10px rgba(0,0,0,.15);
+}
+
+.logo{
+text-align:center;
+margin-bottom:25px;
+}
+
+.logo h2{
+font-size:24px;
+}
+
+.logo p{
+font-size:13px;
+opacity:.8;
 }
 
 .sidebar button{
 display:block;
 width:100%;
-margin:8px 0;
-padding:10px;
+margin:10px 0;
+padding:12px;
 border:none;
-border-radius:8px;
-background:#ffffff22;
+border-radius:10px;
+background:rgba(255,255,255,.15);
 color:white;
+font-size:15px;
 cursor:pointer;
+transition:.2s;
+}
+
+.sidebar button:hover{
+background:rgba(255,255,255,.3);
+transform:translateX(5px);
 }
 
 /* MAIN */
+
 .main{
-margin-left:220px;
-padding:20px;
+margin-left:240px;
+padding:25px;
 width:100%;
 }
 
-.section{display:none}
+.topo{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:25px;
+}
+
+.titulo{
+font-size:34px;
+color:#3d84d8;
+font-weight:bold;
+}
+
+.relogio{
+font-size:20px;
+font-weight:bold;
+}
+
+.section{
+display:none;
+animation:fade .3s;
+}
+
+@keyframes fade{
+from{
+opacity:0;
+transform:translateY(10px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+/* CARDS */
 
 .card{
 background:white;
-padding:12px;
-border-radius:10px;
-box-shadow:0 3px 8px rgba(0,0,0,0.1);
-margin-bottom:10px;
+padding:15px;
+border-radius:15px;
+box-shadow:0 4px 10px rgba(0,0,0,.08);
+margin-bottom:15px;
 }
 
 .grid{
@@ -57,30 +141,44 @@ grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
 gap:15px;
 }
 
+/* INPUTS */
+
+input{
+padding:10px;
+border:1px solid #ccc;
+border-radius:8px;
+outline:none;
+}
+
 button{
 background:#5aa9e6;
 color:white;
 border:none;
-padding:6px 10px;
-border-radius:6px;
+padding:10px 15px;
+border-radius:8px;
 cursor:pointer;
+transition:.2s;
+}
+
+button:hover{
+transform:scale(1.05);
 }
 
 /* HORÁRIO */
+
 .tabela{
 display:grid;
 grid-template-columns:80px repeat(5,1fr);
-gap:6px;
-max-width:700px;
-margin:auto;
+gap:5px;
 }
 
 .celula{
 background:white;
 padding:10px;
 border-radius:8px;
-text-align:center;
 border:1px solid #ddd;
+text-align:center;
+min-height:45px;
 }
 
 .header{
@@ -89,224 +187,838 @@ color:white;
 font-weight:bold;
 }
 
-/* MODAL */
-.modal{
-display:none;
-position:fixed;
-top:0;left:0;
-width:100%;height:100%;
-background:rgba(0,0,0,0.5);
-}
+/* MATÉRIAS */
 
-.modal-content{
+.materia-card{
 background:white;
-padding:20px;
-border-radius:10px;
-width:90%;
-max-width:500px;
-margin:10% auto;
+padding:15px;
+border-radius:15px;
+box-shadow:0 4px 10px rgba(0,0,0,.08);
 }
 
-textarea{
-width:100%;
-height:150px;
+.materia-card h3{
+margin-bottom:10px;
+color:#3d84d8;
 }
 
-canvas{
-background:white;
-border-radius:10px;
+.materia-card button{
+margin-right:5px;
 }
 
 /* JOGOS */
+
 .jogo{
 background:white;
-padding:20px;
-border-radius:10px;
+padding:25px;
+border-radius:15px;
 text-align:center;
-transition:0.2s;
+box-shadow:0 4px 10px rgba(0,0,0,.08);
+transition:.2s;
+font-size:18px;
 }
 
 .jogo:hover{
-transform:scale(1.05);
+transform:translateY(-5px);
 }
+
+.jogo a{
+text-decoration:none;
+color:#3d84d8;
+font-weight:bold;
+}
+
+/* PROVAS */
+
+#listaProvas li{
+padding:8px;
+margin:5px 0;
+background:#f5f5f5;
+border-radius:8px;
+list-style:none;
+}
+
+/* RESPONSIVO */
+
+@media(max-width:800px){
+
+.sidebar{
+width:80px;
+padding:10px;
+}
+
+.sidebar button{
+font-size:12px;
+padding:8px;
+}
+
+.logo h2,
+.logo p{
+display:none;
+}
+
+.main{
+margin-left:80px;
+}
+
+.titulo{
+font-size:24px;
+}
+
+}
+
 </style>
 </head>
 
 <body>
 
 <div class="sidebar">
+
+<div class="logo">
+<h2>🎒 Mochila</h2>
+<p>do Miguel</p>
+</div>
+
 <button onclick="mostrar('mochila')">📚 Mochila</button>
+
 <button onclick="mostrar('horario')">📅 Horário</button>
+
 <button onclick="mostrar('notas')">📊 Notas</button>
-<button onclick="mostrar('provas')">📅 Provas</button>
+
+<button onclick="mostrar('provas')">📝 Provas</button>
+
 <button onclick="mostrar('jogos')">🎮 Jogos</button>
+
+<button onclick="trocarTema()">🌙 Tema</button>
+
 </div>
 
 <div class="main">
 
-<!-- MOCHILA -->
-<div id="mochila" class="section">
-<div class="card">
-<input id="novaMateria" placeholder="Nova matéria">
-<button onclick="criarMateria()">Adicionar</button>
+<div class="topo">
+
+<div class="titulo">
+🎒 Mochila do Miguel
 </div>
+
+<div class="relogio" id="relogio">
+00:00:00
+</div>
+
+</div>
+
+<!-- MOCHILA -->
+
+<div id="mochila" class="section">
+
+<div class="card">
+
+<input
+id="novaMateria"
+placeholder="Digite uma matéria">
+
+<button onclick="criarMateria()">
+Adicionar
+</button>
+
+</div>
+
 <div class="grid" id="grid"></div>
+
 </div>
 
 <!-- HORÁRIO -->
+
 <div id="horario" class="section">
+
 <div class="card">
-<h3>Manhã</h3>
+
+<h2>🌅 Turno da Manhã</h2>
+<br>
+
 <div id="manha" class="tabela"></div>
+
 </div>
+
 <div class="card">
-<h3>Tarde</h3>
+
+<h2>☀️ Turno da Tarde</h2>
+<br>
+
 <div id="tarde" class="tabela"></div>
+
 </div>
+
 </div>
 
 <!-- NOTAS -->
+
 <div id="notas" class="section">
+
 <div class="card">
-<input id="nota" placeholder="Ex: 8P">
-<button onclick="addNota()">Adicionar</button>
-<canvas id="grafico" width="500" height="250"></canvas>
-</div>
+
+<input
+id="nota"
+placeholder="Ex: 8P">
+
+<button onclick="addNota()">
+Adicionar Nota
+</button>
+
+<br><br>
+
+<canvas
+id="grafico"
+width="600"
+height="250">
+</canvas>
+
 </div>
 
-<!-- PROVAS -->
-<div id="provas" class="section">
-<div class="card">
-<input type="date" id="dataProva">
-<input id="materiaProva">
-<button onclick="addProva()">Adicionar</button>
-<ul id="listaProvas"></ul>
 </div>
+
+  <!-- PROVAS -->
+
+<div id="provas" class="section">
+
+<div class="card">
+
+<h2>📝 Calendário de Provas</h2>
+
+<br>
+
+<input type="date" id="dataProva">
+
+<input
+id="materiaProva"
+placeholder="Matéria">
+
+<button onclick="addProva()">
+Adicionar
+</button>
+
+<br><br>
+
+<ul id="listaProvas"></ul>
+
+</div>
+
 </div>
 
 <!-- JOGOS -->
+
 <div id="jogos" class="section">
+
 <div class="grid">
-<div class="jogo"><a href="https://www.friv.com" target="_blank">FRIV</a></div>
-<div class="jogo"><a href="https://poki.com" target="_blank">Poki</a></div>
-<div class="jogo"><a href="https://crazygames.com" target="_blank">CrazyGames</a></div>
+
+<div class="jogo">
+<a href="https://www.friv.com" target="_blank">
+🎮 FRIV
+</a>
 </div>
+
+<div class="jogo">
+<a href="https://poki.com" target="_blank">
+🕹️ Poki
+</a>
+</div>
+
+<div class="jogo">
+<a href="https://crazygames.com" target="_blank">
+🔥 CrazyGames
+</a>
+</div>
+
+<div class="jogo">
+<a href="https://gartic.io" target="_blank">
+✏️ Gartic
+</a>
+</div>
+
+<div class="jogo">
+<a href="https://tetr.io" target="_blank">
+🧩 Tetris
+</a>
+</div>
+
+<div class="jogo">
+<a href="https://www.chess.com/play/computer" target="_blank">
+♟️ Xadrez
+</a>
+</div>
+
+</div>
+
 </div>
 
 </div>
 
 <script>
 
-/* NAV */
-function mostrar(s){
-document.querySelectorAll(".section").forEach(e=>e.style.display="none")
-document.getElementById(s).style.display="block"
+/* NAVEGAÇÃO */
+
+function mostrar(secao){
+
+document
+.querySelectorAll(".section")
+.forEach(s=>s.style.display="none")
+
+document
+.getElementById(secao)
+.style.display="block"
+
 }
+
 mostrar("mochila")
 
+/* RELÓGIO */
+
+function atualizarRelogio(){
+
+let agora = new Date()
+
+let h = String(agora.getHours()).padStart(2,'0')
+let m = String(agora.getMinutes()).padStart(2,'0')
+let s = String(agora.getSeconds()).padStart(2,'0')
+
+document.getElementById("relogio").innerHTML =
+`${h}:${m}:${s}`
+
+}
+
+setInterval(atualizarRelogio,1000)
+
+atualizarRelogio()
+
+/* TEMA */
+
+function trocarTema(){
+
+document.body.classList.toggle("dark")
+
+localStorage.setItem(
+"tema",
+document.body.classList.contains("dark")
+)
+
+}
+
+if(localStorage.getItem("tema")=="true"){
+document.body.classList.add("dark")
+}
+
+/* MATÉRIAS */
+
+let materias =
+JSON.parse(
+localStorage.getItem("materias")
+) || []
+
+function salvarMaterias(){
+
+localStorage.setItem(
+"materias",
+JSON.stringify(materias)
+)
+
+}
+
+function renderMaterias(){
+
+let grid =
+document.getElementById("grid")
+
+grid.innerHTML = ""
+
+materias.forEach((materia,index)=>{
+
+let card =
+document.createElement("div")
+
+card.className =
+"materia-card"
+
+card.innerHTML = `
+
+<h3>${materia}</h3>
+
+<button onclick="editarMateria(${index})">
+✏️ Editar
+</button>
+
+<button onclick="excluirMateria(${index})">
+🗑️ Excluir
+</button>
+
+`
+
+grid.appendChild(card)
+
+})
+
+}
+
+function criarMateria(){
+
+let input =
+document.getElementById("novaMateria")
+
+let nome =
+input.value.trim()
+
+if(nome=="") return
+
+materias.push(nome)
+
+salvarMaterias()
+
+renderMaterias()
+
+input.value=""
+
+}
+
+function editarMateria(index){
+
+let novo =
+prompt(
+"Editar matéria:",
+materias[index]
+)
+
+if(!novo) return
+
+materias[index]=novo
+
+salvarMaterias()
+
+renderMaterias()
+
+}
+
+function excluirMateria(index){
+
+if(confirm(
+"Excluir matéria?"
+)){
+
+materias.splice(index,1)
+
+salvarMaterias()
+
+renderMaterias()
+
+}
+
+}
+
+renderMaterias()
+
 /* HORÁRIO */
-let dias=["Seg","Ter","Qua","Qui","Sex"]
+
+let dias =
+["Seg","Ter","Qua","Qui","Sex"]
 
 function tabela(id,linhas){
-let div=document.getElementById(id)
-div.innerHTML=""
 
-div.innerHTML+=`<div class="celula header"></div>`
-dias.forEach(d=>div.innerHTML+=`<div class="celula header">${d}</div>`)
+let div =
+document.getElementById(id)
+
+div.innerHTML = ""
+
+div.innerHTML +=
+`<div class="celula header"></div>`
+
+dias.forEach(d=>{
+
+div.innerHTML +=
+`<div class="celula header">${d}</div>`
+
+})
 
 for(let i=1;i<=linhas;i++){
-div.innerHTML+=`<div class="celula header">Aula ${i}</div>`
-dias.forEach((d,j)=>{
-let key=id+i+j
-let val=localStorage.getItem(key)||""
-div.innerHTML+=`
-<div contenteditable class="celula"
-oninput="localStorage.setItem('${key}',this.innerText)">
-${val}
+
+div.innerHTML +=
+`<div class="celula header">
+Aula ${i}
 </div>`
+
+dias.forEach((d,j)=>{
+
+let key=id+i+j
+
+let valor =
+localStorage.getItem(key) || ""
+
+div.innerHTML += `
+
+<div
+contenteditable="true"
+class="celula"
+
+oninput="
+localStorage.setItem(
+'${key}',
+this.innerText
+)
+">
+
+${valor}
+
+</div>
+
+`
+
 })
+
 }
+
 }
 
 tabela("manha",5)
+
 tabela("tarde",4)
 
-/* NOTAS COM SIGLA */
-let notas=[]
-let labels=[]
-let ctx=grafico.getContext("2d")
+/* NOTAS */
 
-function addNota(){
+let notas =
+JSON.parse(
+localStorage.getItem("notas")
+) || []
 
-let input = nota.value.trim()
+let labels =
+JSON.parse(
+localStorage.getItem("labels")
+) || []
 
-let numero = parseFloat(input)
-let sigla = input.replace(/[0-9.]/g,'')
+const canvas =
+document.getElementById("grafico")
 
-if(isNaN(numero)) return
+const ctx =
+canvas.getContext("2d")
+  /* DESENHAR GRÁFICO */
 
-notas.push(numero)
-labels.push(sigla)
+function desenharGrafico(){
 
-draw()
-}
+ctx.clearRect(
+0,
+0,
+canvas.width,
+canvas.height
+)
 
-function draw(){
-ctx.clearRect(0,0,500,250)
+/* LINHAS */
 
-/* linhas */
 for(let i=0;i<=10;i++){
-let y=250-i*20
-ctx.fillStyle="#ccc"
-ctx.fillRect(0,y,500,1)
+
+let y =
+canvas.height - (i*20)
+
+ctx.fillStyle="#cccccc"
+
+ctx.fillRect(
+0,
+y,
+canvas.width,
+1
+)
+
 ctx.fillStyle="#000"
-ctx.fillText(i,5,y-2)
+
+ctx.fillText(
+i,
+5,
+y-2
+)
+
 }
 
-/* barras */
-notas.forEach((n,i)=>{
-let x=i*40+40
-let h=n*20
+/* BARRAS */
+
+notas.forEach((nota,index)=>{
+
+let x =
+(index*50)+50
+
+let altura =
+nota*20
 
 ctx.fillStyle="#5aa9e6"
-ctx.fillRect(x,250-h,30,h)
 
-/* número */
+ctx.fillRect(
+x,
+canvas.height-altura,
+35,
+altura
+)
+
 ctx.fillStyle="#000"
-ctx.fillText(n,x,250-h-5)
 
-/* sigla */
-ctx.fillText(labels[i],x,245)
+ctx.fillText(
+nota,
+x,
+canvas.height-altura-5
+)
+
+ctx.fillText(
+labels[index],
+x,
+canvas.height-5
+)
+
 })
 
 }
 
+function addNota(){
+
+let campo =
+document.getElementById("nota")
+
+let valor =
+campo.value.trim()
+
+if(valor=="") return
+
+let numero =
+parseFloat(valor)
+
+let sigla =
+valor.replace(/[0-9.]/g,'')
+
+if(isNaN(numero)){
+
+alert(
+"Digite algo como 8P ou 7T"
+)
+
+return
+
+}
+
+notas.push(numero)
+
+labels.push(sigla)
+
+localStorage.setItem(
+"notas",
+JSON.stringify(notas)
+)
+
+localStorage.setItem(
+"labels",
+JSON.stringify(labels)
+)
+
+campo.value=""
+
+desenharGrafico()
+
+}
+
+desenharGrafico()
+
 /* PROVAS */
+
+let provas =
+JSON.parse(
+localStorage.getItem("provas")
+) || []
+
+function salvarProvas(){
+
+localStorage.setItem(
+"provas",
+JSON.stringify(provas)
+)
+
+}
+
+function renderProvas(){
+
+let lista =
+document.getElementById(
+"listaProvas"
+)
+
+lista.innerHTML=""
+
+provas.forEach((prova,index)=>{
+
+let li =
+document.createElement("li")
+
+li.innerHTML = `
+📅 ${prova.data}
+ - 
+📚 ${prova.materia}
+`
+
+li.onclick = function(){
+
+let opcao =
+prompt(
+"1 = Editar\n2 = Excluir"
+)
+
+if(opcao=="1"){
+
+let novaMateria =
+prompt(
+"Nova matéria:",
+prova.materia
+)
+
+if(novaMateria){
+
+provas[index]
+.materia =
+novaMateria
+
+salvarProvas()
+
+renderProvas()
+
+}
+
+}
+
+if(opcao=="2"){
+
+provas.splice(
+index,
+1
+)
+
+salvarProvas()
+
+renderProvas()
+
+}
+
+}
+
+lista.appendChild(li)
+
+})
+
+}
+
 function addProva(){
-if(!dataProva.value || !materiaProva.value) return
 
-let li=document.createElement("li")
-li.innerText=dataProva.value+" - "+materiaProva.value
+let data =
+document
+.getElementById(
+"dataProva"
+)
+.value
 
-li.oncontextmenu=function(e){
-e.preventDefault()
+let materia =
+document
+.getElementById(
+"materiaProva"
+)
+.value
+.trim()
 
-let op=prompt("1 editar | 2 excluir")
+if(
+!data ||
+!materia
+){
 
-if(op=="1"){
-let novo=prompt("Editar:",li.innerText)
-if(novo) li.innerText=novo
+alert(
+"Preencha os campos."
+)
+
+return
+
 }
 
-if(op=="2"){
-li.remove()
-}
+provas.push({
+
+data:data,
+materia:materia
+
+})
+
+salvarProvas()
+
+renderProvas()
+
+document
+.getElementById(
+"dataProva"
+)
+.value=""
+
+document
+.getElementById(
+"materiaProva"
+)
+.value=""
+
 }
 
-listaProvas.appendChild(li)
+renderProvas()
+
+/* ENTER PARA ADICIONAR MATÉRIA */
+
+document
+.getElementById(
+"novaMateria"
+)
+.addEventListener(
+"keypress",
+function(e){
+
+if(e.key==="Enter"){
+
+criarMateria()
+
 }
+
+}
+)
+
+/* ENTER PARA ADICIONAR NOTA */
+
+document
+.getElementById(
+"nota"
+)
+.addEventListener(
+"keypress",
+function(e){
+
+if(e.key==="Enter"){
+
+addNota()
+
+}
+
+}
+)
+
+/* ENTER PARA ADICIONAR PROVA */
+
+document
+.getElementById(
+"materiaProva"
+)
+.addEventListener(
+"keypress",
+function(e){
+
+if(e.key==="Enter"){
+
+addProva()
+
+}
+
+}
+)
 
 </script>
 
 </body>
+
 </html>
