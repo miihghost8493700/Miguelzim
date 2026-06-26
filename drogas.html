@@ -15,31 +15,28 @@
     padding:0;
     box-sizing:border-box;
     font-family:'Poppins', sans-serif;
+    scroll-behavior:smooth;
 }
 
 body{
-    background:#f4f7fc;
+    background:#f5f7fa;
     color:#333;
-    line-height:1.6;
 }
 
-/* HEADER */
-
-header{
-    height:100vh;
-    background:linear-gradient(rgba(0,0,0,.65),rgba(0,0,0,.65)),
-    url('https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=1600&q=80');
-    background-size:cover;
-    background-position:center;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    color:white;
-    padding:20px;
-}
+/* HERO */
 
 .hero{
+    min-height:100vh;
+    background:linear-gradient(135deg,#0f172a,#1e3a8a,#2563eb);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    color:white;
+    padding:40px;
+}
+
+.hero-content{
     max-width:900px;
 }
 
@@ -50,23 +47,23 @@ header{
 
 .hero p{
     font-size:1.2rem;
-    margin-bottom:30px;
+    line-height:1.8;
 }
 
 .btn{
     display:inline-block;
+    margin-top:30px;
     padding:15px 35px;
-    background:#00b894;
-    color:white;
+    background:white;
+    color:#1e3a8a;
     text-decoration:none;
-    border-radius:30px;
+    border-radius:50px;
     font-weight:600;
     transition:.3s;
 }
 
 .btn:hover{
-    transform:translateY(-3px);
-    background:#019875;
+    transform:translateY(-5px);
 }
 
 /* SEÇÕES */
@@ -75,21 +72,12 @@ section{
     padding:80px 10%;
 }
 
-.titulo{
+.section-title{
     text-align:center;
+    font-size:2.5rem;
+    color:#1e3a8a;
     margin-bottom:50px;
 }
-
-.titulo h2{
-    font-size:2.5rem;
-    color:#0f172a;
-}
-
-.titulo p{
-    color:#64748b;
-}
-
-/* CARDS */
 
 .cards{
     display:grid;
@@ -110,86 +98,80 @@ section{
 }
 
 .card h3{
+    color:#2563eb;
     margin-bottom:15px;
-    color:#00b894;
 }
 
-/* CONSEQUÊNCIAS */
+/* INFO */
 
-.consequencias{
-    background:#0f172a;
+.info{
+    background:white;
+    border-radius:20px;
+    padding:40px;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+    line-height:1.9;
+}
+
+/* ESTATISTICAS */
+
+.stats{
+    background:linear-gradient(135deg,#2563eb,#1e3a8a);
     color:white;
 }
 
-.lista{
+.stats-grid{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:20px;
-}
-
-.item{
-    background:rgba(255,255,255,.08);
-    padding:25px;
-    border-radius:15px;
-}
-
-/* ESTATÍSTICAS */
-
-.stats{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:20px;
+    gap:25px;
+    text-align:center;
 }
 
 .stat{
-    background:white;
-    text-align:center;
     padding:30px;
+}
+
+.stat h2{
+    font-size:3rem;
+}
+
+/* PALESTRA */
+
+.palestra{
+    background:#eef4ff;
+}
+
+.text-box{
+    background:white;
+    padding:40px;
     border-radius:20px;
-    box-shadow:0 5px 15px rgba(0,0,0,.08);
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
 }
 
-.stat h3{
-    font-size:2rem;
-    color:#00b894;
+.text-box h3{
+    color:#1e3a8a;
+    margin-bottom:15px;
+    margin-top:20px;
 }
 
-/* PREVENÇÃO */
+/* FRASES */
 
-.prevencao{
-    background:#e8fff8;
-}
-
-.dicas{
+.frases{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
     gap:20px;
 }
 
-.dica{
+.frase{
     background:white;
     padding:25px;
-    border-radius:15px;
+    border-left:6px solid #2563eb;
+    border-radius:10px;
     box-shadow:0 5px 15px rgba(0,0,0,.08);
-}
-
-/* FRASE */
-
-.frase{
-    background:linear-gradient(135deg,#00b894,#0984e3);
-    color:white;
-    text-align:center;
-    padding:80px 20px;
-}
-
-.frase h2{
-    font-size:2.5rem;
 }
 
 /* FOOTER */
 
 footer{
-    background:#111827;
+    background:#0f172a;
     color:white;
     text-align:center;
     padding:30px;
@@ -198,11 +180,11 @@ footer{
 @media(max-width:768px){
 
 .hero h1{
-    font-size:2.7rem;
+    font-size:2.6rem;
 }
 
-.hero p{
-    font-size:1rem;
+.section-title{
+    font-size:2rem;
 }
 
 }
@@ -211,194 +193,258 @@ footer{
 </head>
 <body>
 
-<header>
+<!-- HERO -->
 
-<div class="hero">
-    <h1>Prevenção às Drogas</h1>
+<section class="hero">
 
-    <p>
-        Informar é uma das formas mais importantes de prevenção.
-        Conheça os riscos das drogas, suas consequências e como
-        construir escolhas mais saudáveis para o futuro.
-    </p>
+<div class="hero-content">
 
-    <a href="#sobre" class="btn">Saiba Mais</a>
+<h1>🚫 Prevenção às Drogas</h1>
+
+<p>
+A informação é uma das principais ferramentas para prevenir o uso de drogas.
+Conhecer os riscos, as consequências e a importância das boas escolhas ajuda
+a construir um futuro mais saudável, seguro e cheio de oportunidades.
+</p>
+
+<a href="#sobre" class="btn">Saiba Mais</a>
+
 </div>
 
-</header>
+</section>
+
+<!-- SOBRE -->
 
 <section id="sobre">
 
-<div class="titulo">
-    <h2>O que são drogas?</h2>
-    <p>Entenda o impacto dessas substâncias na vida das pessoas.</p>
+<h2 class="section-title">O Que São as Drogas?</h2>
+
+<div class="info">
+
+<p>
+Drogas são substâncias que podem alterar o funcionamento do organismo e do cérebro.
+Algumas possuem uso medicinal quando prescritas por profissionais da saúde, enquanto
+outras podem causar dependência e diversos problemas físicos, emocionais e sociais.
+</p>
+
+<br>
+
+<p>
+O uso indevido dessas substâncias pode comprometer a saúde, os relacionamentos,
+o desempenho escolar e até mesmo os sonhos e objetivos de vida de uma pessoa.
+</p>
+
 </div>
+
+</section>
+
+<!-- CONSEQUENCIAS -->
+
+<section>
+
+<h2 class="section-title">Consequências do Uso de Drogas</h2>
 
 <div class="cards">
 
 <div class="card">
-    <h3>💊 Drogas Lícitas</h3>
-    <p>
-        São substâncias permitidas por lei, como álcool e cigarro.
-        Mesmo sendo legais, podem causar dependência e diversos
-        problemas de saúde.
-    </p>
+<h3>🧠 Saúde Mental</h3>
+<p>
+Pode causar ansiedade, depressão, alterações de comportamento,
+dificuldade de concentração e dependência.
+</p>
 </div>
 
 <div class="card">
-    <h3>🚫 Drogas Ilícitas</h3>
-    <p>
-        São proibidas por lei e representam sérios riscos à saúde,
-        ao convívio social e à segurança das pessoas.
-    </p>
+<h3>❤️ Saúde Física</h3>
+<p>
+Afeta órgãos importantes do corpo, reduz a qualidade de vida
+e pode provocar doenças graves.
+</p>
 </div>
 
 <div class="card">
-    <h3>🧠 Dependência</h3>
-    <p>
-        O uso frequente pode alterar o funcionamento do cérebro,
-        tornando difícil parar sem ajuda profissional.
-    </p>
+<h3>👨‍👩‍👧 Família</h3>
+<p>
+O uso de drogas pode gerar conflitos familiares,
+afastamento e perda de confiança.
+</p>
+</div>
+
+<div class="card">
+<h3>🎓 Estudos</h3>
+<p>
+Diminui o rendimento escolar,
+a motivação e a capacidade de aprendizado.
+</p>
+</div>
+
+<div class="card">
+<h3>💰 Vida Financeira</h3>
+<p>
+Pode gerar gastos excessivos e prejudicar
+o futuro profissional.
+</p>
+</div>
+
+<div class="card">
+<h3>⚖️ Problemas Sociais</h3>
+<p>
+O envolvimento com drogas pode resultar
+em situações de risco e consequências legais.
+</p>
 </div>
 
 </div>
 
 </section>
 
-<section class="consequencias">
-
-<div class="titulo">
-    <h2>Consequências do Uso de Drogas</h2>
-</div>
-
-<div class="lista">
-
-<div class="item">
-    <h3>🏥 Saúde Física</h3>
-    <p>
-        Problemas cardíacos, respiratórios, danos ao fígado,
-        perda de memória e redução da qualidade de vida.
-    </p>
-</div>
-
-<div class="item">
-    <h3>🧠 Saúde Mental</h3>
-    <p>
-        Ansiedade, depressão, alterações de comportamento,
-        dificuldades de concentração e dependência química.
-    </p>
-</div>
-
-<div class="item">
-    <h3>👨‍👩‍👧 Família</h3>
-    <p>
-        Conflitos familiares, perda de confiança e dificuldades
-        nos relacionamentos.
-    </p>
-</div>
-
-<div class="item">
-    <h3>🎓 Escola e Trabalho</h3>
-    <p>
-        Queda no rendimento, faltas frequentes e dificuldades
-        para alcançar objetivos pessoais e profissionais.
-    </p>
-</div>
-
-</div>
-
-</section>
+<!-- PREVENÇÃO -->
 
 <section>
 
-<div class="titulo">
-    <h2>Fatores de Proteção</h2>
-    <p>Hábitos que ajudam a manter uma vida saudável.</p>
+<h2 class="section-title">Como Prevenir</h2>
+
+<div class="cards">
+
+<div class="card">
+<h3>✅ Informação</h3>
+<p>
+Buscar conhecimento sobre os riscos das drogas é uma das formas mais eficazes de prevenção.
+</p>
 </div>
 
-<div class="stats">
-
-<div class="stat">
-    <h3>🏃</h3>
-    <p>Prática de esportes</p>
+<div class="card">
+<h3>🤝 Boas Companhias</h3>
+<p>
+Manter amizades positivas ajuda a evitar influências prejudiciais.
+</p>
 </div>
 
-<div class="stat">
-    <h3>📚</h3>
-    <p>Educação e informação</p>
+<div class="card">
+<h3>🏃 Esporte e Lazer</h3>
+<p>
+Praticar esportes e desenvolver hobbies contribui para uma vida saudável.
+</p>
 </div>
 
-<div class="stat">
-    <h3>👨‍👩‍👧</h3>
-    <p>Apoio familiar</p>
-</div>
-
-<div class="stat">
-    <h3>🤝</h3>
-    <p>Boas amizades</p>
-</div>
-
-</div>
-
-</section>
-
-<section class="prevencao">
-
-<div class="titulo">
-    <h2>Como Prevenir?</h2>
-</div>
-
-<div class="dicas">
-
-<div class="dica">
-    <h3>✔ Informe-se</h3>
-    <p>
-        Conhecer os riscos ajuda a tomar decisões conscientes
-        e responsáveis.
-    </p>
-</div>
-
-<div class="dica">
-    <h3>✔ Escolha Boas Companhias</h3>
-    <p>
-        Cercar-se de pessoas que incentivem hábitos saudáveis
-        faz toda a diferença.
-    </p>
-</div>
-
-<div class="dica">
-    <h3>✔ Tenha Objetivos</h3>
-    <p>
-        Sonhos e metas ajudam a manter o foco e a motivação
-        para construir um futuro melhor.
-    </p>
-</div>
-
-<div class="dica">
-    <h3>✔ Procure Ajuda</h3>
-    <p>
-        Em situações difíceis, converse com familiares,
-        professores ou profissionais de saúde.
-    </p>
+<div class="card">
+<h3>💬 Diálogo</h3>
+<p>
+Conversar com familiares, professores e amigos fortalece a prevenção.
+</p>
 </div>
 
 </div>
 
 </section>
 
-<section class="frase">
+<!-- ESTATÍSTICAS -->
 
-<h2>
-"A melhor escolha é aquela que protege sua saúde,
-seus sonhos e seu futuro."
+<section class="stats">
+
+<h2 class="section-title" style="color:white;">
+Importância da Conscientização
 </h2>
 
+<div class="stats-grid">
+
+<div class="stat">
+<h2>📚</h2>
+<p>Educação é uma das maiores formas de prevenção.</p>
+</div>
+
+<div class="stat">
+<h2>🤝</h2>
+<p>Família e escola têm papel fundamental na orientação dos jovens.</p>
+</div>
+
+<div class="stat">
+<h2>💙</h2>
+<p>Escolhas saudáveis contribuem para um futuro melhor.</p>
+</div>
+
+</div>
+
 </section>
+
+<!-- PALESTRA -->
+
+<section class="palestra">
+
+<h2 class="section-title">Palestra Sobre Drogas na Escola</h2>
+
+<div class="text-box">
+
+<h3>Introdução</h3>
+
+<p>
+Ontem, nossa escola recebeu a visita de três policiais para a realização de uma palestra sobre drogas. O objetivo foi conscientizar os alunos sobre os perigos dessas substâncias, suas consequências para a saúde e para a vida das pessoas, além de incentivar a prevenção e as boas escolhas.
+</p>
+
+<h3>Desenvolvimento</h3>
+
+<p>
+Durante a palestra, os policiais explicaram o que são as drogas, os problemas que elas podem causar ao organismo e os impactos negativos que podem trazer para a família, os estudos e o futuro dos jovens. Eles também destacaram a importância de não aceitar ofertas de drogas e de buscar ajuda caso alguém esteja enfrentando esse problema.
+</p>
+
+<br>
+
+<p>
+Após a apresentação, houve uma demonstração com um cão farejador da raça Pastor Belga. O animal, que é treinado para auxiliar a polícia, mostrou suas habilidades ao procurar o odor de drogas escondido em caixas colocadas no chão. Utilizando seu olfato extremamente apurado, o cão conseguiu identificar corretamente a caixa que continha o cheiro da substância.
+</p>
+
+<h3>Conclusão</h3>
+
+<p>
+A palestra foi muito interessante e educativa, pois permitiu que os alunos aprendessem mais sobre os riscos das drogas e a importância da prevenção. Além disso, a demonstração com o cão farejador tornou o aprendizado mais dinâmico e mostrou como a polícia trabalha no combate às drogas, contribuindo para a segurança da sociedade.
+</p>
+
+</div>
+
+</section>
+
+<!-- FRASES -->
+
+<section>
+
+<h2 class="section-title">Frases de Conscientização</h2>
+
+<div class="frases">
+
+<div class="frase">
+"A melhor escolha é aquela que protege sua saúde e seu futuro."
+</div>
+
+<div class="frase">
+"Diga não às drogas e sim aos seus sonhos."
+</div>
+
+<div class="frase">
+"Conhecimento e prevenção caminham juntos."
+</div>
+
+<div class="frase">
+"Seu futuro vale mais do que qualquer influência momentânea."
+</div>
+
+</div>
+
+</section>
+
+<!-- RODAPÉ -->
 
 <footer>
 
+<h3>🚫 Prevenção às Drogas</h3>
+
 <p>
-Projeto Educativo • Conscientização e Prevenção às Drogas
+Informação, conscientização e educação para um futuro melhor.
+</p>
+
+<br>
+
+<p>
+Projeto Escolar • 2026
 </p>
 
 </footer>
