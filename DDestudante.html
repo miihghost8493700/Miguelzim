@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dia do Estudante</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins', sans-serif;
+}
+
+body{
+    background: #f5f7ff;
+    color:#333;
+}
+
+header{
+    background: linear-gradient(135deg,#4f46e5,#7c3aed);
+    color:white;
+    text-align:center;
+    padding:80px 20px;
+}
+
+header h1{
+    font-size:3rem;
+    margin-bottom:15px;
+}
+
+header p{
+    font-size:1.2rem;
+    max-width:800px;
+    margin:auto;
+}
+
+.hero{
+    width:100%;
+    height:400px;
+    background:url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f') center/cover;
+    position:relative;
+}
+
+.hero::after{
+    content:"";
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.45);
+}
+
+.hero-text{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    color:white;
+    text-align:center;
+    z-index:1;
+}
+
+.hero-text h2{
+    font-size:2.5rem;
+}
+
+.container{
+    width:90%;
+    max-width:1200px;
+    margin:auto;
+}
+
+section{
+    padding:60px 0;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:40px;
+    color:#4f46e5;
+    font-size:2rem;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:25px;
+}
+
+.card{
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+    transition:.4s;
+}
+
+.card:hover{
+    transform:translateY(-10px);
+}
+
+.card h3{
+    color:#4f46e5;
+    margin-bottom:10px;
+}
+
+.info{
+    background:white;
+    border-radius:20px;
+    padding:40px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+    text-align:justify;
+    line-height:1.8;
+}
+
+.frase{
+    background:linear-gradient(135deg,#4f46e5,#7c3aed);
+    color:white;
+    text-align:center;
+    padding:70px 20px;
+}
+
+.frase h2{
+    font-size:2rem;
+}
+
+footer{
+    background:#1f2937;
+    color:white;
+    text-align:center;
+    padding:25px;
+}
+
+footer p{
+    opacity:0.8;
+}
+
+</style>
+</head>
+<body>
+
+<header>
+    <h1>📚 Dia do Estudante</h1>
+    <p>Celebrando aqueles que constroem o futuro através do conhecimento, dedicação e aprendizado.</p>
+</header>
+
+<div class="hero">
+    <div class="hero-text">
+        <h2>11 de Agosto</h2>
+        <p>Uma homenagem a todos os estudantes do Brasil.</p>
+    </div>
+</div>
+
+<section>
+    <div class="container">
+        <h2 class="section-title">Sobre a Data</h2>
+
+        <div class="info">
+            <p>
+                O Dia do Estudante é comemorado no Brasil em 11 de agosto. A data foi criada para reconhecer a importância dos estudantes na construção de uma sociedade mais justa, desenvolvida e consciente.
+                Além de representar uma homenagem aos alunos, o dia também destaca o valor da educação como ferramenta de transformação social.
+            </p>
+            <br>
+            <p>
+                Ser estudante é enfrentar desafios diariamente, buscar novos conhecimentos e desenvolver habilidades que serão importantes para a vida pessoal e profissional. Cada aula, trabalho e aprendizado contribui para a formação de cidadãos preparados para o futuro.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="container">
+        <h2 class="section-title">Importância dos Estudantes</h2>
+
+        <div class="cards">
+
+            <div class="card">
+                <h3>🎓 Educação</h3>
+                <p>
+                    Os estudantes são os principais protagonistas do processo educacional e representam o futuro da sociedade.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>💡 Inovação</h3>
+                <p>
+                    Novas ideias, criatividade e soluções para os problemas do mundo surgem através do conhecimento adquirido.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>🌎 Transformação</h3>
+                <p>
+                    A educação ajuda a formar cidadãos conscientes e capazes de promover mudanças positivas na comunidade.
+                </p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section class="frase">
+    <h2>
+        "A educação é a arma mais poderosa que você pode usar para mudar o mundo."
+    </h2>
+    <p>— Nelson Mandela</p>
+</section>
+
+<section>
+    <div class="container">
+        <h2 class="section-title">Mensagem ao Estudante</h2>
+
+        <div class="info">
+            <p>
+                Neste Dia do Estudante, celebramos o esforço, a dedicação e a vontade de aprender de milhões de jovens. Cada página lida, cada atividade realizada e cada desafio superado representam passos importantes rumo aos seus sonhos.
+            </p>
+            <br>
+            <p>
+                Continue acreditando no seu potencial, valorizando o conhecimento e buscando sempre evoluir. O futuro pertence àqueles que nunca deixam de aprender.
+            </p>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p>📚 Dia do Estudante | Desenvolvido para fins educacionais</p>
+</footer>
+
+</body>
+</html>
