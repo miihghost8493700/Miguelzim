@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Atividade - Processo de Boot e Inicialização do Sistema</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,#0f172a,#1e293b);
+    color:white;
+    line-height:1.8;
+}
+
+header{
+    text-align:center;
+    padding:60px 20px;
+    background:rgba(255,255,255,0.05);
+    backdrop-filter: blur(10px);
+}
+
+header h1{
+    font-size:3rem;
+    margin-bottom:10px;
+}
+
+header p{
+    color:#cbd5e1;
+}
+
+.container{
+    width:90%;
+    max-width:1200px;
+    margin:auto;
+    padding:40px 0;
+}
+
+.card{
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.1);
+    border-radius:20px;
+    padding:30px;
+    margin-bottom:30px;
+    backdrop-filter:blur(8px);
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+}
+
+h2{
+    color:#60a5fa;
+    margin-bottom:15px;
+}
+
+ul{
+    padding-left:20px;
+}
+
+li{
+    margin-bottom:10px;
+}
+
+.highlight{
+    color:#38bdf8;
+    font-weight:bold;
+}
+
+footer{
+    text-align:center;
+    padding:25px;
+    background:rgba(255,255,255,0.05);
+    margin-top:40px;
+}
+
+.badge{
+    display:inline-block;
+    background:#2563eb;
+    padding:8px 16px;
+    border-radius:20px;
+    margin-top:15px;
+}
+
+</style>
+</head>
+<body>
+
+<header>
+    <h1>O Caixa Não Inicia Antes da Abertura do Supermercado</h1>
+    <p>Atividade de Sistemas Operacionais e Hardware</p>
+    <div class="badge">2º Técnico - Ensino Médio Técnico</div>
+</header>
+
+<div class="container">
+
+    <div class="card">
+        <h2>Situação-Problema</h2>
+        <p>
+            Um operador chega ao supermercado para abrir o caixa. Ao ligar o computador,
+            o Windows não inicia e aparece uma mensagem informando que não foi encontrado
+            um dispositivo de inicialização. O gerente solicita uma análise para descobrir
+            a causa do problema antes de chamar o suporte técnico.
+        </p>
+    </div>
+
+    <div class="card">
+        <h2>Verificações Necessárias</h2>
+        <ul>
+            <li>Verificar se o HD ou SSD está corretamente conectado.</li>
+            <li>Entrar na BIOS/UEFI para conferir se a unidade de armazenamento está sendo reconhecida.</li>
+            <li>Conferir a ordem de inicialização (Boot Order).</li>
+            <li>Verificar possíveis falhas físicas no HD ou SSD.</li>
+            <li>Confirmar se o sistema operacional continua instalado na unidade.</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2>O que é o Processo de Boot?</h2>
+        <p>
+            O <span class="highlight">processo de boot</span> é a sequência de etapas
+            executadas quando o computador é ligado. Durante esse processo, o hardware é
+            verificado e o sistema operacional é carregado para que o computador possa ser utilizado.
+        </p>
+    </div>
+
+    <div class="card">
+        <h2>Função da BIOS/UEFI</h2>
+        <p>
+            A <span class="highlight">BIOS</span> (Basic Input/Output System) ou a
+            <span class="highlight">UEFI</span> (Unified Extensible Firmware Interface)
+            realiza a verificação inicial dos componentes do computador, como memória,
+            processador e dispositivos de armazenamento.
+        </p>
+
+        <p>
+            Após essa verificação, ela procura um dispositivo de inicialização válido
+            para carregar o sistema operacional.
+        </p>
+    </div>
+
+    <div class="card">
+        <h2>Ordem de Inicialização (Boot Order)</h2>
+        <p>
+            A Boot Order define a sequência em que o computador procura um sistema
+            operacional para iniciar.
+        </p>
+
+        <ul>
+            <li>SSD</li>
+            <li>HD</li>
+            <li>Pendrive</li>
+            <li>DVD</li>
+            <li>Rede</li>
+        </ul>
+
+        <p>
+            Caso a ordem esteja configurada incorretamente, o computador pode não
+            encontrar o Windows e exibir mensagens de erro.
+        </p>
+    </div>
+
+    <div class="card">
+        <h2>Importância do HD ou SSD</h2>
+        <p>
+            O HD ou SSD é o dispositivo onde o sistema operacional está armazenado.
+            Se ele não for reconhecido pela BIOS/UEFI, estiver desconectado ou apresentar
+            defeito, o Windows não conseguirá iniciar.
+        </p>
+
+        <p>
+            Por isso, a verificação do armazenamento é uma das etapas mais importantes
+            na solução desse tipo de problema.
+        </p>
+    </div>
+
+    <div class="card">
+        <h2>Conclusão</h2>
+        <p>
+            Para resolver o problema do caixa que não inicia, é necessário verificar
+            o reconhecimento do HD/SSD, analisar as configurações da BIOS/UEFI e conferir
+            a ordem de inicialização. Esses procedimentos ajudam a identificar a causa da
+            falha e garantem que o sistema operacional seja carregado corretamente.
+        </p>
+    </div>
+
+</div>
+
+<footer>
+    Página desenvolvida para apresentação da atividade escolar sobre processo de boot,
+    BIOS/UEFI e dispositivos de armazenamento.
+</footer>
+
+</body>
+</html>
