@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Atividade - Manutenção de Computadores</title>
+
+    <!-- Fonte com aparência de escrita à mão -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #dedede;
+            font-family: Arial, sans-serif;
+        }
+
+        /* =========================
+           PÁGINA INICIAL
+        ========================= */
+
+        #inicio {
+            min-height: 100vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 20px;
+        }
+
+        .menu {
+            width: 100%;
+            max-width: 600px;
+
+            background: white;
+
+            padding: 45px 30px;
+
+            border-radius: 18px;
+
+            text-align: center;
+
+            box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+        }
+
+        .menu h1 {
+            font-size: 30px;
+            color: #222;
+
+            margin-bottom: 15px;
+        }
+
+        .menu p {
+            color: #666;
+            line-height: 1.6;
+
+            margin-bottom: 30px;
+        }
+
+        .botao {
+            display: inline-block;
+
+            background: #222;
+            color: white;
+
+            text-decoration: none;
+
+            padding: 12px 22px;
+
+            border-radius: 9px;
+
+            font-size: 15px;
+
+            transition: 0.2s;
+        }
+
+        .botao:hover {
+            transform: translateY(-2px);
+
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+        }
+
+
+        /* =========================
+           ÁREA DA RESPOSTA
+        ========================= */
+
+        #resposta {
+            min-height: 100vh;
+
+            padding: 20px 10px 40px;
+        }
+
+        .barra {
+            width: 100%;
+            max-width: 950px;
+
+            margin: 0 auto 15px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .barra h2 {
+            font-size: 18px;
+            color: #333;
+        }
+
+
+        /* =========================
+           FOLHA DO CADERNO
+        ========================= */
+
+        .folha {
+            position: relative;
+
+            width: 100%;
+            max-width: 950px;
+
+            min-height: 1150px;
+
+            margin: auto;
+
+            padding: 32px 30px 60px 30px;
+
+            background-color: #fffefa;
+
+            /*
+                LINHAS DO CADERNO
+
+                Sem margem vermelha.
+                A linha é preta, mas mais clara
+                que a escrita.
+            */
+
+            background-image:
+                repeating-linear-gradient(
+                    to bottom,
+                    transparent 0px,
+                    transparent 31px,
+                    rgba(45,45,45,0.35) 32px,
+                    rgba(45,45,45,0.35) 33px
+                );
+
+            box-shadow:
+                0 8px 25px rgba(0,0,0,0.20);
+
+            overflow: hidden;
+        }
+
+
+        /* =========================
+           NOME
+        ========================= */
+
+        .nome {
+            height: 34px;
+
+            font-family:
+                "Caveat",
+                "Segoe Print",
+                "Bradley Hand",
+                cursive;
+
+            font-size: 25px;
+
+            font-weight: 600;
+
+            color: #7778a5;
+
+            transform: rotate(-0.4deg);
+        }
+
+
+        /* =========================
+           ESCRITA
+        ========================= */
+
+        .escrita {
+            font-family:
+                "Caveat",
+                "Segoe Print",
+                "Bradley Hand",
+                cursive;
+
+            font-size: 21px;
+
+            font-weight: 500;
+
+            color: #666666;
+
+            line-height: 32px;
+
+            letter-spacing: 0.1px;
+        }
+
+
+        /*
+            Cada linha possui exatamente
+            a altura de uma linha do caderno.
+        */
+
+        .linha {
+            height: 32px;
+
+            white-space: nowrap;
+
+            overflow: hidden;
+
+            transform: rotate(-0.15deg);
+        }
+
+        .linha:nth-child(4n) {
+            transform: rotate(0.1deg);
+        }
+
+        .linha:nth-child(7n) {
+            transform: rotate(-0.25deg);
+        }
+
+
+        /* =========================
+           BOTÃO FINAL
+        ========================= */
+
+        .final {
+            width: 100%;
+            max-width: 950px;
+
+            margin: 18px auto 0;
+        }
+
+
+        /* =========================
+           CELULAR
+        ========================= */
+
+        @media (max-width: 650px) {
+
+            #resposta {
+                padding: 10px 5px 30px;
+            }
+
+            .barra h2 {
+                font-size: 15px;
+            }
+
+            .folha {
+                min-height: 1000px;
+
+                padding:
+                    25px
+                    10px
+                    40px
+                    10px;
+            }
+
+            .nome {
+                font-size: 20px;
+
+                height: 29px;
+            }
+
+            .escrita {
+                font-size: 16px;
+
+                line-height: 27px;
+            }
+
+            .linha {
+                height: 27px;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     PÁGINA INICIAL
+===================================================== -->
+
+<section id="inicio">
+
+    <div class="menu">
+
+        <h1>💻 Atividade de Manutenção</h1>
+
+        <p>
+            Resposta da atividade sobre o problema
+            de um computador que liga, mas não apresenta imagem.
+        </p>
+
+        <a href="#resposta" class="botao">
+            ➜ Ver resposta
+        </a>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     PÁGINA DA RESPOSTA
+===================================================== -->
+
+<section id="resposta">
+
+    <div class="barra">
+
+        <h2>
+            Resposta manuscrita
+        </h2>
+
+        <a href="#inicio" class="botao">
+            ← Voltar
+        </a>
+
+    </div>
+
+
+
+    <!-- =================================================
+         FOLHA
+    ================================================== -->
+
+    <div class="folha">
+
+
+        <!-- NOME -->
+
+        <div class="nome">
+            Miguel Rodrigues Pereira
+        </div>
+
+
+
+        <!-- ESCRITA -->
+
+        <div class="escrita">
+
+
+            <!-- QUESTÃO 1 -->
+
+            <div class="linha">
+                1. Diante desse problema, qual seria sua sequência
+            </div>
+
+            <div class="linha">
+                de procedimentos para verificar por que o seu
+            </div>
+
+            <div class="linha">
+                computador liga mas não apresenta imagem? Explique
+            </div>
+
+            <div class="linha">
+                quais componentes e conexões você verificaria
+            </div>
+
+            <div class="linha">
+                primeiro para tentar solucionar o problema e
+            </div>
+
+            <div class="linha">
+                conseguir uma conclusão com segurança.
+            </div>
+
+            <div class="linha">
+                com pouco trabalho.
+            </div>
+
+
+            <div class="linha">
+                Para finalizar responda:
+            </div>
+
+
+
+            <!-- QUESTÃO 2 -->
+
+            <div class="linha">
+                2. Como você acha que poderia se evitar
+            </div>
+
+            <div class="linha">
+                os problemas que aconteceram? Isso que
+            </div>
+
+            <div class="linha">
+                você aprendeu na escola de como o
+            </div>
+
+            <div class="linha">
+                você resolveria um problema semelhante
+            </div>
+
+            <div class="linha">
+                e para ele?
+            </div>
+
+
+
+            <!-- RESPOSTA 1 -->
+
+            <div class="linha">
+                1- Eu começaria verificando os cabos e a fonte e
+            </div>
+
+            <div class="linha">
+                monitor, RAM, e a temperatura do computador.
+            </div>
+
+            <div class="linha">
+                Depois faria alguns testes nos componentes
+            </div>
+
+            <div class="linha">
+                para descobrir qual deles está causando o pro-
+            </div>
+
+            <div class="linha">
+                blema.
+            </div>
+
+
+
+            <!-- RESPOSTA 2 -->
+
+            <div class="linha">
+                2- Esse conhecimento ajudaria a resolver os pro-
+            </div>
+
+            <div class="linha">
+                blemas nos computadores da escola com trata-
+            </div>
+
+            <div class="linha">
+                mentos e lentidão. Assim eu conseguiria
+            </div>
+
+            <div class="linha">
+                encontrar a causa do problema mais rápido
+            </div>
+
+            <div class="linha">
+                e ajudar a evitar que o computador fique pa-
+            </div>
+
+            <div class="linha">
+                rado.
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+
+    <!-- BOTÃO FINAL -->
+
+    <div class="final">
+
+        <a href="#inicio" class="botao">
+            ↑ Voltar para o início
+        </a>
+
+    </div>
+
+</section>
+
+</body>
+</html>
