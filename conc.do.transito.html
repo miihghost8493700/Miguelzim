@@ -1,0 +1,2116 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>TRÂNSITO 360° | Semana Nacional de Trânsito</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+    --bg:#070b12;
+    --bg2:#0d1420;
+    --card:rgba(255,255,255,.065);
+    --card2:rgba(255,255,255,.035);
+    --text:#f5f7fb;
+    --muted:#9ba8b8;
+    --yellow:#ffd43b;
+    --yellow2:#ffb703;
+    --red:#ff4757;
+    --green:#25d366;
+    --blue:#42a5ff;
+    --cyan:#38d9ff;
+    --border:rgba(255,255,255,.11);
+    --shadow:0 25px 80px rgba(0,0,0,.35);
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:'Inter',sans-serif;
+    background:
+        radial-gradient(circle at 10% 10%,rgba(66,165,255,.12),transparent 30%),
+        radial-gradient(circle at 90% 20%,rgba(255,212,59,.08),transparent 25%),
+        var(--bg);
+    color:var(--text);
+    overflow-x:hidden;
+}
+
+body.light{
+    --bg:#eef2f7;
+    --bg2:#ffffff;
+    --card:rgba(0,0,0,.055);
+    --card2:rgba(0,0,0,.035);
+    --text:#101722;
+    --muted:#596575;
+    --border:rgba(0,0,0,.1);
+}
+
+a{
+    color:inherit;
+    text-decoration:none;
+}
+
+button{
+    font-family:inherit;
+}
+
+::-webkit-scrollbar{
+    width:9px;
+}
+
+::-webkit-scrollbar-track{
+    background:var(--bg);
+}
+
+::-webkit-scrollbar-thumb{
+    background:#344152;
+    border-radius:20px;
+}
+
+/* =========================
+   LOADER
+========================= */
+
+.loader{
+    position:fixed;
+    inset:0;
+    z-index:9999;
+    background:#05080d;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:.7s;
+}
+
+.loader.hide{
+    opacity:0;
+    pointer-events:none;
+}
+
+.loader-content{
+    text-align:center;
+}
+
+.loader-logo{
+    font-family:'Space Grotesk';
+    font-size:50px;
+    font-weight:900;
+    letter-spacing:-3px;
+}
+
+.loader-logo span{
+    color:var(--yellow);
+}
+
+.loader-line{
+    width:230px;
+    height:3px;
+    background:#1d2733;
+    margin:22px auto;
+    overflow:hidden;
+}
+
+.loader-line div{
+    width:0;
+    height:100%;
+    background:var(--yellow);
+    animation:load 1.8s forwards;
+}
+
+@keyframes load{
+    to{width:100%}
+}
+
+/* =========================
+   HEADER
+========================= */
+
+header{
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    z-index:1000;
+    padding:18px 5%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    backdrop-filter:blur(18px);
+    background:rgba(7,11,18,.72);
+    border-bottom:1px solid var(--border);
+}
+
+.logo{
+    font-family:'Space Grotesk';
+    font-size:22px;
+    font-weight:900;
+    letter-spacing:-1px;
+}
+
+.logo span{
+    color:var(--yellow);
+}
+
+nav{
+    display:flex;
+    gap:6px;
+}
+
+nav a{
+    padding:9px 14px;
+    border-radius:10px;
+    color:var(--muted);
+    font-size:13px;
+    font-weight:700;
+    transition:.3s;
+}
+
+nav a:hover{
+    color:var(--text);
+    background:var(--card);
+}
+
+.header-actions{
+    display:flex;
+    gap:8px;
+}
+
+.icon-btn{
+    width:40px;
+    height:40px;
+    border:1px solid var(--border);
+    background:var(--card);
+    color:var(--text);
+    border-radius:12px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.icon-btn:hover{
+    transform:translateY(-2px);
+    border-color:var(--yellow);
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+    min-height:100vh;
+    padding:150px 7% 90px;
+    display:grid;
+    grid-template-columns:1.05fr .95fr;
+    align-items:center;
+    gap:60px;
+    position:relative;
+    overflow:hidden;
+}
+
+.grid-bg{
+    position:absolute;
+    inset:0;
+    opacity:.15;
+    background-image:
+        linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px);
+    background-size:55px 55px;
+    mask-image:linear-gradient(to bottom,black,transparent);
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
+}
+
+.badge{
+    display:inline-flex;
+    align-items:center;
+    gap:9px;
+    padding:9px 14px;
+    border:1px solid rgba(255,212,59,.28);
+    background:rgba(255,212,59,.08);
+    color:var(--yellow);
+    border-radius:999px;
+    font-size:12px;
+    font-weight:800;
+    letter-spacing:.5px;
+    margin-bottom:25px;
+}
+
+.badge-dot{
+    width:7px;
+    height:7px;
+    background:var(--green);
+    border-radius:50%;
+    box-shadow:0 0 15px var(--green);
+}
+
+h1{
+    font-family:'Space Grotesk';
+    font-size:clamp(52px,7vw,100px);
+    line-height:.9;
+    letter-spacing:-6px;
+    margin-bottom:28px;
+}
+
+h1 span{
+    color:var(--yellow);
+}
+
+.hero-text{
+    max-width:620px;
+    color:var(--muted);
+    font-size:18px;
+    line-height:1.7;
+}
+
+.hero-buttons{
+    display:flex;
+    gap:12px;
+    margin-top:35px;
+    flex-wrap:wrap;
+}
+
+.primary-btn,
+.secondary-btn{
+    border:none;
+    padding:15px 22px;
+    border-radius:13px;
+    font-weight:800;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.primary-btn{
+    background:var(--yellow);
+    color:#111;
+    box-shadow:0 10px 35px rgba(255,212,59,.18);
+}
+
+.primary-btn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 15px 45px rgba(255,212,59,.3);
+}
+
+.secondary-btn{
+    background:var(--card);
+    color:var(--text);
+    border:1px solid var(--border);
+}
+
+.secondary-btn:hover{
+    transform:translateY(-3px);
+    border-color:var(--yellow);
+}
+
+/* =========================
+   HERO TRAFFIC VISUAL
+========================= */
+
+.traffic-scene{
+    height:500px;
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.city-glow{
+    position:absolute;
+    width:380px;
+    height:380px;
+    background:rgba(255,212,59,.08);
+    filter:blur(60px);
+    border-radius:50%;
+}
+
+.road{
+    position:absolute;
+    width:90%;
+    height:160px;
+    background:#111a25;
+    transform:rotate(-8deg);
+    border-top:2px solid #283545;
+    border-bottom:2px solid #283545;
+    overflow:hidden;
+}
+
+.road::after{
+    content:"";
+    position:absolute;
+    left:0;
+    top:50%;
+    width:100%;
+    border-top:4px dashed rgba(255,212,59,.8);
+}
+
+.car{
+    position:absolute;
+    width:110px;
+    height:45px;
+    border-radius:12px 18px 8px 8px;
+    background:var(--yellow);
+    z-index:3;
+    animation:carMove 5s linear infinite;
+}
+
+.car::before{
+    content:"";
+    position:absolute;
+    width:45px;
+    height:22px;
+    left:25px;
+    top:-17px;
+    border-radius:12px 12px 0 0;
+    background:#8ecae6;
+}
+
+.car::after{
+    content:"";
+    position:absolute;
+    width:18px;
+    height:18px;
+    border-radius:50%;
+    background:#111;
+    left:13px;
+    bottom:-9px;
+    box-shadow:68px 0 #111;
+}
+
+@keyframes carMove{
+    from{left:-130px}
+    to{left:calc(100% + 130px)}
+}
+
+.traffic-light{
+    position:absolute;
+    width:105px;
+    height:260px;
+    border-radius:30px;
+    background:#090d13;
+    border:5px solid #222b37;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:space-around;
+    padding:17px;
+    z-index:5;
+    box-shadow:0 25px 70px rgba(0,0,0,.5);
+}
+
+.light{
+    width:55px;
+    height:55px;
+    border-radius:50%;
+    background:#1c232d;
+    transition:.4s;
+}
+
+.light.red.active{
+    background:var(--red);
+    box-shadow:0 0 35px var(--red);
+}
+
+.light.yellow.active{
+    background:var(--yellow);
+    box-shadow:0 0 35px var(--yellow);
+}
+
+.light.green.active{
+    background:var(--green);
+    box-shadow:0 0 35px var(--green);
+}
+
+.scene-label{
+    position:absolute;
+    bottom:5px;
+    right:0;
+    background:var(--card);
+    border:1px solid var(--border);
+    padding:12px 15px;
+    border-radius:12px;
+    font-size:11px;
+    color:var(--muted);
+    backdrop-filter:blur(10px);
+}
+
+/* =========================
+   SECTIONS
+========================= */
+
+section{
+    padding:110px 7%;
+    position:relative;
+}
+
+.section-head{
+    max-width:720px;
+    margin-bottom:50px;
+}
+
+.eyebrow{
+    color:var(--yellow);
+    font-size:12px;
+    font-weight:900;
+    text-transform:uppercase;
+    letter-spacing:2px;
+    margin-bottom:14px;
+}
+
+.section-title{
+    font-family:'Space Grotesk';
+    font-size:clamp(34px,5vw,60px);
+    line-height:1;
+    letter-spacing:-3px;
+    margin-bottom:18px;
+}
+
+.section-description{
+    color:var(--muted);
+    line-height:1.7;
+}
+
+/* =========================
+   NUMBERS
+========================= */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+}
+
+.stat{
+    padding:28px;
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:20px;
+    transition:.3s;
+}
+
+.stat:hover{
+    transform:translateY(-5px);
+    border-color:rgba(255,212,59,.4);
+}
+
+.stat-number{
+    font-family:'Space Grotesk';
+    font-size:42px;
+    font-weight:900;
+    color:var(--yellow);
+}
+
+.stat p{
+    margin-top:8px;
+    color:var(--muted);
+    font-size:13px;
+}
+
+/* =========================
+   360 EXPERIENCE
+========================= */
+
+.experience{
+    background:
+        linear-gradient(180deg,transparent,rgba(255,255,255,.015),transparent);
+}
+
+.experience-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+.experience-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:24px;
+    padding:30px;
+    position:relative;
+    overflow:hidden;
+    min-height:280px;
+    transition:.35s;
+}
+
+.experience-card:hover{
+    transform:translateY(-5px);
+    border-color:rgba(66,165,255,.4);
+}
+
+.experience-card::before{
+    content:"";
+    position:absolute;
+    width:160px;
+    height:160px;
+    right:-50px;
+    top:-50px;
+    background:var(--blue);
+    opacity:.08;
+    filter:blur(30px);
+    border-radius:50%;
+}
+
+.card-icon{
+    font-size:35px;
+    margin-bottom:20px;
+}
+
+.experience-card h3{
+    font-size:23px;
+    margin-bottom:10px;
+}
+
+.experience-card p{
+    color:var(--muted);
+    line-height:1.6;
+    font-size:14px;
+}
+
+/* =========================
+   DECISION SIMULATOR
+========================= */
+
+.simulator{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:25px;
+}
+
+.scenario{
+    background:linear-gradient(135deg,#111b27,#0a1018);
+    border:1px solid var(--border);
+    border-radius:25px;
+    padding:35px;
+    min-height:430px;
+    position:relative;
+    overflow:hidden;
+}
+
+.scenario-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:30px;
+}
+
+.scenario-number{
+    color:var(--yellow);
+    font-weight:900;
+}
+
+.scenario-tag{
+    padding:7px 11px;
+    background:rgba(255,255,255,.06);
+    border-radius:8px;
+    font-size:11px;
+    color:var(--muted);
+}
+
+.scenario h3{
+    font-family:'Space Grotesk';
+    font-size:31px;
+    margin-bottom:15px;
+}
+
+.scenario p{
+    color:var(--muted);
+    line-height:1.7;
+}
+
+.options{
+    margin-top:30px;
+    display:grid;
+    gap:10px;
+}
+
+.option{
+    padding:15px;
+    border-radius:12px;
+    border:1px solid var(--border);
+    background:rgba(255,255,255,.035);
+    color:var(--text);
+    cursor:pointer;
+    text-align:left;
+    font-weight:700;
+    transition:.25s;
+}
+
+.option:hover{
+    border-color:var(--yellow);
+    transform:translateX(4px);
+}
+
+.option.correct{
+    border-color:var(--green);
+    background:rgba(37,211,102,.1);
+}
+
+.option.wrong{
+    border-color:var(--red);
+    background:rgba(255,71,87,.1);
+}
+
+.feedback{
+    margin-top:20px;
+    min-height:45px;
+    color:var(--yellow);
+    font-size:13px;
+    line-height:1.5;
+}
+
+/* =========================
+   CITY MAP
+========================= */
+
+.city{
+    border:1px solid var(--border);
+    border-radius:28px;
+    min-height:520px;
+    background:
+        linear-gradient(30deg,transparent 48%,rgba(255,255,255,.07) 49%,rgba(255,255,255,.07) 51%,transparent 52%),
+        linear-gradient(-30deg,transparent 48%,rgba(255,255,255,.07) 49%,rgba(255,255,255,.07) 51%,transparent 52%),
+        #0d141d;
+    background-size:180px 180px;
+    position:relative;
+    overflow:hidden;
+}
+
+.city-road{
+    position:absolute;
+    background:#222d39;
+}
+
+.road-h{
+    left:0;
+    right:0;
+    height:80px;
+    top:45%;
+}
+
+.road-v{
+    top:0;
+    bottom:0;
+    width:80px;
+    left:47%;
+}
+
+.crosswalk{
+    position:absolute;
+    left:37%;
+    top:41%;
+    width:280px;
+    height:88px;
+    background:repeating-linear-gradient(
+        90deg,
+        #e7ebef 0 18px,
+        transparent 18px 35px
+    );
+    opacity:.65;
+}
+
+.city-object{
+    position:absolute;
+    padding:12px 15px;
+    border-radius:12px;
+    background:rgba(7,11,18,.85);
+    border:1px solid var(--border);
+    backdrop-filter:blur(10px);
+    font-size:12px;
+    font-weight:800;
+    animation:float 3s ease-in-out infinite;
+}
+
+.city-object small{
+    display:block;
+    color:var(--muted);
+    font-weight:500;
+    margin-top:4px;
+}
+
+.obj1{top:15%;left:10%}
+.obj2{top:20%;right:10%;animation-delay:.6s}
+.obj3{bottom:15%;left:12%;animation-delay:1s}
+.obj4{bottom:18%;right:9%;animation-delay:1.5s}
+
+@keyframes float{
+    50%{transform:translateY(-8px)}
+}
+
+.city-car{
+    position:absolute;
+    left:42%;
+    top:53%;
+    font-size:35px;
+    animation:drive 5s linear infinite;
+}
+
+@keyframes drive{
+    0%{transform:translateX(-250px)}
+    50%{transform:translateX(80px)}
+    100%{transform:translateX(300px)}
+}
+
+/* =========================
+   BLIND SPOT
+========================= */
+
+.blind-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+.blind-box{
+    min-height:350px;
+    border:1px solid var(--border);
+    border-radius:24px;
+    padding:30px;
+    background:var(--card);
+}
+
+.blind-visual{
+    height:200px;
+    margin-top:25px;
+    border-radius:16px;
+    background:#111923;
+    position:relative;
+    overflow:hidden;
+}
+
+.blind-road{
+    position:absolute;
+    width:100%;
+    height:70px;
+    top:65px;
+    background:#263340;
+}
+
+.blind-car{
+    position:absolute;
+    width:85px;
+    height:40px;
+    background:var(--yellow);
+    border-radius:8px;
+    top:80px;
+    left:80px;
+}
+
+.blind-zone{
+    position:absolute;
+    width:150px;
+    height:100px;
+    background:rgba(255,71,87,.22);
+    border:2px dashed var(--red);
+    right:20px;
+    top:50px;
+    border-radius:50%;
+}
+
+.blind-label{
+    position:absolute;
+    right:35px;
+    top:80px;
+    font-size:10px;
+    color:#ff8892;
+    font-weight:900;
+}
+
+/* =========================
+   QUIZ
+========================= */
+
+.quiz{
+    max-width:850px;
+    margin:auto;
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:28px;
+    padding:40px;
+}
+
+.progress{
+    height:6px;
+    background:rgba(255,255,255,.08);
+    border-radius:20px;
+    overflow:hidden;
+    margin-bottom:35px;
+}
+
+.progress div{
+    height:100%;
+    width:0%;
+    background:var(--yellow);
+    transition:.4s;
+}
+
+.quiz h3{
+    font-family:'Space Grotesk';
+    font-size:28px;
+    margin-bottom:25px;
+}
+
+.quiz-options{
+    display:grid;
+    gap:10px;
+}
+
+.quiz-option{
+    padding:17px;
+    border:1px solid var(--border);
+    border-radius:13px;
+    background:rgba(255,255,255,.03);
+    cursor:pointer;
+    font-weight:700;
+    transition:.25s;
+}
+
+.quiz-option:hover{
+    border-color:var(--yellow);
+}
+
+.quiz-result{
+    text-align:center;
+    display:none;
+}
+
+.quiz-score{
+    font-family:'Space Grotesk';
+    font-size:70px;
+    color:var(--yellow);
+    font-weight:900;
+}
+
+/* =========================
+   FINAL CTA
+========================= */
+
+.final{
+    text-align:center;
+    padding:130px 7%;
+    background:
+        radial-gradient(circle at center,rgba(255,212,59,.12),transparent 45%);
+}
+
+.final h2{
+    font-family:'Space Grotesk';
+    font-size:clamp(45px,7vw,90px);
+    line-height:.95;
+    letter-spacing:-5px;
+    max-width:900px;
+    margin:auto;
+}
+
+.final h2 span{
+    color:var(--yellow);
+}
+
+.final p{
+    color:var(--muted);
+    max-width:600px;
+    margin:25px auto;
+    line-height:1.7;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    border-top:1px solid var(--border);
+    padding:40px 7%;
+    display:flex;
+    justify-content:space-between;
+    gap:20px;
+    color:var(--muted);
+    font-size:12px;
+}
+
+footer strong{
+    color:var(--text);
+}
+
+/* =========================
+   MODAL
+========================= */
+
+.modal{
+    position:fixed;
+    inset:0;
+    z-index:5000;
+    background:rgba(0,0,0,.75);
+    backdrop-filter:blur(12px);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+.modal.show{
+    display:flex;
+}
+
+.modal-box{
+    max-width:600px;
+    width:100%;
+    background:#101822;
+    border:1px solid var(--border);
+    border-radius:25px;
+    padding:35px;
+    box-shadow:var(--shadow);
+    animation:modalIn .35s ease;
+}
+
+@keyframes modalIn{
+    from{transform:translateY(20px);opacity:0}
+    to{transform:none;opacity:1}
+}
+
+.modal-close{
+    float:right;
+    background:none;
+    border:none;
+    color:var(--muted);
+    font-size:25px;
+    cursor:pointer;
+}
+
+.modal-box h3{
+    font-family:'Space Grotesk';
+    font-size:30px;
+    margin-bottom:15px;
+}
+
+.modal-box p{
+    color:var(--muted);
+    line-height:1.7;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:900px){
+
+    header{
+        padding:15px 4%;
+    }
+
+    nav{
+        display:none;
+    }
+
+    .hero{
+        grid-template-columns:1fr;
+        padding:130px 6% 70px;
+    }
+
+    .traffic-scene{
+        height:390px;
+    }
+
+    .stats{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .experience-grid,
+    .simulator,
+    .blind-grid{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:600px){
+
+    h1{
+        font-size:55px;
+        letter-spacing:-4px;
+    }
+
+    section{
+        padding:80px 5%;
+    }
+
+    .stats{
+        grid-template-columns:1fr;
+    }
+
+    .hero-text{
+        font-size:16px;
+    }
+
+    .traffic-light{
+        transform:scale(.8);
+    }
+
+    .road{
+        width:110%;
+    }
+
+    .quiz{
+        padding:25px;
+    }
+
+    footer{
+        flex-direction:column;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- LOADER -->
+
+<div class="loader" id="loader">
+    <div class="loader-content">
+        <div class="loader-logo">TRÂNSITO<span>360°</span></div>
+        <div class="loader-line"><div></div></div>
+        <small style="color:#9ba8b8">CARREGANDO EXPERIÊNCIA...</small>
+    </div>
+</div>
+
+<!-- HEADER -->
+
+<header>
+
+    <div class="logo">
+        TRÂNSITO<span>360°</span>
+    </div>
+
+    <nav>
+        <a href="#inicio">Início</a>
+        <a href="#experiencia">Experiência</a>
+        <a href="#cidade">Cidade</a>
+        <a href="#quiz">Quiz</a>
+    </nav>
+
+    <div class="header-actions">
+        <button class="icon-btn" onclick="toggleTheme()" title="Modo claro/escuro">☼</button>
+        <button class="icon-btn" onclick="openInfo()" title="Sobre o projeto">?</button>
+    </div>
+
+</header>
+
+
+<!-- HERO -->
+
+<main id="inicio">
+
+<section class="hero">
+
+    <div class="grid-bg"></div>
+
+    <div class="hero-content">
+
+        <div class="badge">
+            <span class="badge-dot"></span>
+            SEMANA NACIONAL DE TRÂNSITO • 18 — 25 SET
+        </div>
+
+        <h1>
+            NÃO É SÓ<br>
+            SOBRE <span>IR.</span><br>
+            É SOBRE<br>
+            CHEGAR.
+        </h1>
+
+        <p class="hero-text">
+            Um jeito diferente de enxergar o trânsito:
+            não como um conjunto de placas e regras,
+            mas como um espaço compartilhado onde
+            cada escolha pode proteger alguém.
+        </p>
+
+        <div class="hero-buttons">
+
+            <button class="primary-btn"
+                    onclick="document.getElementById('experiencia').scrollIntoView()">
+                COMEÇAR EXPERIÊNCIA →
+            </button>
+
+            <button class="secondary-btn"
+                    onclick="document.getElementById('quiz').scrollIntoView()">
+                TESTAR CONHECIMENTO
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="traffic-scene">
+
+        <div class="city-glow"></div>
+
+        <div class="road">
+            <div class="car"></div>
+        </div>
+
+        <div class="traffic-light">
+
+            <div class="light red active" id="red"></div>
+            <div class="light yellow" id="yellow"></div>
+            <div class="light green" id="green"></div>
+
+        </div>
+
+        <div class="scene-label">
+            SISTEMA DE SINALIZAÇÃO • ONLINE
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- INTRO -->
+
+<section>
+
+    <div class="section-head">
+
+        <div class="eyebrow">01 / O CONTEXTO</div>
+
+        <h2 class="section-title">
+            O trânsito é maior<br>
+            do que um volante.
+        </h2>
+
+        <p class="section-description">
+            Carros, motos, ônibus, bicicletas e pedestres dividem
+            o mesmo espaço. Segurança viária depende da atenção
+            e da responsabilidade de todos.
+        </p>
+
+    </div>
+
+
+    <div class="stats">
+
+        <div class="stat">
+            <div class="stat-number">18–25</div>
+            <p>Setembro: Semana Nacional de Trânsito.</p>
+        </div>
+
+        <div class="stat">
+            <div class="stat-number">360°</div>
+            <p>Uma visão que considera todos os usuários da via.</p>
+        </div>
+
+        <div class="stat">
+            <div class="stat-number">1</div>
+            <p>Objetivo principal: preservar vidas.</p>
+        </div>
+
+        <div class="stat">
+            <div class="stat-number">∞</div>
+            <p>Possibilidades de escolhas mais responsáveis.</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- EXPERIÊNCIA -->
+
+<section class="experience" id="experiencia">
+
+    <div class="section-head">
+
+        <div class="eyebrow">02 / EXPERIÊNCIA</div>
+
+        <h2 class="section-title">
+            E se você estivesse<br>
+            dentro da situação?
+        </h2>
+
+        <p class="section-description">
+            Em vez de apenas ler regras, tome decisões.
+            O objetivo é perceber como pequenas atitudes
+            podem mudar a segurança de uma situação.
+        </p>
+
+    </div>
+
+
+    <div class="experience-grid">
+
+        <div class="experience-card">
+
+            <div class="card-icon">🧠</div>
+
+            <h3>Decisão em 5 segundos</h3>
+
+            <p>
+                Situações comuns do trânsito aparecem na tela.
+                Você escolhe o que faria e recebe uma explicação
+                sobre a consequência daquela decisão.
+            </p>
+
+            <button class="primary-btn"
+                    style="margin-top:25px"
+                    onclick="startScenario()">
+                INICIAR
+            </button>
+
+        </div>
+
+
+        <div class="experience-card">
+
+            <div class="card-icon">👀</div>
+
+            <h3>O que você não percebe?</h3>
+
+            <p>
+                No trânsito, atenção não significa apenas
+                olhar para frente. Existem pedestres, ciclistas,
+                cruzamentos, pontos cegos e outros usuários
+                dividindo o mesmo espaço.
+            </p>
+
+        </div>
+
+
+        <div class="experience-card">
+
+            <div class="card-icon">📱</div>
+
+            <h3>Distração também é uma escolha</h3>
+
+            <p>
+                Uma mensagem pode esperar. Uma notificação pode
+                esperar. A segurança de quem está ao redor não
+                deveria precisar esperar.
+            </p>
+
+        </div>
+
+
+        <div class="experience-card">
+
+            <div class="card-icon">🐢</div>
+
+            <h3>Desacelerar muda tudo</h3>
+
+            <p>
+                A campanha nacional de 2026 reforça uma ideia:
+                reduzir a velocidade é uma atitude de cuidado.
+                Seu bem maior é a vida.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- DECISION SIMULATOR -->
+
+<section id="decisoes">
+
+    <div class="section-head">
+
+        <div class="eyebrow">03 / DECISÃO</div>
+
+        <h2 class="section-title">
+            Agora é com você.
+        </h2>
+
+        <p class="section-description">
+            Leia a situação e escolha a atitude mais segura.
+            Não existe competição: a ideia é refletir.
+        </p>
+
+    </div>
+
+
+    <div class="simulator">
+
+        <div class="scenario">
+
+            <div class="scenario-top">
+
+                <span class="scenario-number">CENÁRIO 01</span>
+
+                <span class="scenario-tag">
+                    ATENÇÃO
+                </span>
+
+            </div>
+
+            <h3>
+                Você está chegando a uma faixa de pedestres.
+            </h3>
+
+            <p>
+                Uma pessoa está próxima da faixa e demonstra
+                intenção de atravessar. O que você faz?
+            </p>
+
+            <div class="options">
+
+                <button class="option"
+                        onclick="answer(this,false)">
+                    Acelero para passar antes.
+                </button>
+
+                <button class="option"
+                        onclick="answer(this,true)">
+                    Reduzo a velocidade e dou preferência.
+                </button>
+
+                <button class="option"
+                        onclick="answer(this,false)">
+                    Buzino para avisar que estou passando.
+                </button>
+
+            </div>
+
+            <div class="feedback"></div>
+
+        </div>
+
+
+        <div class="scenario">
+
+            <div class="scenario-top">
+
+                <span class="scenario-number">CENÁRIO 02</span>
+
+                <span class="scenario-tag">
+                    FOCO
+                </span>
+
+            </div>
+
+            <h3>
+                Seu celular recebe uma notificação.
+            </h3>
+
+            <p>
+                Você está em deslocamento e percebe que chegou
+                uma mensagem. Qual é a atitude mais segura?
+            </p>
+
+            <div class="options">
+
+                <button class="option"
+                        onclick="answer(this,false)">
+                    Olho rapidamente enquanto continuo.
+                </button>
+
+                <button class="option"
+                        onclick="answer(this,false)">
+                    Seguro o celular em uma mão.
+                </button>
+
+                <button class="option"
+                        onclick="answer(this,true)">
+                    Deixo a mensagem para depois e mantenho a atenção.
+                </button>
+
+            </div>
+
+            <div class="feedback"></div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- CITY -->
+
+<section id="cidade">
+
+    <div class="section-head">
+
+        <div class="eyebrow">04 / VISÃO 360°</div>
+
+        <h2 class="section-title">
+            Uma cidade.<br>
+            Várias perspectivas.
+        </h2>
+
+        <p class="section-description">
+            Um trânsito seguro precisa considerar diferentes
+            pessoas e diferentes formas de deslocamento.
+        </p>
+
+    </div>
+
+
+    <div class="city">
+
+        <div class="city-road road-h"></div>
+        <div class="city-road road-v"></div>
+
+        <div class="crosswalk"></div>
+
+        <div class="city-object obj1">
+            🚶 PEDESTRE
+            <small>Respeitar a travessia.</small>
+        </div>
+
+        <div class="city-object obj2">
+            🚲 CICLISTA
+            <small>Também faz parte do trânsito.</small>
+        </div>
+
+        <div class="city-object obj3">
+            🚌 TRANSPORTE
+            <small>Compartilha o espaço.</small>
+        </div>
+
+        <div class="city-object obj4">
+            🚗 MOTORISTA
+            <small>Responsabilidade e atenção.</small>
+        </div>
+
+        <div class="city-car">
+            🚙
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- BLIND SPOT -->
+
+<section>
+
+    <div class="section-head">
+
+        <div class="eyebrow">05 / O QUE FICA FORA DO CAMPO DE VISÃO</div>
+
+        <h2 class="section-title">
+            Nem tudo que importa<br>
+            está na sua frente.
+        </h2>
+
+        <p class="section-description">
+            Segurança também significa perceber que outros
+            usuários podem estar em locais difíceis de enxergar.
+        </p>
+
+    </div>
+
+
+    <div class="blind-grid">
+
+        <div class="blind-box">
+
+            <h3>👁️ Ponto cego</h3>
+
+            <p style="color:var(--muted);margin-top:10px;line-height:1.6">
+                Antes de mudar de direção ou faixa, é importante
+                verificar os espaços ao redor e considerar
+                outros veículos e usuários da via.
+            </p>
+
+            <div class="blind-visual">
+
+                <div class="blind-road"></div>
+
+                <div class="blind-car"></div>
+
+                <div class="blind-zone"></div>
+
+                <div class="blind-label">
+                    ÁREA DE ATENÇÃO
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="blind-box">
+
+            <h3>🔎 Olhar além do óbvio</h3>
+
+            <p style="color:var(--muted);margin-top:10px;line-height:1.6">
+                Uma atitude segura começa antes da ação.
+                Observar, antecipar situações e manter distância
+                adequada ajuda a reduzir riscos.
+            </p>
+
+            <div style="
+                margin-top:30px;
+                padding:25px;
+                border-radius:18px;
+                background:rgba(255,212,59,.06);
+                border:1px solid rgba(255,212,59,.2);
+            ">
+
+                <strong style="color:var(--yellow)">
+                    REGRA 360°
+                </strong>
+
+                <p style="
+                    color:var(--muted);
+                    margin-top:10px;
+                    line-height:1.6;
+                    font-size:14px;
+                ">
+                    Antes de agir, observe o ambiente,
+                    pense nos outros e só então tome a decisão.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- QUIZ -->
+
+<section id="quiz">
+
+    <div class="section-head">
+
+        <div class="eyebrow">06 / DESAFIO FINAL</div>
+
+        <h2 class="section-title">
+            Quanto você<br>
+            realmente percebeu?
+        </h2>
+
+        <p class="section-description">
+            Responda às perguntas e descubra seu resultado.
+        </p>
+
+    </div>
+
+
+    <div class="quiz">
+
+        <div class="progress">
+            <div id="progressBar"></div>
+        </div>
+
+        <div id="quizContent">
+
+            <div style="color:var(--muted);font-size:12px;margin-bottom:10px">
+                PERGUNTA <span id="questionNumber">1</span>/5
+            </div>
+
+            <h3 id="question">
+                Qual é a mensagem nacional das campanhas educativas
+                de trânsito em 2026?
+            </h3>
+
+            <div class="quiz-options" id="quizOptions"></div>
+
+        </div>
+
+
+        <div class="quiz-result" id="quizResult">
+
+            <div style="font-size:50px">🏆</div>
+
+            <h3>Experiência concluída!</h3>
+
+            <div class="quiz-score" id="score">
+                0/5
+            </div>
+
+            <p style="color:var(--muted);line-height:1.7">
+                Mais importante do que acertar tudo é sair daqui
+                olhando o trânsito de uma forma diferente.
+            </p>
+
+            <button class="primary-btn"
+                    style="margin-top:25px"
+                    onclick="restartQuiz()">
+                FAZER NOVAMENTE
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FINAL -->
+
+<section class="final">
+
+    <div class="eyebrow">07 / A MENSAGEM</div>
+
+    <h2>
+        CHEGAR BEM<br>
+        É O <span>DESTINO.</span>
+    </h2>
+
+    <p>
+        O trânsito é compartilhado. A responsabilidade também.
+        Antes de pensar apenas em chegar rápido, pense em
+        chegar com segurança — e permitir que todos cheguem também.
+    </p>
+
+    <button class="primary-btn"
+            onclick="window.scrollTo({top:0,behavior:'smooth'})">
+        ↑ VOLTAR AO INÍCIO
+    </button>
+
+</section>
+
+</main>
+
+
+<footer>
+
+    <div>
+        <strong>TRÂNSITO 360°</strong><br>
+        Experiência educativa digital.
+    </div>
+
+    <div>
+        Semana Nacional de Trânsito • 18 — 25 de setembro
+    </div>
+
+    <div>
+        <strong>DESACELERE.</strong><br>
+        Seu bem maior é a vida.
+    </div>
+
+</footer>
+
+
+<!-- MODAL -->
+
+<div class="modal" id="infoModal">
+
+    <div class="modal-box">
+
+        <button class="modal-close"
+                onclick="closeInfo()">×</button>
+
+        <div class="eyebrow">
+            SOBRE O PROJETO
+        </div>
+
+        <h3>
+            Por que TRÂNSITO 360°?
+        </h3>
+
+        <p>
+            Esta página foi criada para transformar uma campanha
+            de conscientização em uma experiência interativa.
+            Em vez de apenas apresentar informações, o visitante
+            é convidado a observar, escolher e refletir sobre
+            situações presentes no trânsito.
+        </p>
+
+        <br>
+
+        <p>
+            A proposta é lembrar que segurança viária não depende
+            de apenas uma pessoa. Motoristas, motociclistas,
+            ciclistas, passageiros e pedestres compartilham
+            o mesmo espaço.
+        </p>
+
+        <br>
+
+        <strong style="color:var(--yellow)">
+            Desacelere. Seu bem maior é a vida.
+        </strong>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =========================
+   LOADER
+========================= */
+
+window.addEventListener("load",()=>{
+
+    setTimeout(()=>{
+
+        document
+            .getElementById("loader")
+            .classList.add("hide");
+
+    },1800);
+
+});
+
+
+/* =========================
+   TEMA
+========================= */
+
+function toggleTheme(){
+
+    document.body.classList.toggle("light");
+
+}
+
+
+/* =========================
+   MODAL
+========================= */
+
+function openInfo(){
+
+    document
+        .getElementById("infoModal")
+        .classList.add("show");
+
+}
+
+function closeInfo(){
+
+    document
+        .getElementById("infoModal")
+        .classList.remove("show");
+
+}
+
+document
+    .getElementById("infoModal")
+    .addEventListener("click",function(e){
+
+        if(e.target===this){
+            closeInfo();
+        }
+
+    });
+
+
+/* =========================
+   SEMÁFORO ANIMADO
+========================= */
+
+const red = document.getElementById("red");
+const yellow = document.getElementById("yellow");
+const green = document.getElementById("green");
+
+function trafficCycle(){
+
+    red.classList.remove("active");
+    yellow.classList.remove("active");
+    green.classList.add("active");
+
+    setTimeout(()=>{
+
+        green.classList.remove("active");
+        yellow.classList.add("active");
+
+    },3500);
+
+    setTimeout(()=>{
+
+        yellow.classList.remove("active");
+        red.classList.add("active");
+
+    },5000);
+
+}
+
+trafficCycle();
+
+setInterval(trafficCycle,7000);
+
+
+/* =========================
+   CENÁRIOS
+========================= */
+
+function answer(button,correct){
+
+    const parent = button.closest(".scenario");
+    const buttons = parent.querySelectorAll(".option");
+    const feedback = parent.querySelector(".feedback");
+
+    buttons.forEach(btn=>{
+        btn.disabled=true;
+    });
+
+    if(correct){
+
+        button.classList.add("correct");
+
+        feedback.innerHTML =
+            "✓ Boa decisão. Segurança começa quando você considera também quem está ao seu redor.";
+
+    }else{
+
+        button.classList.add("wrong");
+
+        feedback.innerHTML =
+            "⚠ Essa escolha pode aumentar o risco. Pense primeiro na segurança das pessoas envolvidas.";
+
+    }
+
+}
+
+
+/* =========================
+   INÍCIO DO CENÁRIO
+========================= */
+
+function startScenario(){
+
+    document
+        .getElementById("decisoes")
+        .scrollIntoView({
+            behavior:"smooth"
+        });
+
+}
+
+
+/* =========================
+   QUIZ
+========================= */
+
+const questions = [
+
+    {
+        q:"Qual é a mensagem nacional das campanhas educativas de trânsito em 2026?",
+        options:[
+            "Desacelere. Seu bem maior é a vida.",
+            "Acelere para chegar mais rápido.",
+            "O trânsito é responsabilidade apenas dos motoristas."
+        ],
+        answer:0
+    },
+
+    {
+        q:"Quando uma pessoa está prestes a atravessar pela faixa, qual atitude contribui para a segurança?",
+        options:[
+            "Acelerar para passar primeiro.",
+            "Reduzir a velocidade e respeitar a travessia.",
+            "Ignorar porque a pessoa ainda não atravessou."
+        ],
+        answer:1
+    },
+
+    {
+        q:"Por que manter a atenção é importante no trânsito?",
+        options:[
+            "Porque permite perceber melhor as situações ao redor.",
+            "Porque faz o veículo andar mais rápido.",
+            "Porque elimina completamente qualquer risco."
+        ],
+        answer:0
+    },
+
+    {
+        q:"Quem participa do trânsito?",
+        options:[
+            "Somente motoristas.",
+            "Somente pedestres.",
+            "Motoristas, passageiros, pedestres, ciclistas e outros usuários."
+        ],
+        answer:2
+    },
+
+    {
+        q:"Qual ideia combina melhor com a proposta desta página?",
+        options:[
+            "Chegar rápido é sempre o mais importante.",
+            "Segurança depende de escolhas responsáveis e atenção.",
+            "As regras servem apenas para evitar multas."
+        ],
+        answer:1
+    }
+
+];
+
+let currentQuestion=0;
+let score=0;
+
+function loadQuestion(){
+
+    const q=questions[currentQuestion];
+
+    document.getElementById("question").textContent=q.q;
+
+    document.getElementById("questionNumber").textContent=currentQuestion+1;
+
+    const options=document.getElementById("quizOptions");
+
+    options.innerHTML="";
+
+    q.options.forEach((option,index)=>{
+
+        const btn=document.createElement("button");
+
+        btn.className="quiz-option";
+
+        btn.textContent=option;
+
+        btn.onclick=()=>selectQuiz(index);
+
+        options.appendChild(btn);
+
+    });
+
+    document.getElementById("progressBar").style.width =
+        ((currentQuestion)/questions.length)*100+"%";
+
+}
+
+
+function selectQuiz(index){
+
+    const correct=questions[currentQuestion].answer;
+
+    const buttons=document.querySelectorAll(".quiz-option");
+
+    buttons.forEach(btn=>{
+        btn.disabled=true;
+    });
+
+    if(index===correct){
+
+        score++;
+
+        buttons[index].classList.add("correct");
+
+    }else{
+
+        buttons[index].classList.add("wrong");
+        buttons[correct].classList.add("correct");
+
+    }
+
+    setTimeout(()=>{
+
+        currentQuestion++;
+
+        if(currentQuestion<questions.length){
+
+            loadQuestion();
+
+        }else{
+
+            finishQuiz();
+
+        }
+
+    },900);
+
+}
+
+
+function finishQuiz(){
+
+    document.getElementById("quizContent").style.display="none";
+
+    document.getElementById("quizResult").style.display="block";
+
+    document.getElementById("score").textContent =
+        score+"/"+questions.length;
+
+    document.getElementById("progressBar").style.width="100%";
+
+}
+
+
+function restartQuiz(){
+
+    currentQuestion=0;
+    score=0;
+
+    document.getElementById("quizContent").style.display="block";
+
+    document.getElementById("quizResult").style.display="none";
+
+    loadQuestion();
+
+}
+
+
+/* inicia o quiz */
+
+loadQuestion();
+
+
+/* =========================
+   ANIMAÇÃO AO ROLAR
+========================= */
+
+const observer = new IntersectionObserver(
+
+    entries=>{
+
+        entries.forEach(entry=>{
+
+            if(entry.isIntersecting){
+
+                entry.target.style.opacity="1";
+                entry.target.style.transform="translateY(0)";
+
+            }
+
+        });
+
+    },
+
+    {
+        threshold:.12
+    }
+
+);
+
+
+document
+    .querySelectorAll(".stat,.experience-card,.scenario,.blind-box,.quiz")
+    .forEach(el=>{
+
+        el.style.opacity="0";
+        el.style.transform="translateY(25px)";
+        el.style.transition="opacity .7s ease, transform .7s ease";
+
+        observer.observe(el);
+
+    });
+
+
+/* =========================
+   TECLADO
+========================= */
+
+document.addEventListener("keydown",e=>{
+
+    if(e.key==="Escape"){
+        closeInfo();
+    }
+
+});
+
+
+</script>
+
+</body>
+</html>
