@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -9,1184 +10,2820 @@
 
 <style>
 
+/* =========================================================
+   RESET
+========================================================= */
+
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Segoe UI',sans-serif;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Segoe UI", Arial, sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
 }
 
 body{
-display:flex;
-background:#eef5ff;
-min-height:100vh;
-transition:.3s;
+    min-height:100vh;
+    color:#172033;
+    background:
+        radial-gradient(circle at 10% 10%, rgba(91,141,239,.16), transparent 30%),
+        radial-gradient(circle at 90% 90%, rgba(124,92,255,.13), transparent 30%),
+        #f4f7fc;
+    transition:.4s ease;
 }
 
-/* MODO ESCURO */
+/* =========================================================
+   FUNDO DECORATIVO
+========================================================= */
 
-.dark{
-background:#181818;
-color:white;
+body::before{
+    content:"";
+    position:fixed;
+    width:350px;
+    height:350px;
+    border-radius:50%;
+    background:rgba(90,169,230,.10);
+    filter:blur(80px);
+    top:-100px;
+    right:10%;
+    pointer-events:none;
+    z-index:-1;
 }
 
-.dark .card,
-.dark .jogo,
-.dark .celula{
-background:#242424;
-color:white;
-border-color:#333;
+/* =========================================================
+   MODO ESCURO
+========================================================= */
+
+body.dark{
+    color:#f4f7ff;
+    background:
+        radial-gradient(circle at 10% 10%, rgba(76,130,255,.15), transparent 30%),
+        radial-gradient(circle at 90% 90%, rgba(124,92,255,.12), transparent 30%),
+        #080d17;
 }
 
-/* SIDEBAR */
+body.dark .card,
+body.dark .materia-card,
+body.dark .jogo,
+body.dark .celula,
+body.dark .atalho,
+body.dark .welcome{
+    background:rgba(20,27,42,.82);
+    border-color:rgba(255,255,255,.08);
+    color:#f4f7ff;
+}
+
+body.dark input{
+    background:#111827;
+    color:white;
+    border-color:#334155;
+}
+
+body.dark input::placeholder{
+    color:#94a3b8;
+}
+
+body.dark .subtitulo,
+body.dark .info-text{
+    color:#94a3b8;
+}
+
+body.dark .section-title{
+    color:white;
+}
+
+body.dark .prova-item{
+    background:#111827 !important;
+}
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
 
 .sidebar{
-width:240px;
-background:linear-gradient(180deg,#5aa9e6,#3d84d8);
-height:100vh;
-padding:20px;
-color:white;
-position:fixed;
-box-shadow:3px 0 10px rgba(0,0,0,.15);
+    width:270px;
+    height:100vh;
+    position:fixed;
+    left:0;
+    top:0;
+    z-index:1000;
+
+    padding:25px 18px;
+
+    background:
+        linear-gradient(
+            160deg,
+            #071b38 0%,
+            #123c73 48%,
+            #2563a8 100%
+        );
+
+    color:white;
+
+    box-shadow:
+        8px 0 35px rgba(0,0,0,.12);
+
+    overflow-y:auto;
 }
 
 .logo{
-text-align:center;
-margin-bottom:25px;
+    padding:8px 8px 28px;
+    text-align:center;
+}
+
+.logo-icon{
+    width:70px;
+    height:70px;
+    margin:0 auto 12px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:22px;
+
+    background:linear-gradient(
+        135deg,
+        rgba(255,255,255,.25),
+        rgba(255,255,255,.08)
+    );
+
+    border:1px solid rgba(255,255,255,.2);
+
+    font-size:35px;
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,.15);
 }
 
 .logo h2{
-font-size:24px;
+    font-size:23px;
+    letter-spacing:-.5px;
 }
 
 .logo p{
-font-size:13px;
-opacity:.8;
+    margin-top:4px;
+    font-size:12px;
+    color:#cfe3ff;
+}
+
+.menu-label{
+    margin:10px 10px 10px;
+
+    font-size:10px;
+    font-weight:bold;
+    letter-spacing:2px;
+    text-transform:uppercase;
+
+    color:#9fc4ee;
 }
 
 .sidebar button{
-display:block;
-width:100%;
-margin:10px 0;
-padding:12px;
-border:none;
-border-radius:10px;
-background:rgba(255,255,255,.15);
-color:white;
-font-size:15px;
-cursor:pointer;
-transition:.2s;
+    width:100%;
+    margin:5px 0;
+
+    display:flex;
+    align-items:center;
+    gap:12px;
+
+    padding:13px 15px;
+
+    border:1px solid transparent;
+    border-radius:14px;
+
+    background:transparent;
+    color:#e9f3ff;
+
+    font-size:14px;
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.25s ease;
+}
+
+.sidebar button .menu-icon{
+    width:30px;
+    height:30px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:9px;
+
+    background:rgba(255,255,255,.09);
+
+    font-size:16px;
 }
 
 .sidebar button:hover{
-background:rgba(255,255,255,.3);
-transform:translateX(5px);
+    background:rgba(255,255,255,.12);
+    border-color:rgba(255,255,255,.1);
+    transform:translateX(4px);
 }
 
-/* MAIN */
+.sidebar button:hover .menu-icon{
+    background:rgba(255,255,255,.2);
+}
+
+.sidebar-footer{
+    margin-top:30px;
+    padding:15px;
+
+    border-radius:16px;
+
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.08);
+
+    text-align:center;
+}
+
+.sidebar-footer span{
+    display:block;
+    font-size:10px;
+    color:#a9c8ea;
+    margin-bottom:5px;
+}
+
+.sidebar-footer strong{
+    font-size:12px;
+}
+
+/* =========================================================
+   MAIN
+========================================================= */
 
 .main{
-margin-left:240px;
-padding:25px;
-width:100%;
+    margin-left:270px;
+    width:calc(100% - 270px);
+    padding:28px 35px 50px;
 }
 
+/* =========================================================
+   TOPO
+========================================================= */
+
 .topo{
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-bottom:25px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+
+    margin-bottom:25px;
+}
+
+.breadcrumb{
+    font-size:12px;
+    color:#718096;
+    margin-bottom:5px;
 }
 
 .titulo{
-font-size:34px;
-color:#3d84d8;
-font-weight:bold;
+    font-size:34px;
+    font-weight:800;
+    letter-spacing:-1.5px;
+
+    background:linear-gradient(
+        90deg,
+        #164e88,
+        #4f46e5
+    );
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.relogio-box{
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    padding:10px 16px;
+
+    border-radius:14px;
+
+    background:rgba(255,255,255,.75);
+    border:1px solid rgba(255,255,255,.9);
+
+    box-shadow:0 8px 25px rgba(0,0,0,.06);
+
+    backdrop-filter:blur(12px);
+}
+
+body.dark .relogio-box{
+    background:rgba(20,27,42,.75);
+    border-color:rgba(255,255,255,.08);
+}
+
+.relogio-icon{
+    font-size:18px;
 }
 
 .relogio{
-font-size:20px;
-font-weight:bold;
+    font-weight:800;
+    font-size:16px;
 }
+
+/* =========================================================
+   SECTIONS
+========================================================= */
 
 .section{
-display:none;
-animation:fade .3s;
+    display:none;
+    animation:sectionIn .4s ease;
 }
 
-@keyframes fade{
-from{
-opacity:0;
-transform:translateY(10px);
-}
-to{
-opacity:1;
-transform:translateY(0);
-}
+@keyframes sectionIn{
+    from{
+        opacity:0;
+        transform:translateY(12px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
 }
 
-/* CARDS */
+/* =========================================================
+   WELCOME
+========================================================= */
+
+.welcome{
+    position:relative;
+    overflow:hidden;
+
+    padding:30px;
+
+    border-radius:25px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff,
+            #f0f6ff
+        );
+
+    border:1px solid rgba(255,255,255,.9);
+
+    box-shadow:
+        0 15px 45px rgba(40,80,130,.10);
+
+    margin-bottom:20px;
+}
+
+.welcome::after{
+    content:"🎒";
+
+    position:absolute;
+    right:35px;
+    bottom:-25px;
+
+    font-size:150px;
+    opacity:.06;
+
+    transform:rotate(-10deg);
+}
+
+.welcome-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+
+    padding:6px 10px;
+
+    border-radius:20px;
+
+    background:#e5f0ff;
+    color:#2563a8;
+
+    font-size:11px;
+    font-weight:800;
+
+    text-transform:uppercase;
+    letter-spacing:1px;
+}
+
+.welcome h1{
+    margin-top:12px;
+    font-size:30px;
+    letter-spacing:-1px;
+}
+
+.welcome p{
+    margin-top:7px;
+    max-width:700px;
+    color:#64748b;
+    line-height:1.6;
+}
+
+/* =========================================================
+   CARDS
+========================================================= */
 
 .card{
-background:white;
-padding:15px;
-border-radius:15px;
-box-shadow:0 4px 10px rgba(0,0,0,.08);
-margin-bottom:15px;
+    background:rgba(255,255,255,.85);
+
+    border:1px solid rgba(255,255,255,.95);
+
+    border-radius:20px;
+
+    padding:22px;
+
+    box-shadow:
+        0 10px 35px rgba(30,60,100,.07);
+
+    backdrop-filter:blur(14px);
+
+    margin-bottom:18px;
+
+    transition:.3s ease;
+}
+
+.card:hover{
+    transform:translateY(-2px);
+    box-shadow:
+        0 16px 40px rgba(30,60,100,.10);
 }
 
 .grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:15px;
+    display:grid;
+    grid-template-columns:
+        repeat(auto-fit,minmax(230px,1fr));
+    gap:17px;
 }
 
-/* INPUTS */
+/* =========================================================
+   TITULOS
+========================================================= */
+
+.section-title{
+    font-size:22px;
+    font-weight:800;
+    margin-bottom:5px;
+}
+
+.subtitulo{
+    color:#718096;
+    font-size:13px;
+    margin-bottom:18px;
+}
+
+.section-header{
+    margin-bottom:18px;
+}
+
+.section-header small{
+    color:#64748b;
+}
+
+/* =========================================================
+   INPUTS
+========================================================= */
+
+.input-group{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+}
 
 input{
-padding:10px;
-border:1px solid #ccc;
-border-radius:8px;
-outline:none;
+    flex:1;
+    min-width:180px;
+
+    padding:13px 15px;
+
+    border:1px solid #d9e2ef;
+    border-radius:12px;
+
+    background:white;
+
+    outline:none;
+
+    font-size:14px;
+
+    transition:.25s;
 }
 
-button{
-background:#5aa9e6;
-color:white;
-border:none;
-padding:10px 15px;
-border-radius:8px;
-cursor:pointer;
-transition:.2s;
+input:focus{
+    border-color:#5a9bea;
+
+    box-shadow:
+        0 0 0 4px rgba(90,155,234,.12);
 }
 
-button:hover{
-transform:scale(1.05);
+/* =========================================================
+   BOTÕES
+========================================================= */
+
+.btn{
+    border:none;
+
+    padding:12px 17px;
+
+    border-radius:12px;
+
+    font-size:13px;
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.25s ease;
 }
 
-/* HORÁRIO */
+.btn-primary{
+    background:
+        linear-gradient(
+            135deg,
+            #2563a8,
+            #4f46e5
+        );
 
-.tabela{
-display:grid;
-grid-template-columns:80px repeat(5,1fr);
-gap:5px;
+    color:white;
+
+    box-shadow:
+        0 8px 18px rgba(37,99,168,.2);
 }
 
-.celula{
-background:white;
-padding:10px;
-border-radius:8px;
-border:1px solid #ddd;
-text-align:center;
-min-height:45px;
+.btn-primary:hover{
+    transform:translateY(-2px);
+    box-shadow:
+        0 12px 25px rgba(37,99,168,.3);
 }
 
-.header{
-background:#5aa9e6;
-color:white;
-font-weight:bold;
+.btn-edit{
+    background:#eaf3ff;
+    color:#2563a8;
 }
 
-/* MATÉRIAS */
+.btn-delete{
+    background:#fff0f0;
+    color:#dc2626;
+}
+
+.btn-edit:hover,
+.btn-delete:hover{
+    transform:translateY(-2px);
+}
+
+/* =========================================================
+   MATÉRIAS
+========================================================= */
 
 .materia-card{
-background:white;
-padding:15px;
-border-radius:15px;
-box-shadow:0 4px 10px rgba(0,0,0,.08);
+    position:relative;
+
+    padding:20px;
+
+    background:rgba(255,255,255,.9);
+
+    border:1px solid #e7edf6;
+
+    border-radius:18px;
+
+    box-shadow:
+        0 8px 25px rgba(30,60,100,.06);
+
+    transition:.3s ease;
+}
+
+.materia-card:hover{
+    transform:translateY(-5px);
+
+    box-shadow:
+        0 15px 35px rgba(30,60,100,.12);
+}
+
+.materia-icon{
+    width:43px;
+    height:43px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:13px;
+
+    background:linear-gradient(
+        135deg,
+        #e4f0ff,
+        #eef2ff
+    );
+
+    margin-bottom:13px;
+
+    font-size:21px;
 }
 
 .materia-card h3{
-margin-bottom:10px;
-color:#3d84d8;
+    font-size:17px;
+    margin-bottom:15px;
 }
 
-.materia-card button{
-margin-right:5px;
+.materia-actions{
+    display:flex;
+    gap:7px;
 }
 
-/* JOGOS */
+.materia-actions button{
+    flex:1;
+}
+
+/* =========================================================
+   HORÁRIO
+========================================================= */
+
+.tabela{
+    display:grid;
+    grid-template-columns:
+        80px repeat(5,1fr);
+
+    gap:6px;
+    overflow-x:auto;
+}
+
+.celula{
+    min-height:48px;
+
+    padding:11px 7px;
+
+    background:white;
+
+    border:1px solid #e3eaf3;
+
+    border-radius:10px;
+
+    text-align:center;
+
+    font-size:12px;
+
+    transition:.2s;
+}
+
+.celula:focus{
+    outline:2px solid #5a9bea;
+}
+
+.header{
+    background:
+        linear-gradient(
+            135deg,
+            #2563a8,
+            #4f46e5
+        );
+
+    color:white;
+
+    border:none;
+
+    font-weight:700;
+}
+
+/* =========================================================
+   NOTAS
+========================================================= */
+
+.grafico-container{
+    overflow-x:auto;
+    padding-top:10px;
+}
+
+canvas{
+    max-width:100%;
+    height:auto;
+
+    border-radius:15px;
+}
+
+/* =========================================================
+   PROVAS
+========================================================= */
+
+#listaProvas{
+    display:grid;
+    gap:10px;
+}
+
+.prova-item{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+
+    padding:15px 17px;
+
+    background:#f7faff;
+
+    border:1px solid #e5edf7;
+
+    border-radius:14px;
+
+    cursor:pointer;
+
+    transition:.25s;
+}
+
+.prova-item:hover{
+    transform:translateX(4px);
+    border-color:#9cc2ef;
+}
+
+.prova-info{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.prova-icon{
+    width:40px;
+    height:40px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:11px;
+
+    background:#eaf3ff;
+
+    font-size:19px;
+}
+
+.prova-data{
+    font-size:11px;
+    color:#718096;
+}
+
+.prova-materia{
+    font-size:14px;
+    font-weight:800;
+}
+
+/* =========================================================
+   JOGOS
+========================================================= */
+
+.categoria-jogos{
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    margin:28px 0 15px;
+
+    font-size:20px;
+    font-weight:800;
+}
+
+.categoria-jogos:first-child{
+    margin-top:0;
+}
 
 .jogo{
-background:white;
-padding:25px;
-border-radius:15px;
-text-align:center;
-box-shadow:0 4px 10px rgba(0,0,0,.08);
-transition:.2s;
-font-size:18px;
+    position:relative;
+    overflow:hidden;
+
+    padding:25px;
+
+    min-height:135px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    text-align:center;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #f2f7ff
+        );
+
+    border:1px solid #e5edf7;
+
+    border-radius:20px;
+
+    box-shadow:
+        0 10px 30px rgba(30,60,100,.06);
+
+    transition:.3s ease;
+}
+
+.jogo::before{
+    content:"";
+
+    position:absolute;
+
+    width:100px;
+    height:100px;
+
+    border-radius:50%;
+
+    background:#dbeafe;
+
+    filter:blur(25px);
+
+    top:-45px;
+    right:-30px;
+
+    opacity:.7;
 }
 
 .jogo:hover{
-transform:translateY(-5px);
+    transform:
+        translateY(-7px)
+        scale(1.01);
+
+    box-shadow:
+        0 18px 40px rgba(30,60,100,.12);
 }
 
 .jogo a{
-text-decoration:none;
-color:#3d84d8;
-font-weight:bold;
+    position:relative;
+    z-index:2;
+
+    text-decoration:none;
+
+    color:#2563a8;
+
+    font-size:18px;
+    font-weight:800;
 }
 
-/* PROVAS */
+/* =========================================================
+   ATALHOS
+========================================================= */
 
-#listaProvas li{
-padding:8px;
-margin:5px 0;
-background:#f5f5f5;
-border-radius:8px;
-list-style:none;
+.atalhos-grid{
+    display:grid;
+    grid-template-columns:
+        repeat(auto-fit,minmax(190px,1fr));
+
+    gap:14px;
 }
 
-/* RESPONSIVO */
+.atalho{
+    display:flex;
+    align-items:center;
+    gap:12px;
 
-@media(max-width:800px){
+    padding:15px;
 
-.sidebar{
-width:80px;
-padding:10px;
+    background:rgba(255,255,255,.85);
+
+    border:1px solid #e4ebf5;
+
+    border-radius:16px;
+
+    text-decoration:none;
+
+    color:#1e293b;
+
+    transition:.3s;
 }
 
-.sidebar button{
-font-size:12px;
-padding:8px;
+.atalho:hover{
+    transform:translateY(-4px);
+    border-color:#9cc2ef;
+
+    box-shadow:
+        0 10px 25px rgba(30,60,100,.08);
 }
 
-.logo h2,
-.logo p{
-display:none;
+.atalho-icon{
+    width:42px;
+    height:42px;
+
+    flex-shrink:0;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:12px;
+
+    background:#edf5ff;
+
+    font-size:20px;
 }
 
-.main{
-margin-left:80px;
+.atalho-text strong{
+    display:block;
+    font-size:13px;
 }
 
-.titulo{
-font-size:24px;
+.atalho-text span{
+    display:block;
+    margin-top:2px;
+    font-size:10px;
+    color:#718096;
 }
 
+/* =========================================================
+   DOWNLOAD
+========================================================= */
+
+.download-box{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+
+    padding:18px;
+
+    border-radius:16px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f0fdf4,
+            #ecfeff
+        );
+
+    border:1px solid #d1fae5;
+}
+
+.download-info{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.download-icon{
+    font-size:27px;
+}
+
+.download-box strong{
+    font-size:14px;
+}
+
+.download-box small{
+    display:block;
+    margin-top:3px;
+    color:#64748b;
+}
+
+.btn-download{
+    display:inline-block;
+
+    padding:10px 16px;
+
+    border-radius:10px;
+
+    background:#16a34a;
+    color:white;
+
+    text-decoration:none;
+
+    font-size:12px;
+    font-weight:800;
+
+    transition:.25s;
+}
+
+.btn-download:hover{
+    background:#15803d;
+    transform:translateY(-2px);
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer{
+    margin-top:35px;
+
+    padding-top:20px;
+
+    border-top:1px solid rgba(100,116,139,.15);
+
+    text-align:center;
+
+    color:#94a3b8;
+
+    font-size:11px;
+}
+
+/* =========================================================
+   RESPONSIVO
+========================================================= */
+
+@media(max-width:1000px){
+
+    .sidebar{
+        width:90px;
+        padding:18px 10px;
+    }
+
+    .logo h2,
+    .logo p,
+    .menu-label,
+    .sidebar-footer,
+    .sidebar button span{
+        display:none;
+    }
+
+    .logo-icon{
+        width:55px;
+        height:55px;
+        font-size:28px;
+    }
+
+    .sidebar button{
+        justify-content:center;
+        padding:10px;
+    }
+
+    .sidebar button .menu-icon{
+        width:38px;
+        height:38px;
+    }
+
+    .main{
+        margin-left:90px;
+        width:calc(100% - 90px);
+        padding:22px;
+    }
+}
+
+@media(max-width:650px){
+
+    .main{
+        padding:16px;
+    }
+
+    .topo{
+        align-items:flex-start;
+        flex-direction:column;
+    }
+
+    .titulo{
+        font-size:27px;
+    }
+
+    .relogio-box{
+        width:100%;
+        justify-content:center;
+    }
+
+    .welcome{
+        padding:22px;
+    }
+
+    .welcome h1{
+        font-size:24px;
+    }
+
+    .card{
+        padding:17px;
+    }
+
+    .tabela{
+        grid-template-columns:
+            65px repeat(5,90px);
+    }
+
+    .download-box{
+        align-items:flex-start;
+        flex-direction:column;
+    }
 }
 
 </style>
 </head>
 
+
 <body>
 
-<div class="sidebar">
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
 
-<div class="logo">
-<h2>🎒 Mochila</h2>
-<p>do Miguel</p>
-</div>
+<aside class="sidebar">
 
-<button onclick="mostrar('mochila')">📚 Mochila</button>
+    <div class="logo">
 
-<button onclick="mostrar('horario')">📅 Horário</button>
-
-<button onclick="mostrar('notas')">📊 Notas</button>
-
-<button onclick="mostrar('provas')">📝 Provas</button>
-
-<button onclick="mostrar('jogos')">🎮 Jogos</button>
-
-<button onclick="trocarTema()">🌙 Tema</button>
-
-</div>
-
-<div class="main">
-
-<div class="topo">
-
-<div class="titulo">
-🎒 Mochila do Miguel
-</div>
-
-<div class="relogio" id="relogio">
-00:00:00
-</div>
-
-</div>
-
-<!-- MOCHILA -->
-
-<div id="mochila" class="section">
-
-<div class="card">
-
-<input
-id="novaMateria"
-placeholder="Digite uma matéria">
-
-<button onclick="criarMateria()">
-Adicionar
-</button>
-
-</div>
-
-<div class="grid" id="grid"></div>
-
-</div>
-
-<!-- HORÁRIO -->
-
-<div id="horario" class="section">
-
-<div class="card">
-
-<h2>🌅 Turno da Manhã</h2>
-<br>
-
-<div id="manha" class="tabela"></div>
-
-</div>
-
-<div class="card">
-
-<h2>☀️ Turno da Tarde</h2>
-<br>
-
-<div id="tarde" class="tabela"></div>
-
-</div>
-
-</div>
-
-<!-- NOTAS -->
-
-<div id="notas" class="section">
-
-<div class="card">
-
-<input
-id="nota"
-placeholder="Ex: 8P">
-
-<button onclick="addNota()">
-Adicionar Nota
-</button>
-
-<br><br>
-
-<canvas
-id="grafico"
-width="600"
-height="250">
-</canvas>
-
-</div>
-
-</div>
-
-  <!-- PROVAS -->
-
-<div id="provas" class="section">
-
-<div class="card">
-
-<h2>📝 Calendário de Provas</h2>
-
-<br>
-
-<input type="date" id="dataProva">
-
-<input
-id="materiaProva"
-placeholder="Matéria">
-
-<button onclick="addProva()">
-Adicionar
-</button>
-
-<br><br>
-
-<ul id="listaProvas"></ul>
-
-</div>
-
-</div>
-
-<!-- JOGOS -->
-
-<div id="jogos" class="section">
-
-    <!-- Jogos de Raciocínio -->
-    <h2 class="categoria-jogos">🧠 Jogos de Raciocínio</h2>
-
-    <div class="grid">
-
-        <div class="jogo">
-            <a href="https://tetr.io" target="_blank">
-                🧩 Tetris
-            </a>
+        <div class="logo-icon">
+            🎒
         </div>
 
-        <div class="jogo">
-            <a href="https://www.chess.com/play/computer" target="_blank">
-                ♟️ Xadrez
-            </a>
+        <h2>Mochila</h2>
+        <p>Seu espaço escolar digital</p>
+
+    </div>
+
+
+    <div class="menu-label">
+        Principal
+    </div>
+
+
+    <button onclick="mostrar('mochila')">
+
+        <div class="menu-icon">📚</div>
+
+        <span>Mochila</span>
+
+    </button>
+
+
+    <button onclick="mostrar('horario')">
+
+        <div class="menu-icon">📅</div>
+
+        <span>Horário</span>
+
+    </button>
+
+
+    <button onclick="mostrar('notas')">
+
+        <div class="menu-icon">📊</div>
+
+        <span>Notas</span>
+
+    </button>
+
+
+    <button onclick="mostrar('provas')">
+
+        <div class="menu-icon">📝</div>
+
+        <span>Provas</span>
+
+    </button>
+
+
+    <button onclick="mostrar('jogos')">
+
+        <div class="menu-icon">🎮</div>
+
+        <span>Jogos</span>
+
+    </button>
+
+
+    <div class="menu-label">
+        Aparência
+    </div>
+
+
+    <button onclick="trocarTema()">
+
+        <div class="menu-icon" id="temaIcon">
+            🌙
         </div>
 
-        <div class="jogo">
-            <a href="https://www.mathsisfun.com/games/towerofhanoi.html" target="_blank">
-                🎯 Torre de Hanói
-            </a>
+        <span>Tema</span>
+
+    </button>
+
+
+    <div class="sidebar-footer">
+
+        <span>MOCHILA DIGITAL</span>
+
+        <strong>Organize • Estude • Evolua</strong>
+
+    </div>
+
+</aside>
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main class="main">
+
+
+    <!-- TOPO -->
+
+    <div class="topo">
+
+        <div>
+
+            <div class="breadcrumb">
+                Início / Mochila Digital
+            </div>
+
+            <div class="titulo">
+                🎒 Mochila do Miguel
+            </div>
+
         </div>
 
-        <div class="jogo">
-            <a href="https://www.jigsawplanet.com" target="_blank">
-                🔍 Quebra-Cabeças
-            </a>
-        </div>
 
-        <div class="jogo">
-            <a href="https://rubikscu.be" target="_blank">
-                🟦 Cubo Mágico
-            </a>
+        <div class="relogio-box">
+
+            <div class="relogio-icon">
+                🕐
+            </div>
+
+            <div
+                class="relogio"
+                id="relogio">
+                00:00:00
+            </div>
+
         </div>
 
     </div>
 
-    <!-- Jogos de Diversão -->
-    <h2 class="categoria-jogos">🎮 Jogos de Diversão</h2>
 
-    <div class="grid">
+    <!-- =================================================
+         MOCHILA
+    ================================================= -->
 
-        <div class="jogo">
-            <a href="https://www.friv.com" target="_blank">
-                🎮 FRIV
-            </a>
+    <section
+        id="mochila"
+        class="section">
+
+
+        <div class="welcome">
+
+            <div class="welcome-badge">
+                ✦ Área do estudante
+            </div>
+
+            <h1>
+                Tudo que você precisa, em um só lugar.
+            </h1>
+
+            <p>
+                Organize suas matérias, acompanhe seus horários,
+                registre suas notas e não esqueça das próximas provas.
+            </p>
+
         </div>
 
-        <div class="jogo">
-            <a href="https://poki.com" target="_blank">
-                🕹️ Poki
-            </a>
+
+        <div class="card">
+
+            <div class="section-header">
+
+                <div class="section-title">
+                    📚 Minhas matérias
+                </div>
+
+                <div class="subtitulo">
+                    Adicione e organize suas disciplinas.
+                </div>
+
+            </div>
+
+
+            <div class="input-group">
+
+                <input
+                    id="novaMateria"
+                    placeholder="Digite o nome da matéria...">
+
+                <button
+                    class="btn btn-primary"
+                    onclick="criarMateria()">
+
+                    ＋ Adicionar matéria
+
+                </button>
+
+            </div>
+
         </div>
 
-        <div class="jogo">
-            <a href="https://crazygames.com" target="_blank">
-                🔥 CrazyGames
-            </a>
+
+        <div
+            class="grid"
+            id="grid">
         </div>
 
-        <div class="jogo">
-            <a href="https://gartic.io" target="_blank">
-                ✏️ Gartic
-            </a>
+
+        <div class="card">
+
+            <div class="section-header">
+
+                <div class="section-title">
+                    🔗 Meus atalhos
+                </div>
+
+                <div class="subtitulo">
+                    Acesso rápido aos seus outros projetos e páginas.
+                </div>
+
+            </div>
+
+
+            <div class="atalhos-grid">
+
+
+                <a
+                    href="PWEDTI.html"
+                    class="atalho">
+
+                    <div class="atalho-icon">
+                        💻
+                    </div>
+
+                    <div class="atalho-text">
+
+                        <strong>
+                            PWEDTI
+                        </strong>
+
+                        <span>
+                            Projeto digital
+                        </span>
+
+                    </div>
+
+                </a>
+
+
+                <a
+                    href="drogas.html"
+                    class="atalho">
+
+                    <div class="atalho-icon">
+                        📖
+                    </div>
+
+                    <div class="atalho-text">
+
+                        <strong>
+                            Projeto Drogas
+                        </strong>
+
+                        <span>
+                            Página informativa
+                        </span>
+
+                    </div>
+
+                </a>
+
+
+                <a
+                    href="DiscrimRacial.html"
+                    class="atalho">
+
+                    <div class="atalho-icon">
+                        🫱🏽‍🫲🏾
+                    </div>
+
+                    <div class="atalho-text">
+
+                        <strong>
+                            Veja-DR
+                        </strong>
+
+                        <span>
+                            Discriminação racial
+                        </span>
+
+                    </div>
+
+                </a>
+
+
+                <a
+                    href="DDestudante.html"
+                    class="atalho">
+
+                    <div class="atalho-icon">
+                        🎓
+                    </div>
+
+                    <div class="atalho-text">
+
+                        <strong>
+                            D. Estudante
+                        </strong>
+
+                        <span>
+                            Página do estudante
+                        </span>
+
+                    </div>
+
+                </a>
+
+
+                <a
+                    href="atividadedocletao.html"
+                    class="atalho">
+
+                    <div class="atalho-icon">
+                        📘
+                    </div>
+
+                    <div class="atalho-text">
+
+                        <strong>
+                            Atividade
+                        </strong>
+
+                        <span>
+                            Atividade escolar
+                        </span>
+
+                    </div>
+
+                </a>
+
+
+                <a
+                    href="comp.n.apr.imagem.html"
+                    class="atalho">
+
+                    <div class="atalho-icon">
+                        🖼️
+                    </div>
+
+                    <div class="atalho-text">
+
+                        <strong>
+                            Comp. N. Imagem
+                        </strong>
+
+                        <span>
+                            Computação e imagem
+                        </span>
+
+                    </div>
+
+                </a>
+
+
+                <a
+                    href="conc.do.transito.html"
+                    class="atalho">
+
+                    <div class="atalho-icon">
+                        🚦
+                    </div>
+
+                    <div class="atalho-text">
+
+                        <strong>
+                            Consciência no Trânsito
+                        </strong>
+
+                        <span>
+                            Projeto de trânsito
+                        </span>
+
+                    </div>
+
+                </a>
+
+
+                <a
+                    href="PCD.html"
+                    class="atalho">
+
+                    <div class="atalho-icon">
+                        ♿
+                    </div>
+
+                    <div class="atalho-text">
+
+                        <strong>
+                            PCD Site
+                        </strong>
+
+                        <span>
+                            Inclusão e acessibilidade
+                        </span>
+
+                    </div>
+
+                </a>
+
+
+            </div>
+
         </div>
 
-    </div>
 
-</div>
+        <div class="card">
 
-<style>
-.categoria-jogos{
-    margin: 25px 0 15px;
-    text-align: center;
-    font-size: 24px;
-    color: #fff;
-    background: rgba(255,255,255,0.15);
-    padding: 10px;
-    border-radius: 12px;
-    backdrop-filter: blur(5px);
-}
-</style>
+            <div class="section-header">
+
+                <div class="section-title">
+                    📦 Arquivos
+                </div>
+
+                <div class="subtitulo">
+                    Arquivos disponíveis para acesso rápido.
+                </div>
+
+            </div>
+
+
+            <div class="download-box">
+
+                <div class="download-info">
+
+                    <div class="download-icon">
+                        📁
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Nicolas.png
+                        </strong>
+
+                        <small>
+                            Arquivo disponível para download
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <a
+                    href="NICOLAS.png"
+                    download
+                    class="btn-download">
+
+                    ⬇ Baixar arquivo
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+    <!-- =================================================
+         HORÁRIO
+    ================================================= -->
+
+    <section
+        id="horario"
+        class="section">
+
+
+        <div class="section-header">
+
+            <div class="section-title">
+                📅 Meu horário
+            </div>
+
+            <div class="subtitulo">
+                Clique nas células para editar suas aulas.
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <h2>
+                🌅 Turno da Manhã
+            </h2>
+
+            <br>
+
+            <div
+                id="manha"
+                class="tabela">
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <h2>
+                ☀️ Turno da Tarde
+            </h2>
+
+            <br>
+
+            <div
+                id="tarde"
+                class="tabela">
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+    <!-- =================================================
+         NOTAS
+    ================================================= -->
+
+    <section
+        id="notas"
+        class="section">
+
+
+        <div class="section-header">
+
+            <div class="section-title">
+                📊 Minhas notas
+            </div>
+
+            <div class="subtitulo">
+                Registre suas notas e acompanhe seu desempenho.
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+
+            <div class="input-group">
+
+                <input
+                    id="nota"
+                    placeholder="Ex: 8P, 7T...">
+
+                <button
+                    class="btn btn-primary"
+                    onclick="addNota()">
+
+                    ＋ Adicionar nota
+
+                </button>
+
+            </div>
+
+
+            <br>
+
+
+            <div class="grafico-container">
+
+                <canvas
+                    id="grafico"
+                    width="700"
+                    height="300">
+                </canvas>
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+    <!-- =================================================
+         PROVAS
+    ================================================= -->
+
+    <section
+        id="provas"
+        class="section">
+
+
+        <div class="section-header">
+
+            <div class="section-title">
+                📝 Calendário de provas
+            </div>
+
+            <div class="subtitulo">
+                Cadastre suas próximas avaliações.
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+
+            <div class="input-group">
+
+                <input
+                    type="date"
+                    id="dataProva">
+
+                <input
+                    id="materiaProva"
+                    placeholder="Matéria">
+
+                <button
+                    class="btn btn-primary"
+                    onclick="addProva()">
+
+                    ＋ Adicionar prova
+
+                </button>
+
+            </div>
+
+
+            <br>
+
+
+            <ul id="listaProvas"></ul>
+
+
+        </div>
+
+
+    </section>
+
+
+    <!-- =================================================
+         JOGOS
+    ================================================= -->
+
+    <section
+        id="jogos"
+        class="section">
+
+
+        <div class="section-header">
+
+            <div class="section-title">
+                🎮 Central de jogos
+            </div>
+
+            <div class="subtitulo">
+                Um pouco de diversão entre os estudos.
+            </div>
+
+        </div>
+
+
+        <h2 class="categoria-jogos">
+            🧠 Jogos de Raciocínio
+        </h2>
+
+
+        <div class="grid">
+
+
+            <div class="jogo">
+
+                <a
+                    href="https://tetr.io"
+                    target="_blank">
+
+                    🧩 Tetris
+
+                </a>
+
+            </div>
+
+
+            <div class="jogo">
+
+                <a
+                    href="https://www.chess.com/play/computer"
+                    target="_blank">
+
+                    ♟️ Xadrez
+
+                </a>
+
+            </div>
+
+
+            <div class="jogo">
+
+                <a
+                    href="https://www.mathsisfun.com/games/towerofhanoi.html"
+                    target="_blank">
+
+                    🎯 Torre de Hanói
+
+                </a>
+
+            </div>
+
+
+            <div class="jogo">
+
+                <a
+                    href="https://www.jigsawplanet.com"
+                    target="_blank">
+
+                    🔍 Quebra-Cabeças
+
+                </a>
+
+            </div>
+
+
+            <div class="jogo">
+
+                <a
+                    href="https://rubikscu.be"
+                    target="_blank">
+
+                    🟦 Cubo Mágico
+
+                </a>
+
+            </div>
+
+
+        </div>
+
+
+        <h2 class="categoria-jogos">
+            🎮 Jogos de Diversão
+        </h2>
+
+
+        <div class="grid">
+
+
+            <div class="jogo">
+
+                <a
+                    href="https://www.friv.com"
+                    target="_blank">
+
+                    🎮 FRIV
+
+                </a>
+
+            </div>
+
+
+            <div class="jogo">
+
+                <a
+                    href="https://poki.com"
+                    target="_blank">
+
+                    🕹️ Poki
+
+                </a>
+
+            </div>
+
+
+            <div class="jogo">
+
+                <a
+                    href="https://crazygames.com"
+                    target="_blank">
+
+                    🔥 CrazyGames
+
+                </a>
+
+            </div>
+
+
+            <div class="jogo">
+
+                <a
+                    href="https://gartic.io"
+                    target="_blank">
+
+                    ✏️ Gartic
+
+                </a>
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+    <footer class="footer">
+
+        🎒 Mochila do Miguel • Seu espaço digital de estudos
+
+    </footer>
+
+
+</main>
+
 
 <script>
-/* NAVEGAÇÃO */
+
+/* =========================================================
+   NAVEGAÇÃO
+========================================================= */
 
 function mostrar(secao){
 
-document
-.querySelectorAll(".section")
-.forEach(s=>s.style.display="none")
+    document
+        .querySelectorAll(".section")
+        .forEach(s => {
+            s.style.display = "none";
+        });
 
-document
-.getElementById(secao)
-.style.display="block"
+    document
+        .getElementById(secao)
+        .style.display = "block";
 
 }
 
-mostrar("mochila")
 
-/* RELÓGIO */
+/* ABRIR MOCHILA */
+
+mostrar("mochila");
+
+
+/* =========================================================
+   RELÓGIO
+========================================================= */
 
 function atualizarRelogio(){
 
-let agora = new Date()
+    let agora = new Date();
 
-let h = String(agora.getHours()).padStart(2,'0')
-let m = String(agora.getMinutes()).padStart(2,'0')
-let s = String(agora.getSeconds()).padStart(2,'0')
+    let h = String(
+        agora.getHours()
+    ).padStart(2,"0");
 
-document.getElementById("relogio").innerHTML =
-`${h}:${m}:${s}`
+    let m = String(
+        agora.getMinutes()
+    ).padStart(2,"0");
+
+    let s = String(
+        agora.getSeconds()
+    ).padStart(2,"0");
+
+    document
+        .getElementById("relogio")
+        .innerHTML = `${h}:${m}:${s}`;
 
 }
 
-setInterval(atualizarRelogio,1000)
+setInterval(
+    atualizarRelogio,
+    1000
+);
 
-atualizarRelogio()
+atualizarRelogio();
 
-/* TEMA */
+
+/* =========================================================
+   TEMA
+========================================================= */
 
 function trocarTema(){
 
-document.body.classList.toggle("dark")
+    document
+        .body
+        .classList
+        .toggle("dark");
 
-localStorage.setItem(
-"tema",
-document.body.classList.contains("dark")
-)
+    let escuro =
+        document.body.classList.contains("dark");
+
+    localStorage.setItem(
+        "tema",
+        escuro
+    );
+
+    atualizarIconeTema();
 
 }
 
-if(localStorage.getItem("tema")=="true"){
-document.body.classList.add("dark")
+
+function atualizarIconeTema(){
+
+    let icon =
+        document.getElementById("temaIcon");
+
+    if(
+        document.body.classList.contains("dark")
+    ){
+
+        icon.innerHTML = "☀️";
+
+    }else{
+
+        icon.innerHTML = "🌙";
+
+    }
+
 }
 
-/* MATÉRIAS */
+
+if(
+    localStorage.getItem("tema") === "true"
+){
+
+    document.body.classList.add("dark");
+
+}
+
+atualizarIconeTema();
+
+
+/* =========================================================
+   MATÉRIAS
+========================================================= */
 
 let materias =
-JSON.parse(
-localStorage.getItem("materias")
-) || []
+    JSON.parse(
+        localStorage.getItem("materias")
+    ) || [];
+
 
 function salvarMaterias(){
 
-localStorage.setItem(
-"materias",
-JSON.stringify(materias)
-)
+    localStorage.setItem(
+        "materias",
+        JSON.stringify(materias)
+    );
 
 }
+
 
 function renderMaterias(){
 
-let grid =
-document.getElementById("grid")
+    let grid =
+        document.getElementById("grid");
 
-grid.innerHTML = ""
+    grid.innerHTML = "";
 
-materias.forEach((materia,index)=>{
 
-let card =
-document.createElement("div")
+    materias.forEach(
+        (materia,index) => {
 
-card.className =
-"materia-card"
+            let card =
+                document.createElement("div");
 
-card.innerHTML = `
+            card.className =
+                "materia-card";
 
-<h3>${materia}</h3>
 
-<button onclick="editarMateria(${index})">
-✏️ Editar
-</button>
+            card.innerHTML = `
 
-<button onclick="excluirMateria(${index})">
-🗑️ Excluir
-</button>
+                <div class="materia-icon">
+                    📘
+                </div>
 
-`
+                <h3>
+                    ${materia}
+                </h3>
 
-grid.appendChild(card)
+                <div class="materia-actions">
 
-})
+                    <button
+                        class="btn btn-edit"
+                        onclick="editarMateria(${index})">
+
+                        ✏️ Editar
+
+                    </button>
+
+                    <button
+                        class="btn btn-delete"
+                        onclick="excluirMateria(${index})">
+
+                        🗑️ Excluir
+
+                    </button>
+
+                </div>
+
+            `;
+
+
+            grid.appendChild(card);
+
+        }
+    );
 
 }
+
 
 function criarMateria(){
 
-let input =
-document.getElementById("novaMateria")
+    let input =
+        document.getElementById(
+            "novaMateria"
+        );
 
-let nome =
-input.value.trim()
+    let nome =
+        input.value.trim();
 
-if(nome=="") return
 
-materias.push(nome)
+    if(nome === ""){
+        return;
+    }
 
-salvarMaterias()
 
-renderMaterias()
+    materias.push(nome);
 
-input.value=""
+    salvarMaterias();
+
+    renderMaterias();
+
+    input.value = "";
 
 }
+
 
 function editarMateria(index){
 
-let novo =
-prompt(
-"Editar matéria:",
-materias[index]
-)
+    let novo =
+        prompt(
+            "Editar matéria:",
+            materias[index]
+        );
 
-if(!novo) return
 
-materias[index]=novo
+    if(!novo){
+        return;
+    }
 
-salvarMaterias()
 
-renderMaterias()
+    materias[index] =
+        novo.trim();
+
+    salvarMaterias();
+
+    renderMaterias();
 
 }
+
 
 function excluirMateria(index){
 
-if(confirm(
-"Excluir matéria?"
-)){
+    if(
+        confirm(
+            "Deseja realmente excluir esta matéria?"
+        )
+    ){
 
-materias.splice(index,1)
+        materias.splice(
+            index,
+            1
+        );
 
-salvarMaterias()
+        salvarMaterias();
 
-renderMaterias()
+        renderMaterias();
+
+    }
 
 }
 
-}
 
-renderMaterias()
+renderMaterias();
 
-/* HORÁRIO */
 
-let dias =
-["Seg","Ter","Qua","Qui","Sex"]
+/* =========================================================
+   HORÁRIO
+========================================================= */
+
+let dias = [
+    "Seg",
+    "Ter",
+    "Qua",
+    "Qui",
+    "Sex"
+];
+
 
 function tabela(id,linhas){
 
-let div =
-document.getElementById(id)
+    let div =
+        document.getElementById(id);
 
-div.innerHTML = ""
+    div.innerHTML = "";
 
-div.innerHTML +=
-`<div class="celula header"></div>`
 
-dias.forEach(d=>{
+    div.innerHTML += `
+        <div class="celula header"></div>
+    `;
 
-div.innerHTML +=
-`<div class="celula header">${d}</div>`
 
-})
+    dias.forEach(
+        d => {
 
-for(let i=1;i<=linhas;i++){
+            div.innerHTML += `
+                <div class="celula header">
+                    ${d}
+                </div>
+            `;
 
-div.innerHTML +=
-`<div class="celula header">
-Aula ${i}
-</div>`
+        }
+    );
 
-dias.forEach((d,j)=>{
 
-let key=id+i+j
+    for(
+        let i=1;
+        i<=linhas;
+        i++
+    ){
 
-let valor =
-localStorage.getItem(key) || ""
+        div.innerHTML += `
+            <div class="celula header">
+                Aula ${i}
+            </div>
+        `;
 
-div.innerHTML += `
 
-<div
-contenteditable="true"
-class="celula"
+        dias.forEach(
+            (d,j) => {
 
-oninput="
-localStorage.setItem(
-'${key}',
-this.innerText
-)
-">
+                let key =
+                    id + i + j;
 
-${valor}
 
-</div>
+                let valor =
+                    localStorage.getItem(key) || "";
 
-`
 
-})
+                div.innerHTML += `
+
+                    <div
+                        contenteditable="true"
+                        class="celula"
+                        oninput="
+                            localStorage.setItem(
+                                '${key}',
+                                this.innerText
+                            )
+                        "
+                    >
+
+                        ${valor}
+
+                    </div>
+
+                `;
+
+            }
+        );
+
+    }
 
 }
 
-}
 
-tabela("manha",5)
+tabela(
+    "manha",
+    5
+);
 
-tabela("tarde",4)
+tabela(
+    "tarde",
+    4
+);
 
-/* NOTAS */
+
+/* =========================================================
+   NOTAS
+========================================================= */
 
 let notas =
-JSON.parse(
-localStorage.getItem("notas")
-) || []
+    JSON.parse(
+        localStorage.getItem("notas")
+    ) || [];
+
 
 let labels =
-JSON.parse(
-localStorage.getItem("labels")
-) || []
+    JSON.parse(
+        localStorage.getItem("labels")
+    ) || [];
+
 
 const canvas =
-document.getElementById("grafico")
+    document.getElementById(
+        "grafico"
+    );
+
 
 const ctx =
-canvas.getContext("2d")
-  /* DESENHAR GRÁFICO */
+    canvas.getContext("2d");
+
 
 function desenharGrafico(){
 
-ctx.clearRect(
-0,
-0,
-canvas.width,
-canvas.height
-)
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
 
-/* LINHAS */
 
-for(let i=0;i<=10;i++){
+    /* FUNDO */
 
-let y =
-canvas.height - (i*20)
+    ctx.fillStyle =
+        document.body.classList.contains("dark")
+        ? "#141b2a"
+        : "#ffffff";
 
-ctx.fillStyle="#cccccc"
+    ctx.fillRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
 
-ctx.fillRect(
-0,
-y,
-canvas.width,
-1
-)
 
-ctx.fillStyle="#000"
+    /* LINHAS */
 
-ctx.fillText(
-i,
-5,
-y-2
-)
+    for(
+        let i=0;
+        i<=10;
+        i++
+    ){
+
+        let y =
+            canvas.height - (i * 25);
+
+
+        ctx.fillStyle =
+            document.body.classList.contains("dark")
+            ? "#334155"
+            : "#e5e7eb";
+
+
+        ctx.fillRect(
+            45,
+            y,
+            canvas.width - 60,
+            1
+        );
+
+
+        ctx.fillStyle =
+            document.body.classList.contains("dark")
+            ? "#cbd5e1"
+            : "#64748b";
+
+
+        ctx.font =
+            "11px Segoe UI";
+
+
+        ctx.fillText(
+            i,
+            20,
+            y - 2
+        );
+
+    }
+
+
+    /* BARRAS */
+
+    notas.forEach(
+        (nota,index) => {
+
+            let x =
+                (index * 65) + 60;
+
+
+            let altura =
+                nota * 25;
+
+
+            let gradiente =
+                ctx.createLinearGradient(
+                    0,
+                    canvas.height-altura,
+                    0,
+                    canvas.height
+                );
+
+
+            gradiente.addColorStop(
+                0,
+                "#4f46e5"
+            );
+
+
+            gradiente.addColorStop(
+                1,
+                "#2563a8"
+            );
+
+
+            ctx.fillStyle =
+                gradiente;
+
+
+            ctx.fillRect(
+                x,
+                canvas.height-altura,
+                38,
+                altura
+            );
+
+
+            ctx.fillStyle =
+                document.body.classList.contains("dark")
+                ? "#ffffff"
+                : "#172033";
+
+
+            ctx.font =
+                "bold 11px Segoe UI";
+
+
+            ctx.fillText(
+                nota,
+                x + 9,
+                canvas.height-altura-7
+            );
+
+
+            ctx.font =
+                "11px Segoe UI";
+
+
+            ctx.fillText(
+                labels[index],
+                x + 8,
+                canvas.height-8
+            );
+
+        }
+    );
 
 }
 
-/* BARRAS */
-
-notas.forEach((nota,index)=>{
-
-let x =
-(index*50)+50
-
-let altura =
-nota*20
-
-ctx.fillStyle="#5aa9e6"
-
-ctx.fillRect(
-x,
-canvas.height-altura,
-35,
-altura
-)
-
-ctx.fillStyle="#000"
-
-ctx.fillText(
-nota,
-x,
-canvas.height-altura-5
-)
-
-ctx.fillText(
-labels[index],
-x,
-canvas.height-5
-)
-
-})
-
-}
 
 function addNota(){
 
-let campo =
-document.getElementById("nota")
+    let campo =
+        document.getElementById(
+            "nota"
+        );
 
-let valor =
-campo.value.trim()
 
-if(valor=="") return
+    let valor =
+        campo.value.trim();
 
-let numero =
-parseFloat(valor)
 
-let sigla =
-valor.replace(/[0-9.]/g,'')
+    if(valor === ""){
+        return;
+    }
 
-if(isNaN(numero)){
 
-alert(
-"Digite algo como 8P ou 7T"
-)
+    let numero =
+        parseFloat(valor);
 
-return
+
+    let sigla =
+        valor.replace(
+            /[0-9.]/g,
+            ""
+        );
+
+
+    if(isNaN(numero)){
+
+        alert(
+            "Digite algo como 8P ou 7T."
+        );
+
+        return;
+
+    }
+
+
+    notas.push(numero);
+
+    labels.push(sigla);
+
+
+    localStorage.setItem(
+        "notas",
+        JSON.stringify(notas)
+    );
+
+
+    localStorage.setItem(
+        "labels",
+        JSON.stringify(labels)
+    );
+
+
+    campo.value = "";
+
+    desenharGrafico();
 
 }
 
-notas.push(numero)
 
-labels.push(sigla)
+desenharGrafico();
 
-localStorage.setItem(
-"notas",
-JSON.stringify(notas)
-)
 
-localStorage.setItem(
-"labels",
-JSON.stringify(labels)
-)
-
-campo.value=""
-
-desenharGrafico()
-
-}
-
-desenharGrafico()
-
-/* PROVAS */
+/* =========================================================
+   PROVAS
+========================================================= */
 
 let provas =
-JSON.parse(
-localStorage.getItem("provas")
-) || []
+    JSON.parse(
+        localStorage.getItem("provas")
+    ) || [];
+
 
 function salvarProvas(){
 
-localStorage.setItem(
-"provas",
-JSON.stringify(provas)
-)
+    localStorage.setItem(
+        "provas",
+        JSON.stringify(provas)
+    );
 
 }
+
 
 function renderProvas(){
 
-let lista =
-document.getElementById(
-"listaProvas"
-)
+    let lista =
+        document.getElementById(
+            "listaProvas"
+        );
 
-lista.innerHTML=""
 
-provas.forEach((prova,index)=>{
+    lista.innerHTML = "";
 
-let li =
-document.createElement("li")
 
-li.innerHTML = `
-📅 ${prova.data}
- - 
-📚 ${prova.materia}
-`
+    provas.forEach(
+        (prova,index) => {
 
-li.onclick = function(){
+            let li =
+                document.createElement("li");
 
-let opcao =
-prompt(
-"1 = Editar\n2 = Excluir"
-)
 
-if(opcao=="1"){
+            li.className =
+                "prova-item";
 
-let novaMateria =
-prompt(
-"Nova matéria:",
-prova.materia
-)
 
-if(novaMateria){
+            let dataFormatada =
+                prova.data
+                    .split("-")
+                    .reverse()
+                    .join("/");
 
-provas[index]
-.materia =
-novaMateria
 
-salvarProvas()
+            li.innerHTML = `
 
-renderProvas()
+                <div class="prova-info">
+
+                    <div class="prova-icon">
+                        📝
+                    </div>
+
+                    <div>
+
+                        <div class="prova-materia">
+                            ${prova.materia}
+                        </div>
+
+                        <div class="prova-data">
+                            📅 ${dataFormatada}
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div>
+                    ⋮
+                </div>
+
+            `;
+
+
+            li.onclick =
+                function(){
+
+                    let opcao =
+                        prompt(
+                            "1 = Editar\n2 = Excluir"
+                        );
+
+
+                    if(opcao === "1"){
+
+                        let novaMateria =
+                            prompt(
+                                "Nova matéria:",
+                                prova.materia
+                            );
+
+
+                        if(novaMateria){
+
+                            provas[index]
+                                .materia =
+                                novaMateria;
+
+                            salvarProvas();
+
+                            renderProvas();
+
+                        }
+
+                    }
+
+
+                    if(opcao === "2"){
+
+                        provas.splice(
+                            index,
+                            1
+                        );
+
+                        salvarProvas();
+
+                        renderProvas();
+
+                    }
+
+                };
+
+
+            lista.appendChild(li);
+
+        }
+    );
 
 }
 
-}
-
-if(opcao=="2"){
-
-provas.splice(
-index,
-1
-)
-
-salvarProvas()
-
-renderProvas()
-
-}
-
-}
-
-lista.appendChild(li)
-
-})
-
-}
 
 function addProva(){
 
-let data =
-document
-.getElementById(
-"dataProva"
-)
-.value
+    let data =
+        document
+            .getElementById(
+                "dataProva"
+            )
+            .value;
 
-let materia =
-document
-.getElementById(
-"materiaProva"
-)
-.value
-.trim()
 
-if(
-!data ||
-!materia
-){
+    let materia =
+        document
+            .getElementById(
+                "materiaProva"
+            )
+            .value
+            .trim();
 
-alert(
-"Preencha os campos."
-)
 
-return
+    if(
+        !data ||
+        !materia
+    ){
 
-}
+        alert(
+            "Preencha a data e a matéria."
+        );
 
-provas.push({
+        return;
 
-data:data,
-materia:materia
+    }
 
-})
 
-salvarProvas()
+    provas.push({
 
-renderProvas()
+        data:data,
 
-document
-.getElementById(
-"dataProva"
-)
-.value=""
+        materia:materia
 
-document
-.getElementById(
-"materiaProva"
-)
-.value=""
+    });
 
-}
 
-renderProvas()
+    salvarProvas();
 
-/* ENTER PARA ADICIONAR MATÉRIA */
+    renderProvas();
 
-document
-.getElementById(
-"novaMateria"
-)
-.addEventListener(
-"keypress",
-function(e){
 
-if(e.key==="Enter"){
+    document
+        .getElementById(
+            "dataProva"
+        )
+        .value = "";
 
-criarMateria()
+
+    document
+        .getElementById(
+            "materiaProva"
+        )
+        .value = "";
 
 }
 
-}
-)
 
-/* ENTER PARA ADICIONAR NOTA */
+renderProvas();
+
+
+/* =========================================================
+   ENTER — MATÉRIA
+========================================================= */
 
 document
-.getElementById(
-"nota"
-)
-.addEventListener(
-"keypress",
-function(e){
+    .getElementById(
+        "novaMateria"
+    )
+    .addEventListener(
+        "keypress",
+        function(e){
 
-if(e.key==="Enter"){
+            if(
+                e.key === "Enter"
+            ){
 
-addNota()
+                criarMateria();
 
-}
+            }
 
-}
-)
+        }
+    );
 
-/* ENTER PARA ADICIONAR PROVA */
+
+/* =========================================================
+   ENTER — NOTA
+========================================================= */
 
 document
-.getElementById(
-"materiaProva"
-)
-.addEventListener(
-"keypress",
-function(e){
+    .getElementById(
+        "nota"
+    )
+    .addEventListener(
+        "keypress",
+        function(e){
 
-if(e.key==="Enter"){
+            if(
+                e.key === "Enter"
+            ){
 
-addProva()
+                addNota();
 
-}
+            }
 
-}
-)
+        }
+    );
+
+
+/* =========================================================
+   ENTER — PROVA
+========================================================= */
+
+document
+    .getElementById(
+        "materiaProva"
+    )
+    .addEventListener(
+        "keypress",
+        function(e){
+
+            if(
+                e.key === "Enter"
+            ){
+
+                addProva();
+
+            }
+
+        }
+    );
+
+
+/* =========================================================
+   ATUALIZAR GRÁFICO AO TROCAR TEMA
+========================================================= */
+
+const observadorTema =
+    new MutationObserver(
+        function(){
+
+            desenharGrafico();
+
+        }
+    );
+
+
+observadorTema.observe(
+    document.body,
+    {
+        attributes:true,
+        attributeFilter:["class"]
+    }
+);
 
 </script>
 
-   <a href="PWEDTI.html"> entre
-  </a>
-
-</body>
-   <a href="drogas.html"> descubra
-
-     <h1>Download de Arquivo</h1>
-  
-  <a href="NICOLAS.png" download class="btn-download">
-    Nicolas
-</a>
-
-<style>
-.btn-download {
-    background-color: #28a745;
-    color: yellow;
-    padding: 12px 20px;
-    text-decoration: none;
-    border-radius: 8px;
-    font-weight: bold;
-    display: inline-block;
-    transition: background-color 0.3s ease;
-}
-
-.btn-download:hover {
-    background-color: #218838;
-}
-</style>
-
-     <!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Veja-DR</title>
-
-    <style>
-        body {
-            margin: 0;
-            min-height: 100vh;
-
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            background: #f1f5f9;
-
-            font-family: Arial, sans-serif;
-        }
-
-        .botao {
-            width: 220px;
-            height: 70px;
-
-            padding: 10px 20px;
-
-            border: 3px solid #40916c;
-            border-radius: 20px;
-
-            background-color: #b7e4c7;
-            color: #1b4332;
-
-            font-size: 20px;
-            font-weight: bold;
-            text-align: center;
-            text-decoration: none;
-
-            cursor: pointer;
-
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.20);
-
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            box-sizing: border-box;
-
-            transition: all 0.3s ease;
-        }
-
-        .botao:hover {
-            background-color: #40916c;
-            color: white;
-            border-color: #1b4332;
-
-            transform: scale(1.05);
-
-            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.30);
-        }
-
-        .botao:active {
-            transform: scale(0.95);
-
-            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.20);
-        }
-
-        .botao:focus {
-            outline: 4px solid #74c69d;
-            outline-offset: 4px;
-        }
-    </style>
-</head>
-
-<body>
-
-    <a class="botao" href="DiscrimRacial.html">
-        Veja-DR
-    </a>
-
 </body>
 </html>
-
-     <a href="DDestudante.html"> entre
-       
-  </a>
-  
-    <a href="atividadedocletao.html"> descubra
-   
-  </a>
-          
-    <a href="comp.n.apr.imagem.html">comp.n.imagem
-
-  </a>
-     
-    <a href="conc.do.transito.html">conc.trânsito
-
-  </a>    
-  
-     <a href="PCD.html">PCDsite
-  </a>
-     
-</html>
+```
