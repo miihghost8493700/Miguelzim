@@ -1,0 +1,259 @@
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Git & GitHub | Aprendendo na prática</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Poppins", sans-serif;
+            min-height: 100vh;
+            background:
+                radial-gradient(circle at top left, #193b68 0%, transparent 35%),
+                radial-gradient(circle at bottom right, #122b4d 0%, transparent 35%),
+                #050b14;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 35px 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1050px;
+        }
+
+        /* CABEÇALHO */
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 7px 15px;
+            border: 1px solid rgba(255,255,255,0.15);
+            background: rgba(255,255,255,0.06);
+            border-radius: 50px;
+            font-size: 13px;
+            color: #8fc7ff;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            font-size: clamp(32px, 5vw, 52px);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 12px;
+        }
+
+        h1 span {
+            background: linear-gradient(90deg, #65b5ff, #9c7cff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            color: #aab7c8;
+            font-size: 15px;
+            max-width: 650px;
+            margin: auto;
+        }
+
+        /* VÍDEO */
+
+        .video-card {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 24px;
+            padding: 12px;
+            box-shadow: 0 25px 70px rgba(0,0,0,0.4);
+            backdrop-filter: blur(15px);
+        }
+
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            overflow: hidden;
+            border-radius: 17px;
+            background: #000;
+        }
+
+        .video-wrapper iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* EXPLICAÇÃO */
+
+        .info {
+            margin-top: 25px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        .info-card {
+            background: rgba(255,255,255,0.055);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 18px;
+            padding: 22px;
+            transition: 0.3s;
+        }
+
+        .info-card:hover {
+            transform: translateY(-4px);
+            background: rgba(255,255,255,0.08);
+        }
+
+        .icon {
+            font-size: 25px;
+            margin-bottom: 10px;
+        }
+
+        .info-card h2 {
+            font-size: 17px;
+            margin-bottom: 8px;
+        }
+
+        .info-card p {
+            color: #aeb9c9;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        /* RODAPÉ */
+
+        footer {
+            text-align: center;
+            margin-top: 28px;
+            color: #68778b;
+            font-size: 12px;
+        }
+
+        /* RESPONSIVO */
+
+        @media (max-width: 700px) {
+
+            body {
+                padding: 25px 14px;
+            }
+
+            .info {
+                grid-template-columns: 1fr;
+            }
+
+            .video-card {
+                padding: 7px;
+                border-radius: 18px;
+            }
+
+            .video-wrapper {
+                border-radius: 13px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <main class="container">
+
+        <header class="header">
+
+            <div class="tag">
+                💻 TECNOLOGIA • PROGRAMAÇÃO
+            </div>
+
+            <h1>
+                Git & <span>GitHub</span>
+            </h1>
+
+            <p class="subtitle">
+                Entenda de forma simples como funcionam o Git e o GitHub
+                e por que eles são tão importantes na programação.
+            </p>
+
+        </header>
+
+
+        <section class="video-card">
+
+            <div class="video-wrapper">
+
+                <iframe
+                    src="https://www.youtube.com/embed/LkBjOeoHBhA"
+                    title="O que é Git e Github explicado com bananas"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen>
+                </iframe>
+
+            </div>
+
+        </section>
+
+
+        <section class="info">
+
+            <div class="info-card">
+
+                <div class="icon">🍌</div>
+
+                <h2>Uma explicação diferente</h2>
+
+                <p>
+                    O vídeo utiliza uma explicação simples e divertida
+                    para mostrar o que são Git e GitHub e como eles
+                    ajudam no desenvolvimento de projetos.
+                </p>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <div class="icon">🚀</div>
+
+                <h2>Por que aprender?</h2>
+
+                <p>
+                    Git permite controlar as versões de um projeto,
+                    enquanto o GitHub facilita o armazenamento,
+                    compartilhamento e colaboração entre pessoas.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <footer>
+            Página desenvolvida para fins educacionais • Git & GitHub
+        </footer>
+
+    </main>
+
+</body>
+
+</html>
+```
