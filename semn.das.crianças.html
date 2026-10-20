@@ -1,0 +1,975 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Minha Semana das Crianças 🎮</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --bg: #080d1b;
+    --panel: #111a2d;
+    --panel2: #17233a;
+    --text: #f4f7ff;
+    --muted: #a6b3cb;
+    --blue: #63a7ff;
+    --purple: #b69aff;
+    --orange: #ffbd73;
+    --green: #8ce8bd;
+    --pink: #ff9fc8;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 95px;
+}
+
+body {
+    background:
+        radial-gradient(ellipse at 10% 5%, #19254a 0, transparent 35%),
+        radial-gradient(ellipse at 95% 45%, #211638 0, transparent 35%),
+        var(--bg);
+    color: var(--text);
+    font-family: 'Nunito', sans-serif;
+    line-height: 1.7;
+    overflow-x: hidden;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.container {
+    width: min(1120px, 90%);
+    margin: auto;
+}
+
+/* BARRA SUPERIOR */
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(8, 13, 27, .82);
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid #ffffff12;
+}
+
+.navbar {
+    min-height: 76px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.logo {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -.5px;
+}
+
+.logo span {
+    color: var(--orange);
+}
+
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+}
+
+nav a {
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 800;
+    padding: 9px 12px;
+    border-radius: 10px;
+    transition: .25s;
+}
+
+nav a:hover {
+    background: #ffffff10;
+    color: white;
+}
+
+/* ABERTURA */
+
+.hero {
+    min-height: 590px;
+    display: flex;
+    align-items: center;
+    padding: 90px 0 75px;
+    position: relative;
+}
+
+.hero-content {
+    max-width: 780px;
+    animation: aparecer .9s ease both;
+}
+
+.eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    color: var(--green);
+    background: #8ce8bd12;
+    border: 1px solid #8ce8bd30;
+    padding: 8px 15px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+}
+
+.hero h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(43px, 7vw, 82px);
+    line-height: 1.04;
+    letter-spacing: -4px;
+    margin: 25px 0;
+}
+
+.hero h1 .gradient {
+    background: linear-gradient(100deg, #8dc6ff, #c1a5ff, #ffb8d6);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.hero p {
+    color: var(--muted);
+    max-width: 620px;
+    font-size: 17px;
+}
+
+.hero-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 30px;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 13px 20px;
+    border-radius: 13px;
+    font-weight: 900;
+    font-size: 14px;
+    transition: transform .25s, background .25s;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+}
+
+.btn-primary {
+    background: linear-gradient(110deg, #78b7ff, #b59aff);
+    color: #101327;
+}
+
+.btn-secondary {
+    border: 1px solid #ffffff25;
+    background: #ffffff08;
+}
+
+.floating {
+    position: absolute;
+    font-size: 35px;
+    animation: flutuar 4s ease-in-out infinite;
+    pointer-events: none;
+}
+
+.f1 { top: 17%; right: 12%; }
+.f2 { top: 42%; right: 4%; animation-delay: -1s; }
+.f3 { bottom: 14%; right: 20%; animation-delay: -2s; }
+
+/* NÚMEROS */
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-bottom: 100px;
+}
+
+.stat {
+    padding: 24px;
+    background: linear-gradient(145deg, #17233a, #10182a);
+    border: 1px solid #ffffff10;
+    border-radius: 20px;
+    transition: .3s;
+}
+
+.stat:hover {
+    transform: translateY(-5px);
+    border-color: #8dc6ff55;
+}
+
+.stat .number {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 35px;
+    font-weight: 700;
+    color: var(--blue);
+}
+
+.stat p {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+/* SEÇÕES */
+
+.section {
+    padding: 25px 0 90px;
+}
+
+.section-heading {
+    margin-bottom: 35px;
+}
+
+.section-tag {
+    color: var(--orange);
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.section-heading h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(30px, 4vw, 45px);
+    line-height: 1.2;
+    margin: 10px 0;
+    letter-spacing: -1.5px;
+}
+
+.section-heading p {
+    color: var(--muted);
+    max-width: 600px;
+}
+
+/* CARDS DOS DIAS */
+
+.days-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.day-card {
+    --accent: var(--blue);
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(145deg, #16223a, #101728);
+    border: 1px solid #ffffff12;
+    border-radius: 22px;
+    padding: 27px;
+    transition: transform .3s, border-color .3s;
+    animation: aparecer .7s ease both;
+}
+
+.day-card:hover {
+    transform: translateY(-5px);
+    border-color: color-mix(in srgb, var(--accent) 60%, transparent);
+}
+
+.day-card::after {
+    content: "";
+    position: absolute;
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    right: -65px;
+    top: -65px;
+    background: var(--accent);
+    opacity: .09;
+    pointer-events: none;
+}
+
+.day-card.weekend {
+    grid-column: span 2;
+}
+
+.day-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.day-label {
+    color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 12%, transparent);
+    padding: 6px 11px;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.day-icon {
+    width: 51px;
+    height: 51px;
+    display: grid;
+    place-items: center;
+    border-radius: 16px;
+    background: color-mix(in srgb, var(--accent) 13%, transparent);
+    font-size: 27px;
+}
+
+.day-card h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 24px;
+    margin-bottom: 12px;
+    line-height: 1.25;
+}
+
+.day-card p {
+    color: #b8c4d9;
+    font-size: 14px;
+}
+
+.day-card p strong {
+    color: #f4f7ff;
+}
+
+.day-footer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-top: 20px;
+}
+
+.pill {
+    font-size: 11px;
+    font-weight: 800;
+    padding: 5px 10px;
+    border-radius: 8px;
+    background: #ffffff09;
+    border: 1px solid #ffffff10;
+    color: #d4dcef;
+}
+
+.highlight {
+    border-color: #ffbd7330;
+    background: linear-gradient(145deg, #30233a, #15182a);
+}
+
+/* FRASE */
+
+.quote {
+    position: relative;
+    margin: 20px 0 100px;
+    padding: 45px;
+    text-align: center;
+    border: 1px solid #b69aff30;
+    border-radius: 25px;
+    background: linear-gradient(120deg, #b69aff12, #63a7ff0c);
+}
+
+.quote .quote-icon {
+    font-size: 34px;
+}
+
+.quote h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(22px, 4vw, 36px);
+    line-height: 1.4;
+    margin: 15px auto;
+    max-width: 760px;
+}
+
+.quote p {
+    color: var(--muted);
+    font-size: 14px;
+}
+
+/* MELHORES MOMENTOS */
+
+.moments {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.moment {
+    padding: 24px;
+    background: #ffffff06;
+    border: 1px solid #ffffff10;
+    border-radius: 18px;
+    transition: .25s;
+}
+
+.moment:hover {
+    background: #ffffff0c;
+    transform: translateY(-4px);
+}
+
+.moment .emoji {
+    font-size: 29px;
+}
+
+.moment h3 {
+    font-size: 17px;
+    margin: 12px 0 5px;
+}
+
+.moment p {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+/* FINAL */
+
+.final-card {
+    padding: 45px 25px;
+    margin: 15px 0 80px;
+    text-align: center;
+    background: linear-gradient(125deg, #1c2944, #241c3d);
+    border: 1px solid #ffffff12;
+    border-radius: 26px;
+}
+
+.final-card .big-emoji {
+    font-size: 48px;
+}
+
+.final-card h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(27px, 4vw, 40px);
+    margin: 10px 0;
+}
+
+.final-card p {
+    max-width: 650px;
+    margin: auto;
+    color: var(--muted);
+    font-size: 15px;
+}
+
+footer {
+    border-top: 1px solid #ffffff12;
+    padding: 28px 0;
+    color: #8290a9;
+    font-size: 12px;
+}
+
+.footer-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+footer strong {
+    color: #d8e1f3;
+}
+
+.back-top {
+    color: var(--blue);
+    font-weight: 900;
+}
+
+/* ANIMAÇÕES */
+
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes flutuar {
+    0%, 100% { transform: translateY(0) rotate(-5deg); }
+    50% { transform: translateY(-15px) rotate(7deg); }
+}
+
+/* CELULAR E TABLET */
+
+@media (max-width: 700px) {
+    .navbar {
+        padding: 13px 0;
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 9px;
+    }
+
+    nav {
+        gap: 2px;
+    }
+
+    nav a {
+        font-size: 11px;
+        padding: 7px 9px;
+    }
+
+    .hero {
+        min-height: 510px;
+        padding: 70px 0;
+    }
+
+    .hero h1 {
+        letter-spacing: -2px;
+    }
+
+    .hero p {
+        font-size: 15px;
+    }
+
+    .f1 { right: 8%; top: 8%; }
+    .f2 { right: 3%; top: 45%; }
+    .f3 { right: 12%; bottom: 5%; }
+
+    .stats {
+        gap: 8px;
+        margin-bottom: 70px;
+    }
+
+    .stat {
+        padding: 14px 10px;
+    }
+
+    .stat .number {
+        font-size: 27px;
+    }
+
+    .stat p {
+        font-size: 11px;
+    }
+
+    .days-grid,
+    .moments {
+        grid-template-columns: 1fr;
+    }
+
+    .day-card.weekend {
+        grid-column: span 1;
+    }
+
+    .day-card {
+        padding: 22px;
+    }
+
+    .quote {
+        padding: 30px 20px;
+        margin-bottom: 70px;
+    }
+
+    .final-card {
+        padding: 35px 20px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+    }
+}
+</style>
+</head>
+
+<body id="inicio">
+
+<header>
+    <div class="container navbar">
+        <a href="#inicio" class="logo">MEU DIÁRIO<span> ✦</span></a>
+
+        <nav aria-label="Navegação principal">
+            <a href="#inicio">Início</a>
+            <a href="#semana">Minha semana</a>
+            <a href="#momentos">Destaques</a>
+            <a href="#final">Conclusão</a>
+        </nav>
+    </div>
+</header>
+
+<main>
+
+    <!-- ABERTURA -->
+    <section class="hero container">
+        <span class="floating f1">🎮</span>
+        <span class="floating f2">✨</span>
+        <span class="floating f3">🍦</span>
+
+        <div class="hero-content">
+            <div class="eyebrow">
+                <span>✦</span> Um diário de momentos especiais
+            </div>
+
+            <h1>
+                Minha Semana<br>
+                <span class="gradient">das Crianças!</span>
+            </h1>
+
+            <p>
+                Uma semana cheia de jogos, família, amigos, passeios,
+                descanso e histórias para contar. Teve até piscina gelada
+                e uma quantidade suspeita de churros. KKKKK!
+            </p>
+
+            <div class="hero-buttons">
+                <a href="#semana" class="btn btn-primary">
+                    ✨ Explorar minha semana
+                </a>
+
+                <a href="#momentos" class="btn btn-secondary">
+                    🎯 Melhores momentos
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- RESUMO -->
+    <section class="container">
+        <div class="stats">
+            <div class="stat">
+                <div class="number">07</div>
+                <p>Dias de histórias</p>
+            </div>
+
+            <div class="stat">
+                <div class="number">∞</div>
+                <p>Momentos especiais</p>
+            </div>
+
+            <div class="stat">
+                <div class="number">05</div>
+                <p>Churros no domingo KKKK</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- DIÁRIO -->
+    <section class="section container" id="semana">
+        <div class="section-heading">
+            <span class="section-tag">01 / Meu diário</span>
+            <h2>Sete dias, várias histórias.</h2>
+            <p>
+                Cada dia teve seu próprio rolê. Alguns foram agitados,
+                outros foram de descanso, mas todos fizeram parte da minha semana.
+            </p>
+        </div>
+
+        <div class="days-grid">
+
+            <!-- FIM DE SEMANA INICIAL -->
+            <article class="day-card weekend" style="--accent: #ffbd73">
+                <div class="day-top">
+                    <span class="day-label">Fim de semana · Sítio</span>
+                    <div class="day-icon">🎱</div>
+                </div>
+
+                <h3>Começando com vitória e piscina gelada!</h3>
+
+                <p>
+                    No fim de semana, fui para o sítio da minha tia, no Prata.
+                    Joguei sinuca e <strong>ganhei de geral</strong>, porque
+                    aparentemente eu estava inspirado! KKKKK.
+                    Também entrei na piscina, mas a água estava
+                    <strong>bem gelada</strong>. Além disso, aproveitei para
+                    confraternizar com minha família e curtir o momento com eles.
+                </p>
+
+                <div class="day-footer">
+                    <span class="pill">🎱 Sinuca</span>
+                    <span class="pill">🏊 Piscina</span>
+                    <span class="pill">❤️ Família</span>
+                </div>
+            </article>
+
+            <!-- SEGUNDA -->
+            <article class="day-card" style="--accent: #63a7ff">
+                <div class="day-top">
+                    <span class="day-label">Segunda-feira</span>
+                    <div class="day-icon">📺</div>
+                </div>
+
+                <h3>Dia de ficar em casa</h3>
+
+                <p>
+                    Na segunda-feira, fiquei em casa, sequei algumas vasilhas,
+                    assisti a vídeos na TV e joguei no celular.
+                    Foi um dia mais tranquilo, para descansar e fazer
+                    algumas coisas de casa.
+                </p>
+
+                <div class="day-footer">
+                    <span class="pill">🏠 Em casa</span>
+                    <span class="pill">📱 Jogos</span>
+                    <span class="pill">🧽 Ajuda em casa</span>
+                </div>
+            </article>
+
+            <!-- TERÇA -->
+            <article class="day-card" style="--accent: #b69aff">
+                <div class="day-top">
+                    <span class="day-label">Terça-feira</span>
+                    <div class="day-icon">🎮</div>
+                </div>
+
+                <h3>Jogos e conversa com amigo</h3>
+
+                <p>
+                    Na terça-feira, fui à casa de um amigo meu.
+                    Jogamos alguns joguinhos e conversamos sobre a vida.
+                    Foi bom passar um tempo com ele, dar risada e colocar
+                    o papo em dia.
+                </p>
+
+                <div class="day-footer">
+                    <span class="pill">🎮 Joguinhos</span>
+                    <span class="pill">💬 Conversa</span>
+                    <span class="pill">🤝 Amizade</span>
+                </div>
+            </article>
+
+            <!-- QUARTA -->
+            <article class="day-card" style="--accent: #ff9fc8">
+                <div class="day-top">
+                    <span class="day-label">Quarta-feira</span>
+                    <div class="day-icon">🍦</div>
+                </div>
+
+                <h3>Passeio pelo Ipatinga</h3>
+
+                <p>
+                    Na quarta-feira, fui ao Ipatinga para uma consulta
+                    com meu dentista. Depois, andei um pouco pela cidade
+                    e comprei um sorvete misto de baunilha e chocolate.
+                    Afinal, depois de resolver as coisas, um sorvetinho
+                    sempre cai bem!
+                </p>
+
+                <div class="day-footer">
+                    <span class="pill">🦷 Dentista</span>
+                    <span class="pill">🚶 Passeio</span>
+                    <span class="pill">🍦 Sorvete misto</span>
+                </div>
+            </article>
+
+            <!-- QUINTA -->
+            <article class="day-card" style="--accent: #8ce8bd">
+                <div class="day-top">
+                    <span class="day-label">Quinta-feira</span>
+                    <div class="day-icon">🧹</div>
+                </div>
+
+                <h3>Missão: ajudar em casa!</h3>
+
+                <p>
+                    Na quinta-feira, ajudei minha mãe a lavar a casa.
+                    Lavei o banheiro, a varanda e sequei algumas vasilhas.
+                    Depois de ajudar nas tarefas, passei o resto do dia
+                    assistindo a vídeos na TV e jogando com meus amigos.
+                </p>
+
+                <div class="day-footer">
+                    <span class="pill">🧽 Limpeza</span>
+                    <span class="pill">💚 Família</span>
+                    <span class="pill">🎮 Amigos</span>
+                </div>
+            </article>
+
+            <!-- SEXTA -->
+            <article class="day-card" style="--accent: #ffbd73">
+                <div class="day-top">
+                    <span class="day-label">Sexta-feira</span>
+                    <div class="day-icon">🤝</div>
+                </div>
+
+                <h3>Sexta de perseverança</h3>
+
+                <p>
+                    Na sexta-feira, fui para Ipaba participar da
+                    perseverança do TLCA, que faço toda sexta.
+                    Foi mais um dia de participar dessa atividade
+                    e sair um pouco da rotina de casa.
+                </p>
+
+                <div class="day-footer">
+                    <span class="pill">📍 Ipaba</span>
+                    <span class="pill">🤝 TLCA</span>
+                    <span class="pill">✨ Encontro</span>
+                </div>
+            </article>
+
+            <!-- SÁBADO -->
+            <article class="day-card" style="--accent: #63a7ff">
+                <div class="day-top">
+                    <span class="day-label">Sábado</span>
+                    <div class="day-icon">🛋️</div>
+                </div>
+
+                <h3>O famoso dia de não fazer nada</h3>
+
+                <p>
+                    No sábado, não fiz praticamente nada! Fiquei deitado
+                    assistindo a <strong>The Mentalist</strong>, joguei
+                    alguns joguinhos e sequei as vasilhas do almoço.
+                    Também brinquei de cara ou coroa com minha irmã.
+                    Foi um dia de descanso e diversão sem precisar sair de casa.
+                </p>
+
+                <div class="day-footer">
+                    <span class="pill">📺 The Mentalist</span>
+                    <span class="pill">🎮 Jogos</span>
+                    <span class="pill">🪙 Cara ou coroa</span>
+                </div>
+            </article>
+
+            <!-- DOMINGO -->
+            <article class="day-card weekend highlight" style="--accent: #ff9fc8">
+                <div class="day-top">
+                    <span class="day-label">Domingo · Festa das Crianças</span>
+                    <div class="day-icon">🎉</div>
+                </div>
+
+                <h3>O encerramento com gostinho de churros!</h3>
+
+                <p>
+                    No domingo, fui à festa das crianças oferecida pela
+                    catequese. Brinquei, encontrei alguns amigos e comi
+                    uns <strong>cinco churros</strong>! KKKKKKK.
+                    Foi muito divertido e uma ótima maneira de terminar
+                    minha Semana das Crianças, aproveitando a festa
+                    e passando um tempo com outras pessoas.
+                </p>
+
+                <div class="day-footer">
+                    <span class="pill">🎊 Festa</span>
+                    <span class="pill">👫 Amigos</span>
+                    <span class="pill">🍩 5 churros!</span>
+                    <span class="pill">❤️ Diversão</span>
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+    <!-- FRASE DE DESTAQUE -->
+    <section class="container">
+        <div class="quote">
+            <div class="quote-icon">💫</div>
+            <h2>
+                "Não precisa acontecer algo extraordinário
+                todos os dias para criar boas lembranças."
+            </h2>
+            <p>Uma semana simples, divertida e cheia de momentos meus.</p>
+        </div>
+    </section>
+
+    <!-- MELHORES MOMENTOS -->
+    <section class="section container" id="momentos">
+        <div class="section-heading">
+            <span class="section-tag">02 / Os destaques</span>
+            <h2>Momentos que merecem replay.</h2>
+            <p>
+                Se eu tivesse que escolher algumas partes da semana
+                para guardar na memória, seriam essas!
+            </p>
+        </div>
+
+        <div class="moments">
+            <article class="moment">
+                <div class="emoji">🎱</div>
+                <h3>O rei da sinuca</h3>
+                <p>Fui jogar no sítio e ganhei de geral. Respeitem o campeão!</p>
+            </article>
+
+            <article class="moment">
+                <div class="emoji">🍦</div>
+                <h3>O sorvete perfeito</h3>
+                <p>Baunilha com chocolate durante o passeio pelo Ipatinga.</p>
+            </article>
+
+            <article class="moment">
+                <div class="emoji">🍩</div>
+                <h3>O ataque dos churros</h3>
+                <p>Uma festa divertida e cinco churros que fizeram história. KKKK.</p>
+            </article>
+
+            <article class="moment">
+                <div class="emoji">👨‍👩‍👧‍👦</div>
+                <h3>Tempo com a família</h3>
+                <p>Confraternizar, conversar e compartilhar bons momentos.</p>
+            </article>
+
+            <article class="moment">
+                <div class="emoji">🎮</div>
+                <h3>Jogos e amizades</h3>
+                <p>Jogar com os amigos e curtir os momentos de descontração.</p>
+            </article>
+
+            <article class="moment">
+                <div class="emoji">🛋️</div>
+                <h3>Descanso merecido</h3>
+                <p>Assistir a The Mentalist e aproveitar um sábado tranquilo.</p>
+            </article>
+        </div>
+    </section>
+
+    <!-- CONCLUSÃO -->
+    <section class="container" id="final">
+        <div class="final-card">
+            <div class="big-emoji">🎈</div>
+
+            <h2>E essa foi a minha Semana das Crianças!</h2>
+
+            <p>
+                Minha semana teve um pouco de tudo: passeios, família,
+                amigos, jogos, tarefas de casa e momentos de descanso.
+                Mesmo com dias mais tranquilos, consegui me divertir
+                e aproveitar cada momento do meu jeito. No final,
+                percebi que as coisas simples também podem tornar
+                uma semana especial. E, claro, os cinco churros
+                do domingo não poderiam faltar nessa história! KKKKK.
+            </p>
+
+            <div class="hero-buttons" style="justify-content:center">
+                <a href="#inicio" class="btn btn-primary">
+                    ↑ Voltar ao início
+                </a>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    <div class="container footer-inner">
+        <span>Feito com 💙 e boas lembranças.</span>
+        <span><strong>Minha Semana das Crianças</strong> · 2026</span>
+        <a href="#inicio" class="back-top">Voltar ao topo ↑</a>
+    </div>
+</footer>
+
+</body>
+</html>
